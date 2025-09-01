@@ -1,0 +1,112 @@
+[
+  {
+    "question": "How much faster is the cryosphere warming compared to the global average?",
+    "options": ["1.5×", "2×", "3×", "The same rate"],
+    "answer": "3×"
+  },
+  {
+    "question": "By 2100, how many of the world’s glaciers could vanish?",
+    "options": ["10%", "25%", "50%", "75%"],
+    "answer": "50%"
+  },
+  {
+    "question": "What percentage of the world's glaciers could disappear by 2100, even if we meet climate targets?",
+    "options": ["10%", "25%", "50%", "None — they’ll regrow"],
+    "answer": "50%"
+  },
+  {
+    "question": "Which of these major rivers are glacier-fed?",
+    "options": ["Ganges", "Nile", "Yangtze", "Amazon", "Indus", "Brahmaputra", "Mississippi"],
+    "answer": "Ganges"
+  },
+  {
+    "question": "What happens when glacial lakes overflow due to melting?",
+    "options": ["They become bigger water sources", "They form waterfalls", "They cause floods", "Nothing happens"],
+    "answer": "They cause floods"
+  },
+  {
+    "question": "What are GLOFs?",
+    "options": ["Glacier Lift-Off Flights", "Glacial Lake Outburst Floods", "Great Lapses of Freezing", "Glacial Level Overflow Fields"],
+    "answer": "Glacial Lake Outburst Floods"
+  },
+  {
+    "question": "What percentage of the Earth’s freshwater is locked in ice, snow and glaciers?",
+    "options": ["30%", "70%", "50%", "15%"],
+    "answer": "70%"
+  },
+  {
+    "question": "If Antarctica’s ice fully melts, how high could global sea levels rise?",
+    "options": ["5 meters", "20 meters", "58-68 meters", "That’s impossible"],
+    "answer": "58-68 meters"
+  },
+  {
+    "question": "What is “albedo” and why does it matter?",
+    "options": ["A kind of glacier wind", "A mineral in ice", "Earth’s reflectivity", "An Arctic mammal"],
+    "answer": "Earth’s reflectivity"
+  },
+  {
+    "question": "Which region has lost over 40% of its ice volume since 2000?",
+    "options": ["Andes", "Alps", "Himalayas", "Rockies"],
+    "answer": "Himalayas"
+  },
+  {
+    "question": "What’s the cryosphere?",
+    "options": ["The coldest part of a volcano", "The frozen parts of the Earth system", "A satellite name", "An alien planet"],
+    "answer": "The frozen parts of the Earth system"
+  },
+  {
+    "question": "What’s actually lost when ice melts?",
+    "options": ["Just water", "Aesthetic beauty", "Memory, balance, life", "Nothing really — it’s natural"],
+    "answer": "Memory, balance, life"
+  },
+  {
+    "question": "What is the “Third Pole” of the Earth?",
+    "options": ["Antarctica", "Arctic", "The Hindu Kush-Himalaya region", "Greenland"],
+    "answer": "The Hindu Kush-Himalaya region"
+  },
+  {
+    "question": "What happens to mountain communities when glaciers vanish?",
+    "options": ["More snow comes", "They face water shortages, crop failures & migration", "Nothing changes", "They become tourist hubs"],
+    "answer": "They face water shortages, crop failures & migration"
+  },
+  {
+    "question": "How old can glacier ice be?",
+    "options": ["A few hundred years", "Up to 800,000 years", "50,000 years max", "Ice melts every 1,000 years"],
+    "answer": "Up to 800,000 years"
+  },
+  {
+    "question": "Which of these activities contributes to glacier melting?",
+    "options": ["Driving fossil-fuel vehicles", "Deforestation", "Industrial agriculture", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "What is “Black Carbon,” and how does it affect glaciers?",
+    "options": ["A rare Arctic stone", "A type of volcanic ash", "Soot from burning fossil fuels", "Ice infected by bacteria"],
+    "answer": "Soot from burning fossil fuels"
+  },
+  {
+    "question": "Why are glaciers called “Earth’s water towers”?",
+    "options": ["They’re tall", "They store water", "They release water slowly, like a tower tank", "It’s a nickname from climbers"],
+    "answer": "They release water slowly, like a tower tank"
+  },
+  {
+    "question": "Which of these countries are already experiencing glacier-related disasters?",
+    "options": ["Nepal", "Peru", "Switzerland", "India-Pakistan", "All of them"],
+    "answer": "All of them"
+  },
+  {
+    "question": "Which of the following is NOT part of the cryosphere?",
+    "options": ["Sea ice", "Glaciers", "Permafrost", "Rainforests"],
+    "answer": "Rainforests"
+  },
+  {
+    "question": "True or False — The melting of sea ice raises global sea levels.",
+    "options": ["True", "False"],
+    "answer": "False"
+  },
+  {
+    "question": "Which of these can help protect glaciers?",
+    "options": ["Reducing carbon emissions", "Supporting indigenous knowledge", "Climate education", "Local-to-global action", "All of the above"],
+    "answer": "All of the above"
+  }
+]
