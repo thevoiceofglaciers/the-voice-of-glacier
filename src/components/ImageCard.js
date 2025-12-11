@@ -20,7 +20,7 @@ export default function ImageCard({ imageSrc, heading, description }) {
         <img src={imageSrc} alt={heading} className="w-full h-64 object-cover" />
         <div className="p-4">
           <h3 className="text-lg font-nohemi mb-2 text-glacier-primary">{heading}</h3>
-          <p className="text-sm font-cabin text-glacier-dark">
+          <p className="text-sm font-cabin text-glacier-dark whitespace-pre-wrap">
             {words.length > 10 ? shortDescription + "..." : description}
           </p>
 
@@ -64,7 +64,7 @@ export default function ImageCard({ imageSrc, heading, description }) {
         className="w-full h-auto object-contain rounded-xl mb-4"
       />
       <h2 className="text-2xl font-nohemi text-glacier-primary mb-2">{heading}</h2>
-      <p className="text-base font-cabin text-glacier-dark">{description}</p>
+      <p className="text-base font-cabin text-glacier-dark whitespace-pre-wrap">{description}</p>
     </div>
   </div>
 )}
