@@ -76,6 +76,13 @@ export default function Navbar() {
       sublinks: [
         { label: "Go to media", href: "/media" }
       ], // no dropdown
+    },
+    {
+      name: "Glacier Dialogues",
+      href: "/glacierDialgoues",
+      sublinks: [
+        { label: "Go to Dialgoues", href: "/glacierDialgoues" }
+      ], // no dropdown
     }
   ];
 
