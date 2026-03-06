@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import GlacierDialogueSessionTwo from "@/components/glacierDialogueArticle";
+import GlacierDialogueArticle from "@/components/glacierDialogueArticle";
 import { glacierDialogues } from "@/data/dialogues";
 
 export default function PodcastArticle({ params }) {
+  const { slug } = params;
+
   const article = glacierDialogues.find(
-    (item) => item.slug === params.slug
+    (item) => item.slug === slug
   );
 
   if (!article) {
@@ -16,7 +18,7 @@ export default function PodcastArticle({ params }) {
   return (
     <>
       <Navbar />
-      <GlacierDialogueSessionTwo content={article} />
+      <GlacierDialogueArticle content={article} />
       <Footer />
     </>
   );

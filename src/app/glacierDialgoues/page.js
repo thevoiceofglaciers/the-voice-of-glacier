@@ -26,6 +26,17 @@ export default function PodcastPage() {
             </p>
           </div>
 
+           <div className="my-6">
+              <a
+                href="https://forms.gle/2zSuf4cgMzZ2QawPA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-2 rounded-lg bg-glacier-primary text-white text-sm font-semibold hover:bg-glacier-dark transition"
+              >
+                Register for Upcoming Dialogue
+              </a>
+            </div>
+
           <Section title="Upcoming" data={upcoming} />
         </div>
       </div>
@@ -49,24 +60,26 @@ function Section({ title, data }) {
   );
 }
 
-/* ================= CARD ================= */
-
 function PodcastCard({ podcast }) {
   return (
     <Link href={`/glacierDialgoues/${podcast.slug}`}>
       <div className="bg-white dark:bg-glacier-primary/10 rounded-xl overflow-hidden cursor-pointer border hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
 
-        <div className="relative h-40 overflow-hidden">
+        {/* Image */}
+        <div className="relative w-full aspect-video overflow-hidden">
           <img
             src={podcast.image}
             alt={podcast.title}
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition">
-            <PlayCircle size={36} className="text-white" />
+
+          {/* Play icon hover */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <PlayCircle size={36} className="text-white drop-shadow-lg" />
           </div>
         </div>
 
+        {/* Content */}
         <div className="p-4">
           <div className="flex items-center text-xs mb-1 text-glacier-primary dark:text-glacier-soft">
             <Calendar size={14} className="mr-1" />
