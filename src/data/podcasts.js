@@ -4,7 +4,7 @@ export const podcasts = [
     slug: "glacial-melting-the-silent-crisis",
     status: "upcoming",
     title: "When Glaciers Retreat, Societies Transform",
-    speaker: "Dr. Aris Thorne",
+    speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
     date: "Oct 15, 2026",
     image: "/dialogues/image.png",
     content: `
@@ -18,7 +18,7 @@ export const podcasts = [
     slug: "himalayan-ice-collapse",
     status: "upcoming",
     title: "What the Mountains Are Telling Us",
-    speaker: "Dr. Maya Sen",
+    speaker: "Anoop Nautiyal & Varsha Singh",
     date: "Oct 20, 2026",
     image: "/dialogues/dialogue1.jpeg",
     content: `

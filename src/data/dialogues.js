@@ -1,6 +1,6 @@
 export const glacierDialogues = [
   {
-    slug: "glacial-melting-the-silent-crisis",
+    slug: "himalayan-ice-collapse",
 
     css: `
     
@@ -741,7 +741,7 @@ export const glacierDialogues = [
     `
   },
   {
-    slug: "himalayan-ice-collapse",
+    slug: "glacial-melting-the-silent-crisis",
     css: `
     
     :root {
