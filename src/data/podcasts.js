@@ -1,7 +1,7 @@
 export const podcasts = [
   {
     id: 1,
-    slug: "glacial-melting-the-silent-crisis",
+    slug: "himalayan-ice-collapse",
     status: "upcoming",
     title: "When Glaciers Retreat, Societies Transform",
     speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
@@ -15,7 +15,7 @@ export const podcasts = [
   },
   {
     id: 2,
-    slug: "himalayan-ice-collapse",
+    slug: "glacial-melting-the-silent-crisis",
     status: "upcoming",
     title: "What the Mountains Are Telling Us",
     speaker: "Anoop Nautiyal & Varsha Singh",
