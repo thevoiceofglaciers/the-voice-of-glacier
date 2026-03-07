@@ -5,7 +5,7 @@ export const podcasts = [
     status: "upcoming",
     title: "When Glaciers Retreat, Societies Transform",
     speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
-    date: "Oct 15, 2026",
+    date: "Feb 17, 2026",
     image: "/dialogues/image.png",
     content: `
       Glacial melting is accelerating due to rising global temperatures.
@@ -19,7 +19,7 @@ export const podcasts = [
     status: "upcoming",
     title: "What the Mountains Are Telling Us",
     speaker: "Anoop Nautiyal & Varsha Singh",
-    date: "Oct 20, 2026",
+    date: "Feb 24, 2026",
     image: "/dialogues/dialogue1.jpeg",
     content: `
       The Himalayan glaciers are retreating faster than ever recorded.
