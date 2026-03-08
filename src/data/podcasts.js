@@ -4,9 +4,9 @@ export const podcasts = [
     slug: "himalayan-ice-collapse",
     status: "upcoming",
     title: "When Glaciers Retreat, Societies Transform",
-    speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
-    date: "Feb 17, 2026",
-    image: "/dialogues/image.png",
+    speaker: "Anoop Nautiyal & Varsha Singh",
+    date: "Feb 24, 2026",
+    image: "/dialogues/dialogue1.jpeg ",
     content: `
       Glacial melting is accelerating due to rising global temperatures.
       Scientists warn that this silent crisis could reshape coastlines
@@ -18,9 +18,9 @@ export const podcasts = [
     slug: "glacial-melting-the-silent-crisis",
     status: "upcoming",
     title: "What the Mountains Are Telling Us",
-    speaker: "Anoop Nautiyal & Varsha Singh",
-    date: "Feb 24, 2026",
-    image: "/dialogues/dialogue1.jpeg",
+    speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
+    date: "Feb 17, 2026",
+    image: "/dialogues/image.png",
     content: `
       The Himalayan glaciers are retreating faster than ever recorded.
       This impacts millions who rely on glacier-fed rivers.
