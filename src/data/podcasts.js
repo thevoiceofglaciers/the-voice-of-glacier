@@ -28,13 +28,13 @@ export const podcasts = [
   },
   {
     id: 3,
-    slug: "policy-and-preservation",
-    status: "old",
-    title: "Policy & Preservation",
-    speaker: "Sarah Jenkins",
-    date: "Sept 10, 2025",
+    slug: "3",
+    status: "upcoming",
+    title: "UN Side Event | World Day for Glaciers 2026",
+    speaker: "Dr Aparna Shukla , Dr Ashim Sattar , Safi Ahsan Rizvi , Antony Joh Moothedan",
+    date: "March 19, 2026",
     image:
-      "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=800",
+      "https://www.un-glaciers.org/sites/default/files/styles/paragraph_medium_desktop/public/2026-03/c9e3720b-5049-4be2-a051-62d414c3587b.jpg.webp?itok=jWb8c3IZ",
     content: `
       Environmental policy plays a critical role in glacier protection.
       Global collaboration is essential for long-term sustainability.

@@ -1482,6 +1482,906 @@ export const glacierDialogues = [
 
 </section>
     `
+  },
+  {
+    slug: "3",
+    css: `
+    
+    :root {
+      --ice: #e8f0f0;
+      --deep: #042A33;
+      --glacier: #2A787C;
+      --melt: #9CBBF0;
+      --stone: #6a8a8e;
+      --crimson: #8B0333;
+      --text: #042A33;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #f5f7f7;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 6vw 8vh;
+      background: linear-gradient(160deg, #042A33 0%, #073d47 40%, #0e5a62 75%, #2A787C 100%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='800' height='600' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    .hero-lines {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+    }
+
+    .hero-lines::before,
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 200, 224, 0.12);
+    }
+
+    .hero-lines::before {
+      width: 700px; height: 700px;
+      top: -200px; right: -150px;
+    }
+
+    .hero-lines::after {
+      width: 400px; height: 400px;
+      top: 60px; right: 50px;
+    }
+
+    .hero-tag {
+      position: relative;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--melt);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      max-width: 820px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--melt);
+    }
+
+    .hero-meta {
+      position: relative;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .hero-meta span {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: rgba(168, 200, 224, 0.75);
+      text-transform: uppercase;
+    }
+
+    .hero-meta span strong {
+      color: rgba(168, 200, 224, 1);
+      font-weight: 500;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3.5vh;
+      right: 6vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(168, 200, 224, 0.5);
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(168,200,224,0.5), transparent);
+      animation: lineGrow 2s ease-in-out 1.5s infinite;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+
+    /* ── INTRO ── */
+    .intro-section {
+      padding: 8vh 0 6vh;
+      border-bottom: 1px solid rgba(42, 120, 124, 0.2);
+    }
+
+    .intro-section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .intro-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: var(--glacier);
+      padding: 0.45rem 1rem;
+      display: inline-block;
+    }
+
+    .intro-divider {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(42,120,124,0.4), transparent);
+    }
+
+    .intro-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+      align-items: start;
+    }
+
+    .intro-body-left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--deep);
+      border-left: 3px solid var(--crimson);
+      padding-left: 1.5rem;
+    }
+
+    .intro-body-right {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: #2a4a50;
+      font-weight: 300;
+      padding-top: 0.3rem;
+    }
+
+    .intro-body-right p + p { margin-top: 1.1em; }
+
+    /* ── PARTICIPANTS ── */
+    .participants-section {
+      padding: 6vh 0;
+      border-bottom: 1px solid rgba(74, 127, 165, 0.2);
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--glacier);
+      margin-bottom: 2.5rem;
+    }
+
+    .participant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem 2.5rem;
+    }
+
+    .participant-item {
+      border-left: 2px solid #2A787C;
+      padding-left: 1rem;
+    }
+
+    .participant-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .participant-role {
+      font-size: 0.75rem;
+      color: var(--stone);
+      line-height: 1.4;
+    }
+
+    /* ── THEMES ── */
+    .themes-section {
+      padding: 7vh 0;
+    }
+
+    .themes-header {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: 6vw;
+      align-items: end;
+      margin-bottom: 5vh;
+    }
+
+    .themes-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+      grid-column: 2;
+    }
+
+    .theme-block {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: 6vw;
+      padding: 4vh 0;
+      border-top: 1px solid rgba(74, 127, 165, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    .theme-block:hover {
+      background: rgba(74, 127, 165, 0.03);
+    }
+
+    .theme-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(74, 127, 165, 0.25);
+      line-height: 1;
+      padding-top: 0.15rem;
+    }
+
+    .theme-content {}
+
+    .theme-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+      font-weight: 600;
+      color: var(--deep);
+      margin-bottom: 0.9rem;
+      line-height: 1.25;
+    }
+
+    .theme-body {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #3a5060;
+    }
+
+    .theme-body p + p { margin-top: 0.75em; }
+
+    .theme-voices {
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ── CALLOUT QUOTE ── */
+    .callout {
+      margin: 6vh 0;
+      padding: 5vh 0;
+      border-top: 3px solid #2A787C;
+      border-bottom: 1px solid rgba(74, 127, 165, 0.2);
+    }
+
+    .callout blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--deep);
+      max-width: 800px;
+    }
+
+    .callout blockquote::before {
+      content: '"';
+      font-size: 5rem;
+      line-height: 0;
+      vertical-align: -1.5rem;
+      color: var(--glacier);
+      font-style: normal;
+      margin-right: 0.1em;
+    }
+
+    /* ── INSIGHTS ── */
+    .insights-section {
+      padding: 6vh 0;
+      background: var(--deep);
+      margin: 0 -6vw;
+      padding-left: 6vw;
+      padding-right: 6vw;
+    }
+
+    .insights-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .insights-section .section-label {
+      color: var(--melt);
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .insight-card {
+      background: rgba(255,255,255,0.04);
+      padding: 2rem 2rem 2.5rem;
+      border: 1px solid rgba(74, 127, 165, 0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .insight-card:hover {
+      background: rgba(74, 127, 165, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .insight-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    .insight-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(232, 239, 245, 0.8);
+      font-weight: 300;
+    }
+
+    /* ── TENSIONS ── */
+    .tensions-section {
+      padding: 7vh 0;
+    }
+
+    .tensions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .tension-card {
+      padding: 2rem;
+      border: 1px solid rgba(74, 127, 165, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tension-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--glacier), var(--crimson));
+    }
+
+    .tension-vs {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tension-side {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .tension-divider {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ── QUESTIONS ── */
+    .questions-section {
+      padding: 6vh 0;
+      border-top: 1px solid rgba(74, 127, 165, 0.2);
+    }
+
+    .question-list {
+      margin-top: 3rem;
+      counter-reset: q;
+    }
+
+    .question-item {
+      counter-increment: q;
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(74, 127, 165, 0.1);
+    }
+
+    .question-item::before {
+      content: counter(q, decimal-leading-zero);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--glacier);
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .question-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    /* ── CLOSING ── */
+    .closing-section {
+      padding: 7vh 0 10vh;
+    }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: 6vw;
+      align-items: start;
+    }
+
+    .closing-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .closing-body p + p { margin-top: 1.2em; }
+
+    .closing-footer {
+      margin-top: 4vh;
+      padding-top: 3vh;
+      border-top: 1px solid rgba(74, 127, 165, 0.2);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes lineGrow {
+      0%, 100% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 0.6; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .intro-body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .intro-section,
+      .themes-header,
+      .theme-block,
+      .closing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .themes-header h2 { grid-column: 1; }
+      .tensions-grid { grid-template-columns: 1fr; }
+      .theme-number { font-size: 2rem; }
+    }
+    `,
+
+    html: `
+    <section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-lines"></div>
+    <div class="hero-tag">The Voice of Glaciers Foundation</div>
+    <h1 class="hero-title">
+      When Experts Gathered<br/>
+      <em>to Listen</em>
+    </h1>
+    <div class="hero-meta">
+      <span><strong>15 January 2026</strong></span>
+      <span>Multidisciplinary Alignment Call</span>
+      <span>20+ Participants · 14 Discussion Themes</span>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <div class="container">
+    <div class="intro-section">
+      <div class="intro-section-header">
+        <div class="intro-label">Context &amp; Purpose</div>
+        <div class="intro-divider"></div>
+      </div>
+      <div class="intro-body">
+        <div class="intro-body-left">
+          This was not a solutions session. It was a diagnosis — an attempt to understand, with rigour and humility, the true nature of the glacier crisis before deciding how to act.
+        </div>
+        <div class="intro-body-right">
+          <p>In January 2026, The Voice of Glaciers Foundation convened its first multidisciplinary alignment call — bringing together glaciologists, ecologists, journalists, policy practitioners, disaster management specialists, community leaders, and communicators around a single, deliberate act: listening.</p>
+          <p>What emerged was a picture far more complex, and far more interconnected, than any single discipline could hold alone. The challenge, as the room collectively concluded, was not the absence of scientific knowledge — it was the absence of effective translation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTICIPANTS -->
+  <div class="container">
+    <div class="participants-section">
+      <div class="section-label">Voices in the Room</div>
+      <div class="participant-grid">
+        <div class="participant-item">
+          <div class="participant-name">Dr. Vishal Singh</div>
+          <div class="participant-role">Executive Director, Centre for Ecology Development and Research (CEDAR), Dehradun</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Ravi Chopra</div>
+          <div class="participant-role">Founder-Director, People's Science Institute (PSI), Dehradun</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Anjan Ray</div>
+          <div class="participant-role">Energy &amp; Climate Scientist</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Taj Hasan, IPS</div>
+          <div class="participant-role">Former DG, Fire Services &amp; Civil Defence; Former ED, NIDM</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Suman Sahai</div>
+          <div class="participant-role">Gene Scientist &amp; Agricultural Policy Leader</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Somnath Bandyopadhyay</div>
+          <div class="participant-role">Development Ecologist &amp; Wetland Specialist</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Himanshu Kaushik</div>
+          <div class="participant-role">PhD Scholar (IIT Indore), Glaciologist</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Dr. Suhail Ahmad</div>
+          <div class="participant-role">Glaciologist, IISc Bangalore</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Hridayesh Joshi</div>
+          <div class="participant-role">Senior Journalist</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Romola Butalia</div>
+          <div class="participant-role">Author, Senior Media Person &amp; Conservationist</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">Divyansh Shah</div>
+          <div class="participant-role">Community &amp; Local Development Perspective</div>
+        </div>
+        <div class="participant-item">
+          <div class="participant-name">+ Science, Media &amp; Civil Society</div>
+          <div class="participant-role">Additional participants from creative communication and frontline advocacy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALLOUT 1 -->
+  <div class="container">
+    <div class="callout">
+      <blockquote>
+        The central challenge is not the absence of scientific knowledge — it is the absence of effective translation.
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- THEMES -->
+  <div class="container">
+    <div class="themes-section">
+      <div class="themes-header">
+        <h2>What the Conversation Revealed</h2>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">01</div>
+        <div class="theme-content">
+          <div class="theme-title">Glaciers Are a Systems Crisis, Not an Ice Crisis</div>
+          <div class="theme-body">
+            <p>Every expert in the room reached the same conclusion from a different direction: glaciers cannot be understood or protected in isolation. They are inextricably linked to forests, rivers, wetlands, springs, monsoon systems, groundwater, biodiversity, livelihoods, and governance structures.</p>
+            <p>The role of TVGF, it became clear, should not be to arrive with predefined answers — but to listen, connect disparate insights, identify gaps, and translate knowledge into relevance for people who have never seen a glacier.</p>
+          </div>
+          <div class="theme-voices">Dr. Vishal Singh · Dr. Ravi Chopra · Dr. Somnath Bandyopadhyay</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">02</div>
+        <div class="theme-content">
+          <div class="theme-title">The Translation Problem: Science Is Not Reaching People</div>
+          <div class="theme-body">
+            <p>The scientific knowledge on glacier health exists. What is broken is the pipeline from that knowledge to public understanding, to policy action, to individual behaviour change. Complex data remains locked in research papers while the ecosystems it documents continue to deteriorate.</p>
+            <p>Creative communication — stories, poetry, cultural narratives, and local languages — was identified not as an optional supplement, but as a structural necessity. Public behaviour around tourism, travel, and consumption is directly connected to glacier degradation; yet most people do not see that connection.</p>
+          </div>
+          <div class="theme-voices">Dr. Ravi Chopra · Romola Butalia · Dr. Suman Sahai · Dr. Vishal Singh</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">03</div>
+        <div class="theme-content">
+          <div class="theme-title">Himalayan Civilisation Runs on Mountain Systems</div>
+          <div class="theme-body">
+            <p>India's ecological reality is defined by the intersection of the Himalayas in the north and seas on three sides. Monsoon winds, sediment flow, and mountain hydrology together sustain agriculture, wetlands, groundwater, and food security across the subcontinent. The Gangetic plains exist because of Himalayan sediment.</p>
+            <p>Western models of water management and resource governance, the group cautioned, do not map onto these interdependencies. India needs frameworks rooted in its own ecological logic.</p>
+          </div>
+          <div class="theme-voices">Dr. Somnath Bandyopadhyay</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">04</div>
+        <div class="theme-content">
+          <div class="theme-title">Reading Glacier Health Beyond the Snout</div>
+          <div class="theme-body">
+            <p>A common misunderstanding addressed in the discussion: the position of a glacier's snout (its front edge) is not a reliable indicator of its health. Mass balance — the net ratio of ice gain to ice loss — along with surface lowering and ice thinning, are the metrics that matter.</p>
+            <p>Fragmentation of glaciers is especially dangerous. As a glacier breaks apart, melt accelerates, and each newly formed glacial lake carries the risk of sudden outburst floods. New tools like DGPS and Electrical Resistivity Tomography are providing clearer evidence of these structural changes — but the science is not being translated into the policy frameworks that govern high-altitude zones.</p>
+          </div>
+          <div class="theme-voices">Dr. Himanshu Kaushik · Dr. Suhail Ahmad · Hridayesh Joshi</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">05</div>
+        <div class="theme-content">
+          <div class="theme-title">Tourism and Infrastructure as Ecological Threats</div>
+          <div class="theme-body">
+            <p>The conversation was frank about the dangers posed by mass tourism and infrastructure development in fragile Himalayan zones. The Char Dham corridor, helicopter services in sacred valleys, resort development, and highway expansion were described as disasters in formation — not in the future, but now.</p>
+            <p>Black carbon from exhaust gases, soot from deforestation and forest fires, and the sheer pressure of human presence in narrow mountain valleys are measurable drivers of accelerated glacier melt. Fragile areas need to be treated as ecological security zones, not mass-access destinations.</p>
+          </div>
+          <div class="theme-voices">Dr. Ravi Chopra · Dr. Somnath Bandyopadhyay</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">06</div>
+        <div class="theme-content">
+          <div class="theme-title">Local Communities: Vulnerable, Central, and at Risk of Being Spoken For</div>
+          <div class="theme-body">
+            <p>Mountain communities are living the consequences of glacier loss most acutely — in shifting water sources, changing agricultural cycles, and the erosion of traditional knowledge. But they are also at risk of being defined by external narratives rather than their own voices.</p>
+            <p>Traditional ecological wisdom and native building practices are being displaced by aspirations shaped by social media and urban imagery. There is a need, participants noted, to revitalise local agency and knowledge systems without romanticising them — and to mobilise communities as ecological leaders, not just as vulnerable populations to be helped.</p>
+          </div>
+          <div class="theme-voices">Divyansh Shah · Dr. Somnath Bandyopadhyay</div>
+        </div>
+      </div>
+
+      <div class="theme-block">
+        <div class="theme-number">07</div>
+        <div class="theme-content">
+          <div class="theme-title">Making Glaciers Relevant to Those Who Will Never See One</div>
+          <div class="theme-body">
+            <p>One of the most persistent challenges raised was the invisibility of the glacier crisis to the majority of people whose lives depend on it. For someone in a city connected to Himalayan rivers, glaciers are abstract and distant — even as their water flows from glacier melt.</p>
+            <p>Early childhood and school-level ecological education, creative and experiential learning, and culturally grounded approaches were identified as essential tools for building connection and long-term care. The question of how to make distant ecosystems personally relevant is not a communications problem — it is a civilisational one.</p>
+          </div>
+          <div class="theme-voices">Dr. Anjan Ray · Romola Butalia · Dr. Suman Sahai · Dr. Himanshu Kaushik</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALLOUT 2 -->
+  <div class="container">
+    <div class="callout">
+      <blockquote>
+        This was not a time for rushing into programs. It was an early learning phase — an act of collective diagnosis.
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- INSIGHTS (dark section) -->
+  <div class="insights-section">
+    <div class="insights-inner">
+      <div class="section-label">Key Takeaways</div>
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">The glacier crisis is a systems crisis — shaped by human behaviour, tourism, infrastructure, and governance as much as by climate change itself.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">Scientific knowledge exists. What is broken is the translation — from research to public relevance, from data to policy, from information to action.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">Creative communication is not supplementary. It is the mechanism through which science becomes culture, and culture becomes behaviour.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">Youth engagement is critical and challenging — in large part because glaciers are invisible to most young people, even those whose futures depend on them.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">Local communities are both the most vulnerable and the most essential — as knowledge holders, ecological stewards, and legitimate voices in decisions about their own landscapes.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">◈</div>
+          <div class="insight-text">TVGF's comparative advantage lies in convening, translating, and connecting across disciplines and communities — not in implementing its own solutions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TENSIONS -->
+  <div class="container">
+    <div class="tensions-section">
+      <div class="section-label">Productive Tensions</div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:300; color:var(--stone); margin-bottom:0.5rem; margin-top:0.5rem;">The conversation surfaced tensions that are not contradictions to resolve — but realities to hold:</p>
+      <div class="tensions-grid">
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Urgency to Act</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">Need to Understand Deeply</span>
+          </div>
+        </div>
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Policy Optimism</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">Policy Realism</span>
+          </div>
+        </div>
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Large-Scale Systems</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">Small Organisational Capacity</span>
+          </div>
+        </div>
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Scientific Depth</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">Public Accessibility</span>
+          </div>
+        </div>
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Community Agency</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">External Narrative Risk</span>
+          </div>
+        </div>
+        <div class="tension-card">
+          <div class="tension-vs">
+            <span class="tension-side">Adaptation</span>
+            <span class="tension-divider">vs</span>
+            <span class="tension-side">Irreversibility</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN QUESTIONS -->
+  <div class="container">
+    <div class="questions-section">
+      <div class="section-label">The Questions We're Sitting With</div>
+      <div class="question-list">
+        <div class="question-item">
+          <div class="question-text">How do we make glaciers relevant to people who will never see one?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-text">How do we connect daily lifestyle choices to the health of mountain ecosystems?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-text">How do we avoid oversimplifying systems that took millennia to form?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-text">How do we prevent development from becoming ecological destruction in disguise?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-text">How do we mobilise communities without romanticising or outsider-framing their traditions?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-text">How do we influence policy without becoming part of the bureaucratic inertia we are trying to shift?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="container">
+    <div class="closing-section">
+      <div class="closing-grid">
+        <div class="section-label">What Comes Next</div>
+        <div>
+          <div class="closing-body">
+            <p>This convening was not about answers. It was about learning to ask the right questions — carefully, collectively, and without the rush that urgency often forces upon us.</p>
+            <p>A clear first step emerged from the discussion: building an Ishikawa Diagram to map the root causes of glacier degradation and ecosystem stress. This systems-mapping exercise — drawing on expertise across ecology, glaciology, policy, culture, and community practice — will form the foundation for everything that follows.</p>
+            <p>The experts in that room gave TVGF something more valuable than recommendations. They gave us the frame: listen before you design. Map before you act. Connect before you claim.</p>
+            <p>This is where our work begins.</p>
+          </div>
+          <div class="closing-footer">
+            The Voice of Glaciers Foundation &nbsp;·&nbsp; January 2026 &nbsp;·&nbsp; tvgf.org
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+    `
   }
 
 ];
