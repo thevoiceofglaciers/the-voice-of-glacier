@@ -1,5 +1,4 @@
 export const podcasts = [
-  
   {
     id: 4,
     slug: "GD3",
@@ -17,7 +16,7 @@ export const podcasts = [
     id: 2,
     slug: "GD1",
     status: "upcoming",
-    title: "Glacier Dialogues 1 : What the Mountains Are Telling Us",
+    title: "Glacier Dialogue 1 : What the Mountains Are Telling Us",
     speaker: "Dr Ashim Sattar & Dr Mohd Farooq Azam",
     date: "Feb 17, 2026",
     image: "/dialogues/gd2.png",
