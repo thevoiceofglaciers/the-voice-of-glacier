@@ -8,7 +8,7 @@ export const podcasts = [
     speaker: "Multidisciplinary alignment call",
     date: "January 15, 2026",
     image:
-      "/dialogues/gd1.jpeg",
+      "https://wallpaperaccess.com/full/2150664.jpg",
     content: `
       A multidisciplinary alignment call that brought together 20+ experts for a single, deliberate act: diagnosis before action.
     `,
@@ -18,7 +18,7 @@ export const podcasts = [
     slug: "GD1",
     status: "upcoming",
     title: "Glacier Dialogues 1 : What the Mountains Are Telling Us",
-    speaker: "Dr.Ashim Sattar & Dr. Mohd Farooq Azam",
+    speaker: "Dr Ashim Sattar & Dr Mohd Farooq Azam",
     date: "Feb 17, 2026",
     image: "/dialogues/gd2.png",
     content: `
@@ -46,10 +46,10 @@ export const podcasts = [
     slug: "GD4",
     status: "upcoming",
     title: "Glacier Dialogue 3 : From Risk to Resilience: What It Will Actually Take",
-    speaker: "Dr Aparna Shukla , Dr Ashim Sattar , Safi Ahsan Rizvi , Antony Joh Moothedan",
+    speaker: "Dr Aparna Shukla, Dr Ashim Sattar, Safi Ahsan Rizvi, Antony Joh Moothedan",
     date: "March 19, 2026",
     image:
-      "https://wallpaperaccess.com/full/2150664.jpg",
+      "/dialogues/gd1.jpeg",
     content: `
       A UN side event for World Glacier Day brought together scientists, policymakers, and disaster risk experts to engage with hard, urgent questions about glacier preparedness in the Himalayas.
     `,
