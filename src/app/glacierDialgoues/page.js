@@ -29,13 +29,13 @@ export default function PodcastPage() {
 
             {/* STYLIZED MISSION STATEMENT */}
             <div className="relative max-w-3xl mx-auto mt-8 p-8 rounded-2xl bg-white/40 dark:bg-glacier-primary/5 backdrop-blur-sm border-l-4 border-glacier-primary shadow-sm">
-              <p className="text-lg md:text-xl leading-relaxed text-glacier-dark/90 dark:text-glacier-light/90 italic font-medium">
-                &quot;TVGF Glacier Dialogues is a monthly interdisciplinary conversation
+              <p className="text-lg md:text-xl leading-relaxed text-glacier-dark/90 dark:text-glacier-light/90 font-medium">
+                TVGF Glacier Dialogues is a monthly interdisciplinary conversation
                 series convened by The Voice of Glaciers Foundation, bringing
                 together glacier scientists, policymakers, practitioners, and
                 mountain communities to examine how rapidly changing cryospheric
                 systems are reshaping lives, landscapes, and glacial futures across
-                the Hindu Kush Himalaya.&quot;
+                the Hindu Kush Himalaya.
               </p>
             </div>
 
