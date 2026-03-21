@@ -19,7 +19,7 @@ export default function PodcastPage() {
 
           <div className="text-center mb-10">
             <h1 className="text-3xl font-bold text-glacier-dark dark:text-glacier-light">
-              Our Dialogues 
+              Glacier Dialogues 
             </h1>
             <p className="text-sm mt-2 text-glacier-primary dark:text-glacier-soft">
               When glaciers speak, the world must listen.
@@ -33,7 +33,7 @@ export default function PodcastPage() {
                 rel="noopener noreferrer"
                 className="inline-block px-6 py-2 rounded-lg bg-glacier-primary text-white text-sm font-semibold hover:bg-glacier-dark transition"
               >
-                Register for Upcoming Dialogue
+                Register for Upcoming Dialogues
               </a>
             </div>
 
