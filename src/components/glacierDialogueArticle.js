@@ -14,7 +14,16 @@ export default function GlacierDialogueSessionTwo({ content }) {
         <style dangerouslySetInnerHTML={{ __html: content.css }} />
       )}
 
-
+      {/* Back button */}
+      <div className="max-w-6xl mx-auto px-6 pt-8">
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition"
+        >
+          <IoArrowBack />
+          Back
+        </button>
+      </div>
 
       {/* Article Content */}
       <div

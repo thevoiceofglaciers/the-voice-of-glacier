@@ -4,8 +4,15 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { useEffect } from "react";
-import { FaDatabase, FaBookOpen, FaUsers, FaMicrophoneAlt, FaGavel , FaArrowRight, FaArrowDown } from "react-icons/fa";
-import CryosphereTimeline from "@/components/cryosphereTimeline";
+import { FaDatabase, FaBookOpen, FaUsers, FaMicrophoneAlt, FaGavel  , FaBullseye , FaEye ,   FaHandsHelping,
+  FaBalanceScale,
+  FaPeopleArrows,
+  FaPaintBrush,
+  FaMountain, FaMagic , FaLeaf } from "react-icons/fa";
+import StrategicGaps from "@/components/strategicGaps";
+import EngineModel from "@/components/engingeModal";
+import DualForceModel from "@/components/dualForceModal";
+import TheoryOfChange from "@/components/theoryOfChange";
 // the crises , our approach (why tvgf),  , vision and mission , tvgf goals , story , remove vission and mission 
 
 // add the gaps after the crises 
@@ -32,7 +39,6 @@ const longTermGoal = [
   "Global Glacier Guardians Network visualized.",
   "Policy change realized."
 ]
-
 
 const theoryData = [
   {
@@ -106,6 +112,40 @@ const strategyGaps = [
   },
 ];
 
+
+  const goals = [
+  {
+    title: "A Cryosphere Justice Framework",
+    desc: "Glaciers legally and culturally protected in 10+ countries.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.webp",
+  },
+  {
+    title: "Cryosphere Pedagogy & Education",
+    desc: "Embedded in school systems worldwide.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.jpg",
+  },
+  {
+    title: "Real-time Glacier Monitoring",
+    desc: "Publicly accessible data for all.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.jpg",
+  },
+  {
+    title: "Global Glacier Guardians Network",
+    desc: "Mobilizing 100,000+ individuals across continents.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.jpg",
+  },
+  {
+    title: "Glaciers Resacralized",
+    desc: "Through art, ritual, memory, and community initiatives.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.jpg",
+  },
+  {
+    title: "Humanity & Glaciers",
+    desc: "A relationship built on reverence and reciprocity.",
+    image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.jpg",
+  },
+];
+
 const pillars = [
   {
     title: "Glacier Literacy",
@@ -173,276 +213,198 @@ export default function StrategyPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <div id="strategy-hero" className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
-        <img
-          src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img1.webp"
-          alt="Strategy Banner"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-glacier-dark/60 to-glacier-primary/30 flex items-center px-6 md:px-16">
-          <h1 className="text-3xl md:text-5xl font-nohemi text-white drop-shadow">
-            Our Cryosphere Strategy
-          </h1>
-        </div>
-      </div>
+      
 
-      {/* 1. Cryosphere Crisis */}
-      <motion.section
-        id="cryosphere-crisis"
-        className="w-full bg-glacier-dark py-24 transition-colors duration-300"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+ {/* Parallax Section 2: Vision & Mission Background */}
+      <ParallaxBackground imageUrl="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img2.webp">
+  <div className="max-w-6xl mx-auto" id="vision">
+    <SectionHeader
+      title="Our Vision & Mission"
+      description="Guided by our North Star Goals for 2035, we empower communities, protect glaciers, and advance climate resilience."
+      isLightBackground={false}
+    />
+
+    <div className="grid md:grid-cols-2 gap-10 text-center">
+      {/* Vision Card */}
+      <motion.div
+        className="p-8 bg-white/10 backdrop-blur-sm rounded-xl md:text-xl text-sm border border-white/20 shadow-lg flex flex-col items-center"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.4 }}
       >
-        <div className="w-[80%] max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-nohemi mb-6 text-white">
-            The Cryosphere Crisis
-          </h2>
-
-          <p className="text-lg mb-8 max-w-2xl text-glacier-light/90">
-            The cryosphere is warming at three times the global average. This has
-            devastating implications — disappearing glaciers, ecosystem disruption,
-            cultural loss, and life-threatening glacial lake floods.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-glacier-soft/10 backdrop-blur-md border border-glacier-soft text-glacier-light shadow"
-            >
-              <h3 className="text-xl font-semibold mb-2 text-glacier-light">What is the Cryosphere?</h3>
-              <p className="text-sm leading-relaxed text-glacier-light/80">
-                The cryosphere includes all frozen water parts of Earth: glaciers,
-                snow, ice caps, permafrost. Its loss accelerates climate collapse.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-glacier-soft/10 backdrop-blur-md border border-glacier-soft text-glacier-light shadow"
-            >
-              <h3 className="text-xl font-semibold mb-2 text-glacier-light">Key Impacts</h3>
-              <ul className="list-disc list-inside space-y-1 text-sm text-glacier-light/80">
-                <li>Glaciers melting at 3x global rate</li>
-                <li>50% of glaciers gone by 2100</li>
-                <li>Glacial lake floods (GLOFs) rising</li>
-                <li>2 billion people affected globally</li>
-                <li>Loss of indigenous knowledge & heritage</li>
-              </ul>
-            </motion.div>
-          </div>
-
-          <div className="mt-10">
-            <p className="font-medium text-glacier-light">Why Now: UN Decade of Cryospheric Sciences (2025-2034)</p>
-            <a
-              href="https://www.un.org"
-              target="_blank"
-              className="underline text-white hover:text-glacier-light"
-            >
-              Explore UN Resolutions
-            </a>
-          </div>
-
-          <div className="mt-6">
-            <CryosphereTimeline/>
-          </div>
+        <div className="flex items-center gap-3 mb-4">
+          <FaEye className="text-2xl text-glacier-light" />
+          <h3 className="text-2xl font-bold text-white">Vision</h3>
         </div>
-      </motion.section>
+        <p className=" text-white/90 leading-relaxed">
+          To spark a global movement that unites science, storytelling, and community action to protect glaciers and reimagine humanity&#39;s bond with the cryosphere.
+        </p>
+      </motion.div>
+
+      {/* Mission Card */}
+      <motion.div
+        className="p-8 bg-white/10 backdrop-blur-sm md:text-xl text-sm rounded-xl border border-white/20 shadow-lg flex flex-col items-center"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true, amount: 0.4 }}
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <FaBullseye className="text-2xl text-glacier-light" />
+          <h3 className="text-2xl font-bold text-white">Mission</h3>
+        </div>
+        <p className=" text-white/90 leading-relaxed">
+          To activate global and local ecosystems for glacier preservation by weaving <b>science, storytelling, spirituality, and stewardship</b> into transformative experiences that inspire policy, protect ecosystems, and reshape human relationships with the cryosphere.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+</ParallaxBackground>
+
+
+ {/* TVGF’s North Star & Core Values */}
+      <section id="north-star" className="py-20 px-6 md:px-16 bg-glacier-light text-glacier-dark rounded-b-lg">
+
+  {/* Main content on top of snow */}
+      <div className="relative duration-1000">
+
+  <SectionHeader
+    title="TVGF's North Star: Goals by 2035"
+    description="By 2035, we envision a world transformed in its relationship with glaciers."
+    isLightBackground={true}
+  />
+
+  {/* Two Column Layout */}
+  <div className="mt-14 grid md:grid-cols-2 gap-12 items-start">
+
+    {/* LEFT — Goals */}
+    <ul className="space-y-8 md:text-lg text-sm">
+      {goals.map((goal, index) => (
+        <li
+          key={index}
+          className="group relative border-l-4 border-glacier-primary pl-6"
+        >
+          <div className="font-semibold text-glacier-primary">
+            {goal.title}
+          </div>
+
+          <motion.div
+            className="mt-2 text-glacier-dark/90"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+            viewport={{ once: true }}
+          >
+            {goal.desc}
+          </motion.div>
+        </li>
+      ))}
+    </ul>
+
+    {/* RIGHT — Vision Image */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+      className="relative md:sticky md:top-28 flex justify-center"
+      style={{
+        clipPath: "polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%)",
+      }}
+    >
+      <img
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200"
+        alt="Glacier mountain landscape"
+        className="shadow-lg w-full max-w-md object-cover"
+      />
+
+    </motion.div>
+
+  </div>
+</div>
+
+
+  <div className="relative z-10 max-w-6xl mx-auto">
+
+
+          {/* Core Values Grid (unchanged) */}
+          <div className="mt-0" id="core-values">
+            <h3 className="text-3xl font-bold text-glacier-primary mb-8 text-center">
+              Our Core Values
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {(() => {
+                const coreValues = [
+                  {
+                    name: "Collaboration",
+                    desc: "Bridging diverse disciplines and cultures for collective impact.",
+                    icon: FaHandsHelping,
+                  },
+                  {
+                    name: "Integrity",
+                    desc: "Grounded in robust scientific evidence and deep community respect.",
+                    icon: FaBalanceScale,
+                  },
+                  {
+                    name: "Equity",
+                    desc: "Uplifting indigenous wisdom and empowering local leadership.",
+                    icon: FaPeopleArrows,
+                  },
+                  {
+                    name: "Creativity",
+                    desc: "Driving change through storytelling, science, and co-created art.",
+                    icon: FaPaintBrush,
+                  },
+                  {
+                    name: "Resilience",
+                    desc: "Fostering long-term glacier guardianships and adaptive strategies.",
+                    icon: FaMountain,
+                  },
+                  {
+                    name: "Transparency",
+                    desc: "Operating with open governance and unwavering accountability.",
+                    icon: FaEye,
+                  },
+                ];
+                return coreValues.map((value, idx) => {
+                  const Icon = value.icon;
+                  return (
+                    <motion.div
+                      key={idx}
+                      className="p-6 bg-glacier-soft rounded-xl shadow-sm text-center"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: idx * 0.08 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                    >
+                      <Icon className="text-3xl text-glacier-primary mb-3 mx-auto" />
+                      <h4 className="font-bold text-xl text-glacier-dark mb-2">
+                        {value.name}
+                      </h4>
+                      <p className="text-sm text-glacier-dark/80">{value.desc}</p>
+                    </motion.div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
 
       
-      {/* Parallax Section 3: Strategic Context Background */}
-      <ParallaxBackground imageUrl="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.webp">
-        <div className="max-w-6xl mx-auto px-4">
-          <SectionHeader
-            title="Strategic Context: Why 2025-2034 is Critical"
-            description="The next decade presents unprecedented opportunities and urgent calls to action for glacier preservation."
-            isLightBackground={false}
-          />
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Card 1: UN International Year of Glaciers' Preservation */}
-            <motion.div
-              className="p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg space-y-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <h3 className="text-xl font-semibold text-white">UN Year of Glaciers&apos; Preservation - 2025</h3>
-              <ul className="list-disc list-inside text-white/90 text-sm space-y-2">
-                <li>UN Resolution A/RES/77/281 adopted globally</li>
-                <li>Raises urgency on glacier melt & water security</li>
-                <li>Calls for public education & research funding</li>
-                <li>Arctic may be ice-free by 2030</li>
-              </ul>
-            </motion.div>
-
-            {/* Card 2: UN Decade of Cryospheric Sciences */}
-            <motion.div
-              className="p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg space-y-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <h3 className="text-xl font-semibold text-white">UN Decade of Cryospheric Sciences - 2025-2034</h3>
-              <ul className="list-disc list-inside text-white/90 text-sm space-y-2">
-                <li>Led by WMO & UNESCO</li>
-                <li>Integrates cryosphere science & local knowledge</li>
-                <li>Aligns glacier research with SDGs</li>
-                <li>Targets water, climate, ecosystems & livelihoods</li>
-              </ul>
-            </motion.div>
-
-            {/* Card 3: Related Global Movements */}
-            <motion.div
-              className="p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg space-y-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <h3 className="text-xl font-semibold text-white">Global Movements & Climate Platforms</h3>
-              <ul className="list-disc list-inside text-white/90 text-sm space-y-2">
-                <li><b>UN Ocean Decade:</b> Links glacial melt to ocean health</li>
-                <li><b>COP30 & UN Water Conferences:</b> Key platforms for cryosphere advocacy in climate finance</li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </ParallaxBackground>
+     
 
 
-      {/* 2. Strategic Gaps */}
-      <motion.section
-        id="strategic-gaps"
-        className="w-full py-24"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="w-[90%] max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-nohemi mb-12 text-glacier-primary text-center">
-            Strategic Gaps We Address
-          </h2>
+      <StrategicGaps/>
 
-          <div className="space-y-10">
-            {strategyGaps.map((gap, index) => {
-            // Map index to image filenames
-            const icons = [
-              "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/book-open-svgrepo-com.svg",
-              "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/file-svgrepo-com.svg",
-              "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/global-leader-happy-strong-power-svgrepo-com.svg",
-              "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/globe-2-svgrepo-com.svg",
-            ];
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`relative flex flex-col md:flex-row ${
-                  index % 2 === 0 ? "" : "md:flex-row-reverse"
-                } items-center gap-6 bg-white/10 border border-white/20 backdrop-blur-md rounded-xl`}
-              >
-                {/* Icon from public folder */}
-                <div className="flex-shrink-0 w-40 h-40 bg-glacier-primary/10 text-glacier-primary rounded-full flex items-center justify-center">
-                  <img
-                    src={icons[index]}
-                    alt={`Icon ${index + 1}`}
-                    className="w-20 h-20"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 text-center md:text-left bg-glacier-light rounded-md p-10">
-                  <h4 className="text-xl font-semibold text-glacier-primary mb-2">
-                    {gap.title}
-                  </h4>
-                  <p className="text-base text-glacier-dark/90">{gap.content}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-          </div>
-        </div>
-      </motion.section>
+     
+     <EngineModel/>
 
 
-      {/* 3. Dual-Force Model */}
-      <motion.section
-        id="dual-force-model"
-        className="w-full bg-glacier-light py-24"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="w-[90%] max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-nohemi mb-12 text-center  text-glacier-primary">
-            Dual-Force Action Model
-          </h2>
-
-          {/* TOP-DOWN SECTION */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 ">
-            {/* Circle + Arrow */}
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-40 h-40 rounded-full bg-glacier-dark text-white border border-glacier-dark flex items-center justify-center text-lg font-semibold shadow-md">
-                TOP-DOWN
-              </div>
-              <div className="w-1 h-6 bg-glacier-dark" />
-              <div className="w-0 h-0 border-l-8 border-r-8 border-t-[12px] border-l-transparent border-r-transparent border-t-glacier-dark" />
-            </div>
-
-            {/* Text and Icon */}
-            <div className="flex items-center gap-6 bg-white shadow-md border border-glacier-dark/20 rounded-xl p-6 w-full md:w-auto max-w-xl">
-              <img
-                src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/goverment-building-svgrepo-com.svg"
-                alt="Government Icon"
-                className="w-12 h-12 flex-shrink-0"
-              />
-              <p className="text-sm text-glacier-dark/90 leading-relaxed md:text-xl">
-                Partnering with governments and institutions to shape climate policy
-                and create global awareness.
-              </p>
-            </div>
-          </div>
-
-          {/* BOTTOM-UP SECTION */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            {/* Text and Icon */}
-            <div className="flex items-center gap-6 bg-white shadow-md border border-glacier-dark/20 rounded-xl p-6 w-full md:w-auto max-w-xl">
-              <img
-                src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/flag.svg"
-                alt="Flag Icon"
-                className="w-12 h-12 flex-shrink-0"
-              />
-              <p className="text-sm text-glacier-dark/90 leading-relaxed md:text-xl">
-                Empowering glacier communities, youth, and educators through training
-                and grassroots campaigns.
-              </p>
-            </div>
-
-            {/* Circle + Arrow Up */}
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-0 h-0 border-l-8 border-r-8 border-b-[12px] border-l-transparent border-r-transparent border-b-glacier-dark" />
-              <div className="w-1 h-6 bg-glacier-dark" />
-              <div className="w-40 h-40 rounded-full bg-glacier-dark text-white border border-glacier-dark flex items-center justify-center text-lg font-semibold shadow-md">
-                BOTTOM-UP
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
+     <DualForceModel/>
 
       {/* 4. Solution Pillars */}
       <motion.section
@@ -511,57 +473,7 @@ export default function StrategyPage() {
         </div>
       </motion.section>
 
-      {/* 5. Theory of Change */}
-      <motion.section
-        id="theory-of-change"
-        className="w-full bg-white py-24"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="w-[90%] max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-nohemi mb-12 text-glacier-primary text-center">
-            Theory of Change
-          </h2>
-
-          {/* Use overflow-x only on md+ */}
-          <div className="md:overflow-x-auto">
-            <div className="flex flex-col md:flex-row md:items-start md:gap-6">
-              {theoryData.map((block, idx) => (
-                <div key={idx} className="relative flex flex-col items-center md:flex-row md:items-center">
-                  {/* Card */}
-                  <div className="bg-glacier-light text-glacier-dark p-6 rounded-xl shadow-md border border-glacier-soft w-full md:w-64 text-center md:text-left">
-                    <h3 className="text-xl font-semibold text-glacier-primary mb-2">
-                      {block.title}
-                    </h3>
-                    <ul className="text-sm leading-relaxed list-disc list-inside text-left">
-                      {block.content.map((line, i) => (
-                        <li key={i}>{line}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Arrow */}
-                  {idx < theoryData.length - 1 && (
-                    <>
-                      {/* ↓ Mobile arrow */}
-                      <div className="block md:hidden mt-4 text-glacier-primary">
-                        <FaArrowDown size={18} />
-                      </div>
-
-                      {/* → Desktop arrow (centered) */}
-                      <div className="hidden md:flex items-center justify-center h-full mx-2">
-                        <FaArrowRight size={20} className="text-glacier-primary" />
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.section>
+     <TheoryOfChange/>
 
       <Footer/>
     </div>

@@ -10,16 +10,10 @@ import axios from "axios";
 
 export default function MediaPage() {
   const contentRef = useRef(null);
-  const newsRef = useRef(null);
 
   const [blogs, setBlogs] = useState([]);
   const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; 
 
-  const scrollToSection = (ref) => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   // Fetch blogs from backend
   const fetchBlogs = async () => {

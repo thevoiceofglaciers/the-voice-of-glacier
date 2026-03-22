@@ -1,87 +1,171 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import QuizModal from "@/components/QuizModal";
-import { Button } from "@/components/ui/button"; // Tailwind-based button
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
-  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const containerRef = useRef(null);
+  const skyRef = useRef(null);
+  const mountainBackRef = useRef(null);
+  const mountainFrontRef = useRef(null);
+  const foregroundRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(skyRef.current, {
+        y: 400,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(mountainBackRef.current, {
+        y: 300,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(mountainFrontRef.current, {
+        y: 380,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(foregroundRef.current, {
+        y: 460,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden">
-      {/* Background Video */}
-      <video
-        id="hero-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute w-full h-full object-cover"
-        src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacier-hero.mp4"
+    <section
+      ref={containerRef}
+      className="relative h-screen w-full overflow-hidden "
+    >
+      {/* 🌌 Sky */}
+      <img
+        ref={skyRef}
+        src="/sky_1.png"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        alt="Sky"
       />
 
-      {/* Overlay Content */}
-      <div className="absolute inset-0 bg-glacier-primary/30 flex flex-col items-center justify-center text-center p-4 text-white">
-        {/* Logo Animation */}
+      {/* 🏔️ Mountain Back */}
+      <img
+        ref={mountainBackRef}
+        src="https://cdn.prod.website-files.com/64a42bd57fd800fb6bf3fda5/64a45475c6e7d2c9ca1f00b6_1.webp"
+        className="absolute bottom-0 w-full h-full object-cover z-30"
+        alt="Mountain Back"
+      />
+
+      {/* 🏔️ Mountain Front */}
+      <img
+        ref={mountainFrontRef}
+        src="https://cdn.prod.website-files.com/64a42bd57fd800fb6bf3fda5/64a451f79db2e31a240ef39e_2.webp"
+        className="absolute bottom-0 w-full h-full object-cover z-20"
+        alt="Mountain Front"
+      />
+
+      {/* 🌄 Foreground */}
+      <img
+        ref={foregroundRef}
+        src="https://cdn.prod.website-files.com/64a42bd57fd800fb6bf3fda5/64a45467c6e7d2c9ca1eecba_3.webp"
+        className="absolute bottom-0 w-full h-full object-cover z-10 "
+        alt="Foreground"
+      />
+
+      {/* 🔥 Hero Content */}
+      <div className="absolute inset-0 z-40 flex flex-col items-center justify-center text-center text-white px-6">
+        
+        {/* 🧊 Hero Logo */}
         <motion.div
-          className="w-64 h-auto mb-6"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="mb-8"
         >
           <Image
             src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/comapny-hero-logo.webp"
-            alt="TVGF Logo"
-            width={256}
-            height={256}
-            className="mx-auto"
+            alt="Voice of Glacier Logo"
+            width={220}
+            height={120}
+            className="w-40 md:w-56 lg:w-64 h-auto object-contain"
+            priority
           />
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          className="text-lg md:text-2xl max-w-2xl font-cabin drop-shadow-lg"
-          initial={{ opacity: 0, y: -20 }}
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-2xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-4xl"
         >
-          &quot;Where glaciers speak, communities rise, and the world listens.&quot;
+          Protecting Glaciers.
+          <br />
+          Preparing Communities.
+        </motion.h1>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-6 text-sm md:text-xl text-white/90 max-w-2xl"
+        >
+          Enabling communities to adapt, lead and act in a changing climate.
         </motion.p>
 
-        {/* Action Buttons */}
+        {/* CTA Buttons */}
         <motion.div
-          className="mt-8 flex flex-col sm:flex-row gap-4"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-10 flex md:gap-5 gap-2"
         >
-          <Button
-            onClick={() => setIsQuizOpen(true)}
-            className="bg-glacier-primary hover:bg-glacier-dark text-white font-cabin text-base px-6 py-2 rounded-md transition"
-          >
-            Check your Knowledge about glaciers
-          </Button>
+          <Link href="#crisis">
+            <Button className="bg-glacier-primary md:text-base text-xs hover:bg-glacier-dark md:px-8 md:py-4 px-4 py-2 text-white">
+              Learn More
+            </Button>
+          </Link>
 
-          <Link href="/story" passHref>
+
+          <Link href="/collaborate">
             <Button
               variant="outline"
-              className="border-glacier-light bg-glacier-primary font-cabin text-base hover:bg-glacier-dark px-6 py-2 rounded-md transition"
+              className="border-white text-white bg-white/10 hover:bg-white/20 md:px-8  md:py-4 px-4 py-2 md:text-base text-xs"
             >
-              <span className="text-white">Watch the Story</span>
+              Partner With Us
             </Button>
           </Link>
         </motion.div>
       </div>
-
-      {/* Quiz Modal with Animation */}
-      <AnimatePresence>
-        {isQuizOpen && (
-          <QuizModal key="quiz" onClose={() => setIsQuizOpen(false)} />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
