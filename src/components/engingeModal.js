@@ -30,7 +30,7 @@ const EngineModel = () => {
   ];
 
   return (
-    <section className="relative w-full min-h-screen py-16 md:py-0 overflow-hidden bg-glacier-light flex flex-col justify-center px-6 md:px-16 font-cabin">
+    <section id="The-Three-Engine-Model" className="relative w-full min-h-screen py-16 md:py-0 overflow-hidden bg-glacier-light flex flex-col justify-center px-6 md:px-16 font-cabin">
       
       {/* Background Decor - Hidden on mobile to reduce visual noise */}
       <div className="absolute top-1/2 left-0 w-full h-[1px] bg-glacier-dark/10 -translate-y-1/2 z-0 hidden md:block" />

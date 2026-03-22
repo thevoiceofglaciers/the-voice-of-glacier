@@ -18,7 +18,7 @@ const DualForceModel = () => {
 
   return (
     <section 
-      id="dual-force-model" 
+      id="Dual-Force-Action" 
       className="relative w-full min-h-screen overflow-hidden bg-glacier-light font-cabin flex flex-col justify-center py-12 px-6 md:px-16"
     >
       <div className="max-w-5xl mx-auto w-full flex flex-col relative">

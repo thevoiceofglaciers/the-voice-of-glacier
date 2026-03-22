@@ -42,7 +42,7 @@ export default function WhyGlaciersPage() {
 </section>
 
       {/* 1. THE CRYOSPHERE CRISIS */}
-<section className="py-24 bg-glacier-dark text-white">
+<section id="cryosphere-crisis" className="py-24 bg-glacier-dark text-white">
   <div className="max-w-7xl mx-auto px-6">
     
     <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -99,7 +99,7 @@ export default function WhyGlaciersPage() {
   </div>
 </section>
 {/* 2. WHY HKH MATTERS */}
-<section className="py-24 bg-white">
+<section id="Kush-Himalaya" className="py-24 bg-white">
   <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
     
     {/* LEFT CONTENT */}
@@ -152,7 +152,7 @@ export default function WhyGlaciersPage() {
 </section>
 
     {/* 3. WHAT HAPPENS WHEN GLACIERS DISAPPEAR */}
-    <section className="py-24 bg-glacier-light">
+    <section id="Disappear" className="py-24 bg-glacier-light">
     <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT CONTENT */}

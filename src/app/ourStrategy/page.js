@@ -216,7 +216,7 @@ export default function StrategyPage() {
       
 
  {/* Parallax Section 2: Vision & Mission Background */}
-      <ParallaxBackground imageUrl="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img2.webp">
+      <ParallaxBackground id="vision-mission" imageUrl="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img2.webp">
   <div className="max-w-6xl mx-auto" id="vision">
     <SectionHeader
       title="Our Vision & Mission"

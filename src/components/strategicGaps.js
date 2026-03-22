@@ -27,7 +27,7 @@ const StrategicGaps = () => {
 
   return (
     <section 
-      id="strategic-gaps" 
+      id="gaps" 
       className="relative w-full min-h-screen overflow-hidden bg-white font-cabin flex flex-col justify-center py-16 px-6 md:px-16"
     >
       {/* Subtle Background Elements - Modified for better mobile visibility */}
