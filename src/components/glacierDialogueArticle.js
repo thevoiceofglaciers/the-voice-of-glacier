@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
+import ShareButtons from "./shareButtons";
 
 export default function GlacierDialogueSessionTwo({ content }) {
   const router = useRouter();
@@ -26,10 +27,17 @@ export default function GlacierDialogueSessionTwo({ content }) {
       </div>
 
       {/* Article Content */}
-      <div
-        className="glacier-dialogue-container"
-        dangerouslySetInnerHTML={{ __html: content.html }}
-      />
+      <div className="max-w-6xl mx-auto px-6">
+        <div
+          className="glacier-dialogue-container pb-10"
+          dangerouslySetInnerHTML={{ __html: content.html }}
+        />
+        
+        {/* Social Sharing Section */}
+        <div className="max-w-4xl mx-auto">
+           <ShareButtons title={content.title || "Glacier Dialogue"} />
+        </div>
+      </div>
     </div>
   );
 }

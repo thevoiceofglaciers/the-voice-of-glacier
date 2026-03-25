@@ -5,6 +5,7 @@ import { Calendar, PlayCircle, ArrowRight, Mic2 } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { podcasts } from "@/data/podcasts";
+import ShareButtons from "@/components/shareButtons";
 
 export default function PodcastPage() {
   const upcoming = podcasts.filter((p) => p.status === "upcoming");
@@ -90,13 +91,14 @@ function Section({ data }) {
   );
 }
 
-/* ================= CARD ================= */
+/* ================= SECTION ================= */
 
 function PodcastCard({ podcast }) {
+  const dialogueUrl = `https://thevoiceofglaciers.org/glacierDialgoues/${podcast.slug}`;
+
   return (
-    <Link href={`/glacierDialgoues/${podcast.slug}`} className="group">
-      <div className="h-full bg-white dark:bg-glacier-primary/10 rounded-2xl overflow-hidden border border-glacier-primary/10 hover:border-glacier-primary/40 hover:shadow-2xl hover:shadow-glacier-primary/5 transition-all duration-500 flex flex-col">
-        
+    <div className="group h-full bg-white dark:bg-glacier-primary/10 rounded-2xl border border-glacier-primary/10 hover:border-glacier-primary/40 hover:shadow-2xl hover:shadow-glacier-primary/5 transition-all duration-500 relative flex flex-col overflow-visible">
+      <Link href={`/glacierDialgoues/${podcast.slug}`} className="flex flex-col flex-grow">
         {/* Image Container */}
         <div className="relative aspect-video overflow-hidden">
           <img
@@ -127,14 +129,27 @@ function PodcastCard({ podcast }) {
             {podcast.title}
           </h3>
 
-          <div className="mt-auto pt-6 flex items-center gap-3">
-             <div className="h-8 w-[2px] bg-glacier-primary/30" />
-             <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70">
+          <div className="mt-auto pt-6 flex items-center gap-3 pr-14">
+             <div className="h-8 w-[2px] bg-glacier-primary/30 flex-shrink-0" />
+             <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70 truncate">
                {podcast.speaker}
              </p>
           </div>
         </div>
+      </Link>
+
+      {/*Share Toggle - Stationed outside Link to avoid click hijacking */}
+      <div 
+        className="absolute bottom-5 right-6 z-30"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        <ShareButtons title={podcast.title} url={dialogueUrl} compact={true} />
       </div>
-    </Link>
+    </div>
   );
 }
+
+
