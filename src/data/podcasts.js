@@ -53,4 +53,14 @@ export const podcasts = [
       A UN side event for World Glacier Day brought together scientists, policymakers, and disaster risk experts to engage with hard, urgent questions about glacier preparedness in the Himalayas.
     `,
   },
+  {
+    id: 5,
+    slug: "GD5",
+    status: "upcoming",
+    title: "Glacier Dialogue 4 : They Are Already on Ventilator",
+    speaker: "Jaimitra Singh Bisht, Anup Sah, Dr. Shekhar Pathak",
+    date: "April 1, 2026",
+    image: "https://wallpaperaccess.com/full/2150664.jpg", 
+    content: "Memory, witness, and the weight of watching — three people who have spent decades in the Himalaya showed what sixty years of glacier loss looks like through a lens.",
+  },
 ];
