@@ -63,4 +63,14 @@ export const podcasts = [
     image: "https://wallpaperaccess.com/full/2150664.jpg", 
     content: "Memory, witness, and the weight of watching — three people who have spent decades in the Himalaya showed what sixty years of glacier loss looks like through a lens.",
   },
+  {
+    id: 6,
+    slug: "GD6",
+    status: "upcoming",
+    title: "When Glaciers Retreat,People Move",
+    speaker: "",
+    date: "April 22, 2026",
+    image: "https://media.istockphoto.com/id/2222583527/photo/river-and-valley-lahaul-and-spiti-valley-himachal-pradesh-india.jpg?b=1&s=612x612&w=0&k=20&c=nlKX9SJSsY3tTwYCBOxGBYtGRRlZMmwMlpMva66bBvs=", 
+    content: "Climate migration in the Hindu Kush Himalaya is no longer a future risk. It is a current condition. Two voices — one mapping the basin, one walking the valley — on what the data and the testimony are telling us together.",
+  },
 ];
