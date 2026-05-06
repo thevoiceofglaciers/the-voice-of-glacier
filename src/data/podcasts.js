@@ -68,7 +68,7 @@ export const podcasts = [
     slug: "GD6",
     status: "upcoming",
     title: "Glacier Dialogue 5 : When Glaciers Retreat,People Move",
-    speaker: "",
+    speaker: "Dr Anamika Barua , Nidhi Jamwal",
     date: "April 22, 2026",
     image: "https://media.istockphoto.com/id/2222583527/photo/river-and-valley-lahaul-and-spiti-valley-himachal-pradesh-india.jpg?b=1&s=612x612&w=0&k=20&c=nlKX9SJSsY3tTwYCBOxGBYtGRRlZMmwMlpMva66bBvs=", 
     content: "Climate migration in the Hindu Kush Himalaya is no longer a future risk. It is a current condition. Two voices — one mapping the basin, one walking the valley — on what the data and the testimony are telling us together.",
