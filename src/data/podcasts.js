@@ -67,7 +67,7 @@ export const podcasts = [
     id: 6,
     slug: "GD6",
     status: "upcoming",
-    title: "When Glaciers Retreat,People Move",
+    title: "Glacier Dialogue 5 : When Glaciers Retreat,People Move",
     speaker: "",
     date: "April 22, 2026",
     image: "https://media.istockphoto.com/id/2222583527/photo/river-and-valley-lahaul-and-spiti-valley-himachal-pradesh-india.jpg?b=1&s=612x612&w=0&k=20&c=nlKX9SJSsY3tTwYCBOxGBYtGRRlZMmwMlpMva66bBvs=", 
