@@ -73,4 +73,14 @@ export const podcasts = [
     image: "https://media.istockphoto.com/id/2222583527/photo/river-and-valley-lahaul-and-spiti-valley-himachal-pradesh-india.jpg?b=1&s=612x612&w=0&k=20&c=nlKX9SJSsY3tTwYCBOxGBYtGRRlZMmwMlpMva66bBvs=", 
     content: "Climate migration in the Hindu Kush Himalaya is no longer a future risk. It is a current condition. Two voices — one mapping the basin, one walking the valley — on what the data and the testimony are telling us together.",
   },
+  {
+    id: 7,
+    slug: "GD7",
+    status: "upcoming",
+    title: "Glaciers, Biodiversity and Life: Exploring the Future of Species and Ecosystems",
+    speaker: "Dr. Yash Veer Bhatnagar , Dr. Pankaj Chandan , Archana Chatterjee , Anurag Maloo",
+    date: "23 May 2026",
+    image: "https://tse3.mm.bing.net/th/id/OIP.EkVjTZkBLQKYCc5_XCH7ggHaE8?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3", 
+    content: "When a glacier retreats, it is not only ice that disappears. It is wetlands, migration routes, nesting grounds, and the water that sustains agro-pastoral communities across the roof of the world."
+  }
 ];
