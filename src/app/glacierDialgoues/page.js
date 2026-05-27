@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, PlayCircle, ArrowRight, Mic2 } from "lucide-react";
+import { Calendar, PlayCircle, ArrowRight, Mic2, BookOpen, Video } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { podcasts } from "@/data/podcasts";
@@ -91,16 +91,18 @@ function Section({ data }) {
   );
 }
 
-/* ================= SECTION ================= */
+/* ================= PODCAST CARD ================= */
 
 function PodcastCard({ podcast }) {
   const dialogueUrl = `https://thevoiceofglaciers.org/glacierDialgoues/${podcast.slug}`;
+  const articlePath = `/glacierDialgoues/${podcast.slug}`;
 
   return (
     <div className="group h-full bg-white dark:bg-glacier-primary/10 rounded-2xl border border-glacier-primary/10 hover:border-glacier-primary/40 hover:shadow-2xl hover:shadow-glacier-primary/5 transition-all duration-500 relative flex flex-col overflow-visible">
-      <Link href={`/glacierDialgoues/${podcast.slug}`} className="flex flex-col flex-grow">
+      <Link href={articlePath} className="flex flex-col flex-grow">
+        
         {/* Image Container */}
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden rounded-t-2xl">
           <img
             src={podcast.image}
             alt={podcast.title}
@@ -120,27 +122,57 @@ function PodcastCard({ podcast }) {
 
         {/* Content Area */}
         <div className="p-6 flex flex-col flex-grow">
-          <div className="flex items-center gap-2 text-xs font-bold text-glacier-primary dark:text-glacier-soft mb-3 uppercase tracking-wider">
-            <Calendar size={14} />
-            {podcast.date}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2 text-xs font-bold text-glacier-primary dark:text-glacier-soft uppercase tracking-wider">
+              <Calendar size={14} />
+              {podcast.date}
+            </div>
           </div>
 
-          <h3 className="font-nohemi text-lg text-glacier-dark dark:text-glacier-light leading-snug group-hover:text-glacier-primary transition-colors duration-300">
+          <h3 className="font-nohemi text-lg text-glacier-dark dark:text-glacier-light leading-snug group-hover:text-glacier-primary transition-colors duration-300 mb-4">
             {podcast.title}
           </h3>
 
-          <div className="mt-auto pt-6 flex items-center gap-3 pr-14">
-             <div className="h-8 w-[2px] bg-glacier-primary/30 flex-shrink-0" />
-             <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70 truncate">
-               {podcast.speaker}
-             </p>
+          <div className="mt-auto flex flex-col gap-5">
+            {/* Speaker Info */}
+            <div className="flex items-center gap-3 pr-14">
+               <div className="h-6 w-[2px] bg-glacier-primary/30 flex-shrink-0" />
+               <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70 truncate">
+                 {podcast.speaker}
+               </p>
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              {/* Read Article */}
+              <div className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-primary/10 text-glacier-primary dark:bg-glacier-soft/10 dark:text-glacier-soft hover:bg-glacier-primary hover:text-white dark:hover:bg-glacier-soft dark:hover:text-glacier-dark transition-all duration-300 shadow-sm">
+                <BookOpen size={14} />
+                Read Article
+              </div>
+
+              {/* Watch Video (External Link) */}
+              {podcast.videoLink && (
+                <a
+                  href={podcast.videoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents triggers on Next.js Parent Link wrapping the card
+                  }}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-dark text-white hover:bg-glacier-accent hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300 z-20 shadow-sm"
+                >
+                  <Video size={14} />
+                  Watch Video
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </Link>
 
-      {/*Share Toggle - Stationed outside Link to avoid click hijacking */}
+      {/* Share Toggle */}
       <div 
-        className="absolute bottom-5 right-6 z-30"
+        className="absolute bottom-[72px] right-6 z-30"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -151,5 +183,3 @@ function PodcastCard({ podcast }) {
     </div>
   );
 }
-
-
