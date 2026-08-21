@@ -1,0 +1,10 @@
+.tvgf-comparison-edit {
+	border: 1px dashed #ccc;
+	padding: 12px;
+	border-radius: 6px;
+}
+.tvgf-comparison-col-row {
+	margin-bottom: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #eee;
+}

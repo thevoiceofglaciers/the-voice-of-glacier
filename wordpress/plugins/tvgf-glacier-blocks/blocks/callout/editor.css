@@ -1,0 +1,8 @@
+.tvgf-callout-edit {
+	border: 1px dashed #ccc;
+	padding: 12px;
+	border-radius: 6px;
+}
+.tvgf-callout-edit.tvgf-callout-warning {
+	border-color: #d63638;
+}

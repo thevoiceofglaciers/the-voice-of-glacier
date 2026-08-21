@@ -1,0 +1,16 @@
+.tvgf-stat-tiles-edit {
+	border: 1px dashed #ccc;
+	padding: 12px;
+	border-radius: 6px;
+}
+.tvgf-stat-tile-row {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+	margin-bottom: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #eee;
+}
+.tvgf-stat-tile-row > div {
+	flex: 1;
+}

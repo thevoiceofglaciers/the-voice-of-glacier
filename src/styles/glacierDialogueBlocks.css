@@ -1,0 +1,187 @@
+/* Shared styling for all Glacier Dialogue article content blocks.
+   Replaces the old per-article inline <style> blob in dialogues.js —
+   one stylesheet for every dialogue instead of bespoke CSS per entry. */
+
+.tvgf-dialogue-body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+  color: #042a33;
+  line-height: 1.75;
+}
+
+/* Context Strip */
+.tvgf-context-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid #e0e8e8;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.tvgf-context-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 1 200px;
+}
+.tvgf-context-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e8f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+.tvgf-context-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8aacac;
+  margin-bottom: 2px;
+}
+.tvgf-context-value {
+  font-size: 0.88rem;
+  color: #042a33;
+  font-weight: 600;
+}
+
+/* Speaker Bio */
+.tvgf-speaker-bio {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 20px 0;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e8e8;
+}
+.tvgf-speaker-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.tvgf-speaker-name {
+  font-weight: 700;
+  color: #042a33;
+}
+.tvgf-speaker-role {
+  font-size: 0.85rem;
+  color: #2a787c;
+  margin-bottom: 6px;
+}
+.tvgf-speaker-bio-text {
+  font-size: 0.9rem;
+  color: #345;
+}
+
+/* Stat Tiles */
+.tvgf-stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.tvgf-stat-tile {
+  background: #042a33;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.tvgf-stat-value {
+  font-family: "NohemiBlack", sans-serif;
+  font-size: 2rem;
+  color: #a8dfe1;
+}
+.tvgf-stat-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.tvgf-stat-trend {
+  font-size: 0.75rem;
+  color: #9cb8bf;
+  margin-top: 6px;
+}
+
+/* Callout */
+.tvgf-callout {
+  border-left: 4px solid #2a787c;
+  background: #eef6f6;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.tvgf-callout-warning {
+  border-left-color: #8b0333;
+  background: #fbeef1;
+}
+.tvgf-callout-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #042a33;
+}
+.tvgf-callout-body {
+  margin: 0;
+  color: #234;
+}
+
+/* Comparison */
+.tvgf-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.tvgf-comparison-col {
+  background: #fff;
+  border: 1px solid #e0e8e8;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.tvgf-comparison-heading {
+  font-weight: 700;
+  color: #2a787c;
+  margin-bottom: 6px;
+}
+.tvgf-comparison-body {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #234;
+}
+
+/* Fallback: WordPress core blocks (quote, gallery, list, paragraph, etc.) */
+.tvgf-wp-block {
+  margin: 20px 0;
+}
+.tvgf-wp-block .wp-block-quote,
+.tvgf-wp-block .wp-block-pullquote {
+  border-left: 4px solid #2a787c;
+  padding: 8px 20px;
+  font-style: italic;
+  color: #042a33;
+}
+.tvgf-wp-block .wp-block-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.tvgf-wp-block .wp-block-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.tvgf-wp-block figcaption {
+  font-size: 0.75rem;
+  color: #8aacac;
+  margin-top: 4px;
+}

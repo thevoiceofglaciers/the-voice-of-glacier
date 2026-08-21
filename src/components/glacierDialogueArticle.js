@@ -1,41 +1,47 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { IoArrowBack } from "react-icons/io5";
+import BackButton from "./backButton";
 import ShareButtons from "./shareButtons";
+import { renderBlocks } from "@/lib/blocks";
+import { formatDialogueDate } from "@/lib/wp";
+import "@/styles/glacierDialogueBlocks.css";
 
-export default function GlacierDialogueSessionTwo({ content }) {
-  const router = useRouter();
+export default function GlacierDialogueArticle({ content }) {
+  const { title, date, speaker, topics = [], blocks = [] } = content;
 
   return (
-    <div className="bg-glacier-glacier-primary text-glacier-dark font-cabin relative">
-
-      {/* Inject page specific CSS */}
-      {content.css && (
-        <style dangerouslySetInnerHTML={{ __html: content.css }} />
-      )}
-
-      {/* Back button */}
+    <div className="bg-glacier-light text-glacier-dark font-cabin relative">
       <div className="max-w-6xl mx-auto px-6 pt-8">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition"
-        >
-          <IoArrowBack />
-          Back
-        </button>
+        <BackButton />
       </div>
 
-      {/* Article Content */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div
-          className="glacier-dialogue-container pb-10"
-          dangerouslySetInnerHTML={{ __html: content.html }}
-        />
-        
-        {/* Social Sharing Section */}
-        <div className="max-w-4xl mx-auto">
-           <ShareButtons title={content.title || "Glacier Dialogue"} />
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Hero — derived from post metadata, not a CMS block */}
+        <header className="text-center py-12 space-y-4">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-glacier-primary">
+            Glacier Dialogues {date ? `· ${formatDialogueDate(date)}` : ""}
+          </p>
+          <h1 className="font-nohemi text-3xl md:text-5xl text-glacier-dark">{title}</h1>
+          {speaker && (
+            <p className="text-glacier-dark/70 text-lg">{speaker}</p>
+          )}
+          {topics.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
+              {topics.map((topic) => (
+                <span
+                  key={topic}
+                  className="text-xs px-3 py-1 rounded-full bg-glacier-primary/10 text-glacier-primary font-semibold uppercase tracking-wide"
+                >
+                  {topic}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        {/* Article body — rendered from WordPress Gutenberg blocks */}
+        <div className="tvgf-dialogue-body">{renderBlocks(blocks)}</div>
+
+        <div className="max-w-4xl mx-auto pb-10">
+          <ShareButtons title={title || "Glacier Dialogue"} />
         </div>
       </div>
     </div>

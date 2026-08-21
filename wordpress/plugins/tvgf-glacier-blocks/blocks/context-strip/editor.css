@@ -1,0 +1,16 @@
+.tvgf-context-strip-edit {
+	border: 1px dashed #ccc;
+	padding: 12px;
+	border-radius: 6px;
+}
+.tvgf-context-strip-row {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+	margin-bottom: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #eee;
+}
+.tvgf-context-strip-row > div {
+	flex: 1;
+}

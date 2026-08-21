@@ -1,14 +1,15 @@
-"use client";
-
 import Link from "next/link";
 import { Calendar, PlayCircle, ArrowRight, Mic2, BookOpen, Video } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { podcasts } from "@/data/podcasts";
+import { getGlacierDialogues, formatDialogueDate } from "@/lib/wp";
 import ShareButtons from "@/components/shareButtons";
+import ClickGuard from "@/components/clickGuard";
 
-export default function PodcastPage() {
-  const upcoming = podcasts.filter((p) => p.status === "upcoming");
+export const revalidate = 3600;
+
+export default async function PodcastPage() {
+  const { past } = await getGlacierDialogues();
 
   return (
     <div className="min-h-screen flex flex-col font-cabin bg-glacier-light dark:bg-glacier-dark transition-colors duration-300">
@@ -16,7 +17,7 @@ export default function PodcastPage() {
 
       <main className="flex-grow pt-32 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-8">
-          
+
           {/* HEADER SECTION */}
           <header className="text-center mb-16 space-y-6">
             <div className="space-y-2">
@@ -59,7 +60,7 @@ export default function PodcastPage() {
             <div className="h-[1px] flex-grow bg-glacier-primary/20"></div>
           </div>
 
-          <Section data={upcoming} />
+          <Section data={past} />
         </div>
       </main>
 
@@ -100,15 +101,17 @@ function PodcastCard({ podcast }) {
   return (
     <div className="group h-full bg-white dark:bg-glacier-primary/10 rounded-2xl border border-glacier-primary/10 hover:border-glacier-primary/40 hover:shadow-2xl hover:shadow-glacier-primary/5 transition-all duration-500 relative flex flex-col overflow-visible">
       <Link href={articlePath} className="flex flex-col flex-grow">
-        
+
         {/* Image Container */}
         <div className="relative aspect-video overflow-hidden rounded-t-2xl">
-          <img
-            src={podcast.image}
-            alt={podcast.title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          
+          {podcast.image && (
+            <img
+              src={podcast.image}
+              alt={podcast.imageAlt || podcast.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          )}
+
           {/* Overlay Gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-glacier-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -125,7 +128,7 @@ function PodcastCard({ podcast }) {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 text-xs font-bold text-glacier-primary dark:text-glacier-soft uppercase tracking-wider">
               <Calendar size={14} />
-              {podcast.date}
+              {formatDialogueDate(podcast.date)}
             </div>
           </div>
 
@@ -133,53 +136,44 @@ function PodcastCard({ podcast }) {
             {podcast.title}
           </h3>
 
-          <div className="mt-auto flex flex-col gap-5">
-            {/* Speaker Info */}
-            <div className="flex items-center gap-3 pr-14">
-               <div className="h-6 w-[2px] bg-glacier-primary/30 flex-shrink-0" />
-               <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70 truncate">
-                 {podcast.speaker}
-               </p>
-            </div>
-
-            {/* ACTION BUTTONS */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              {/* Read Article */}
-              <div className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-primary/10 text-glacier-primary dark:bg-glacier-soft/10 dark:text-glacier-soft hover:bg-glacier-primary hover:text-white dark:hover:bg-glacier-soft dark:hover:text-glacier-dark transition-all duration-300 shadow-sm">
-                <BookOpen size={14} />
-                Read Article
-              </div>
-
-              {/* Watch Video (External Link) */}
-              {podcast.videoLink && (
-                <a
-                  href={podcast.videoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevents triggers on Next.js Parent Link wrapping the card
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-dark text-white hover:bg-glacier-accent hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300 z-20 shadow-sm"
-                >
-                  <Video size={14} />
-                  Watch Video
-                </a>
-              )}
-            </div>
+          <div className="mt-auto flex items-center gap-3 pr-14">
+             <div className="h-6 w-[2px] bg-glacier-primary/30 flex-shrink-0" />
+             <p className="text-sm font-medium text-glacier-dark/70 dark:text-glacier-soft/70 truncate">
+               {podcast.speaker}
+             </p>
           </div>
         </div>
       </Link>
 
-      {/* Share Toggle */}
-      <div 
-        className="absolute bottom-[72px] right-6 z-30"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-      >
-        <ShareButtons title={podcast.title} url={dialogueUrl} compact={true} />
+      {/* ACTION BUTTONS — kept outside the card-wide <Link> above, since
+          "Watch Video" is itself an <a> and can't nest inside another one. */}
+      <div className="grid grid-cols-2 gap-3 px-6 pb-6">
+        <Link
+          href={articlePath}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-primary/10 text-glacier-primary dark:bg-glacier-soft/10 dark:text-glacier-soft hover:bg-glacier-primary hover:text-white dark:hover:bg-glacier-soft dark:hover:text-glacier-dark transition-all duration-300 shadow-sm"
+        >
+          <BookOpen size={14} />
+          Read Article
+        </Link>
+
+        {/* Watch Video (External Link) */}
+        {podcast.videoLink && (
+          <a
+            href={podcast.videoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl bg-glacier-dark text-white hover:bg-glacier-accent hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300 z-20 shadow-sm"
+          >
+            <Video size={14} />
+            Watch Video
+          </a>
+        )}
       </div>
+
+      {/* Share Toggle */}
+      <ClickGuard preventDefault className="absolute bottom-[72px] right-6 z-30">
+        <ShareButtons title={podcast.title} url={dialogueUrl} compact={true} />
+      </ClickGuard>
     </div>
   );
 }

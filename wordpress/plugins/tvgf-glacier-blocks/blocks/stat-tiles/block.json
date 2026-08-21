@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "tvgf/stat-tiles",
+	"title": "Stat Tiles",
+	"category": "text",
+	"icon": "chart-bar",
+	"description": "A row of big-number callouts (e.g. 87% / of glacier mass lost since...).",
+	"attributes": {
+		"tiles": { "type": "array", "default": [] }
+	},
+	"supports": { "html": false },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}
