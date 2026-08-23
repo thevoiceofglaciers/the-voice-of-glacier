@@ -149,7 +149,8 @@ export async function getGlacierDialogueBySlug(slug, { preview = false } = {}) {
 }
 
 // WPGraphQL Content Blocks serializes array-of-object attributes (declared as
-// "type":"array" in block.json) as a JSON-encoded string, not a native list —
+// "type":"array", "items":{"type":"object"} in block.json) as a list whose
+// elements are each individually JSON-encoded strings, not native objects —
 // confirmed against a real WordPress instance. Flat string/number attributes
 // (speaker-bio, callout) come through already-typed and need no parsing.
 const JSON_ENCODED_ARRAY_FIELDS = {
@@ -158,16 +159,35 @@ const JSON_ENCODED_ARRAY_FIELDS = {
   "tvgf/comparison": "columns",
 };
 
+function parseJsonEncodedArray(raw) {
+  // Older/alternate shape: the whole array serialized as one JSON string.
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  }
+  // Current shape: a real list whose elements are each a JSON-encoded string.
+  if (Array.isArray(raw)) {
+    return raw.map((item) => {
+      if (typeof item !== "string") return item;
+      try {
+        return JSON.parse(item);
+      } catch {
+        return item;
+      }
+    });
+  }
+  return [];
+}
+
 function normalizeBlockAttributes(block) {
   const field = JSON_ENCODED_ARRAY_FIELDS[block.name];
   if (!field || !block.attributes) return block;
 
-  const raw = block.attributes[field];
-  if (typeof raw !== "string") return block;
-
-  try {
-    return { ...block, attributes: { ...block.attributes, [field]: JSON.parse(raw) } };
-  } catch {
-    return { ...block, attributes: { ...block.attributes, [field]: [] } };
-  }
+  return {
+    ...block,
+    attributes: { ...block.attributes, [field]: parseJsonEncodedArray(block.attributes[field]) },
+  };
 }

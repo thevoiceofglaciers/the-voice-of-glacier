@@ -219,6 +219,49 @@ add_filter( 'preview_post_link', function ( $link, $post ) {
 }, 10, 2 );
 
 // ---------------------------------------------------------------------------
+// "View Post" link (published posts) -> the real Next.js page, not the
+// WordPress theme. preview_post_link above only fires for drafts/unsaved
+// changes — once a post is published, WordPress uses the plain permalink for
+// the editor's "View Post" link instead, which without this filter would
+// point at WordPress's own (soon-to-be-blocked, see below) front-end.
+// ---------------------------------------------------------------------------
+
+add_filter( 'post_type_link', function ( $link, $post ) {
+	if ( ! $post || $post->post_type !== 'glacier_dialogue' ) {
+		return $link;
+	}
+
+	$nextjs_url = defined( 'TVGF_NEXTJS_URL' ) ? TVGF_NEXTJS_URL : '';
+	if ( ! $nextjs_url ) {
+		return $link;
+	}
+
+	return rtrim( $nextjs_url, '/' ) . '/glacierDialgoues/' . $post->post_name;
+}, 10, 2 );
+
+// ---------------------------------------------------------------------------
+// Headless lockdown: redirect any normal front-end request to wp-admin.
+// WordPress's own theme should never be publicly browsable — only the REST
+// API, GraphQL, and wp-admin/wp-login need to stay reachable. Static files
+// (Media Library uploads) are served directly by the webserver and never
+// reach this hook at all, so nothing needs to be special-cased for those.
+// ---------------------------------------------------------------------------
+
+add_action( 'template_redirect', function () {
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		return;
+	}
+
+	$uri = $_SERVER['REQUEST_URI'] ?? '';
+	if ( strpos( $uri, '/graphql' ) === 0 || strpos( $uri, '/wp-json' ) === 0 ) {
+		return;
+	}
+
+	wp_safe_redirect( admin_url(), 302 );
+	exit;
+} );
+
+// ---------------------------------------------------------------------------
 // Revalidation webhook: tell Next.js to refresh its cache for this dialogue
 // ---------------------------------------------------------------------------
 

@@ -13,6 +13,21 @@
 		return next;
 	}
 
+	function renderPreview( columns, rootProps ) {
+		return el(
+			'div',
+			rootProps || { className: 'tvgf-comparison' },
+			columns.map( function ( col, index ) {
+				return el(
+					'div',
+					{ key: index, className: 'tvgf-comparison-col' },
+					el( 'div', { className: 'tvgf-comparison-heading' }, col.heading ),
+					el( 'p', { className: 'tvgf-comparison-body' }, col.body )
+				);
+			} )
+		);
+	}
+
 	registerBlockType( 'tvgf/comparison', {
 		edit: function ( props ) {
 			var columns = props.attributes.columns || [];
@@ -22,7 +37,9 @@
 			return el(
 				'div',
 				blockProps,
-				el( 'p', {}, el( 'strong', {}, 'Comparison' ) ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Comparison — preview' ),
+				renderPreview( columns ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Edit columns' ),
 				columns.map( function ( col, index ) {
 					return el(
 						'div',
@@ -69,20 +86,8 @@
 			);
 		},
 		save: function ( props ) {
-			var columns = props.attributes.columns || [];
 			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-comparison' } );
-			return el(
-				'div',
-				blockProps,
-				columns.map( function ( col, index ) {
-					return el(
-						'div',
-						{ key: index, className: 'tvgf-comparison-col' },
-						el( 'div', { className: 'tvgf-comparison-heading' }, col.heading ),
-						el( 'p', { className: 'tvgf-comparison-body' }, col.body )
-					);
-				} )
-			);
+			return renderPreview( props.attributes.columns || [], blockProps );
 		},
 	} );
 } )( window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components );

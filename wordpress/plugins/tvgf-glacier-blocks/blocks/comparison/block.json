@@ -7,7 +7,7 @@
 	"icon": "columns",
 	"description": "A side-by-side comparison of two or more short positions (e.g. a tension/contradiction).",
 	"attributes": {
-		"columns": { "type": "array", "default": [] }
+		"columns": { "type": "array", "default": [], "items": { "type": "object" } }
 	},
 	"supports": { "html": false },
 	"editorScript": "file:./index.js",

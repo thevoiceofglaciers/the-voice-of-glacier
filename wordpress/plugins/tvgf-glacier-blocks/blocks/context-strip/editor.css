@@ -1,7 +1,15 @@
 .tvgf-context-strip-edit {
 	border: 1px dashed #ccc;
-	padding: 12px;
+	padding: 16px;
 	border-radius: 6px;
+}
+.tvgf-block-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin: 16px 0 8px;
 }
 .tvgf-context-strip-row {
 	display: flex;
@@ -13,4 +21,45 @@
 }
 .tvgf-context-strip-row > div {
 	flex: 1;
+}
+
+/* Live preview — mirrors src/styles/glacierDialogueBlocks.css so the editor
+   view matches how this looks on the published site. */
+.tvgf-context-strip {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	background: #fff;
+	border: 1px solid #e0e8e8;
+	border-radius: 12px;
+	padding: 20px 24px;
+}
+.tvgf-context-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	flex: 1 1 200px;
+}
+.tvgf-context-icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: #e8f4f4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	font-size: 1rem;
+}
+.tvgf-context-label {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin-bottom: 2px;
+}
+.tvgf-context-value {
+	font-size: 0.88rem;
+	color: #042a33;
+	font-weight: 600;
 }

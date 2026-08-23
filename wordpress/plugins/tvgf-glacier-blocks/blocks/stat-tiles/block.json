@@ -7,7 +7,7 @@
 	"icon": "chart-bar",
 	"description": "A row of big-number callouts (e.g. 87% / of glacier mass lost since...).",
 	"attributes": {
-		"tiles": { "type": "array", "default": [] }
+		"tiles": { "type": "array", "default": [], "items": { "type": "object" } }
 	},
 	"supports": { "html": false },
 	"editorScript": "file:./index.js",

@@ -8,6 +8,23 @@
 	var TextareaControl = components.TextareaControl;
 	var Button = components.Button;
 
+	function renderPreview( a, rootProps ) {
+		return el(
+			'div',
+			rootProps || { className: 'tvgf-speaker-bio' },
+			a.photoUrl
+				? el( 'img', { className: 'tvgf-speaker-photo', src: a.photoUrl, alt: a.photoAlt } )
+				: null,
+			el(
+				'div',
+				{ className: 'tvgf-speaker-info' },
+				el( 'div', { className: 'tvgf-speaker-name' }, a.name || 'Speaker name' ),
+				el( 'div', { className: 'tvgf-speaker-role' }, [ a.role, a.org ].filter( Boolean ).join( ', ' ) ),
+				a.bio ? el( 'p', { className: 'tvgf-speaker-bio-text' }, a.bio ) : null
+			)
+		);
+	}
+
 	registerBlockType( 'tvgf/speaker-bio', {
 		edit: function ( props ) {
 			var a = props.attributes;
@@ -17,7 +34,9 @@
 			return el(
 				'div',
 				blockProps,
-				el( 'p', {}, el( 'strong', {}, 'Speaker Bio' ) ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Speaker Bio — preview' ),
+				renderPreview( a ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Edit' ),
 				el(
 					'div',
 					{ className: 'tvgf-speaker-bio-photo' },
@@ -78,22 +97,8 @@
 			);
 		},
 		save: function ( props ) {
-			var a = props.attributes;
 			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-speaker-bio' } );
-			return el(
-				'div',
-				blockProps,
-				a.photoUrl
-					? el( 'img', { className: 'tvgf-speaker-photo', src: a.photoUrl, alt: a.photoAlt } )
-					: null,
-				el(
-					'div',
-					{ className: 'tvgf-speaker-info' },
-					el( 'div', { className: 'tvgf-speaker-name' }, a.name ),
-					el( 'div', { className: 'tvgf-speaker-role' }, [ a.role, a.org ].filter( Boolean ).join( ', ' ) ),
-					a.bio ? el( 'p', { className: 'tvgf-speaker-bio-text' }, a.bio ) : null
-				)
-			);
+			return renderPreview( props.attributes, blockProps );
 		},
 	} );
 } )( window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components );

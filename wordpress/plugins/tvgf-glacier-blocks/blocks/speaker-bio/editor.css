@@ -1,8 +1,48 @@
 .tvgf-speaker-bio-edit {
 	border: 1px dashed #ccc;
-	padding: 12px;
+	padding: 16px;
 	border-radius: 6px;
+}
+.tvgf-block-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin: 16px 0 8px;
 }
 .tvgf-speaker-bio-photo {
 	margin-bottom: 8px;
+}
+
+/* Live preview — mirrors src/styles/glacierDialogueBlocks.css */
+.tvgf-speaker-bio {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 16px;
+	background: #fff;
+	border-radius: 12px;
+	border: 1px solid #e0e8e8;
+}
+.tvgf-speaker-photo {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+.tvgf-speaker-name {
+	font-weight: 700;
+	color: #042a33;
+}
+.tvgf-speaker-role {
+	font-size: 0.85rem;
+	color: #2a787c;
+	margin-bottom: 6px;
+}
+.tvgf-speaker-bio-text {
+	font-size: 0.9rem;
+	color: #345;
+	margin: 0;
 }

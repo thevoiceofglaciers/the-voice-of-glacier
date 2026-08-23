@@ -1,7 +1,15 @@
 .tvgf-stat-tiles-edit {
 	border: 1px dashed #ccc;
-	padding: 12px;
+	padding: 16px;
 	border-radius: 6px;
+}
+.tvgf-block-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin: 16px 0 8px;
 }
 .tvgf-stat-tile-row {
 	display: flex;
@@ -13,4 +21,33 @@
 }
 .tvgf-stat-tile-row > div {
 	flex: 1;
+}
+
+/* Live preview — mirrors src/styles/glacierDialogueBlocks.css */
+.tvgf-stat-tiles {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 16px;
+}
+.tvgf-stat-tile {
+	background: #042a33;
+	color: #fff;
+	border-radius: 12px;
+	padding: 20px;
+	text-align: center;
+}
+.tvgf-stat-value {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #a8dfe1;
+}
+.tvgf-stat-label {
+	font-size: 0.8rem;
+	opacity: 0.85;
+	margin-top: 4px;
+}
+.tvgf-stat-trend {
+	font-size: 0.75rem;
+	color: #9cb8bf;
+	margin-top: 6px;
 }

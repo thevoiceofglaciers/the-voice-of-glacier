@@ -9,7 +9,8 @@
 	"attributes": {
 		"items": {
 			"type": "array",
-			"default": []
+			"default": [],
+			"items": { "type": "object" }
 		}
 	},
 	"supports": { "html": false },

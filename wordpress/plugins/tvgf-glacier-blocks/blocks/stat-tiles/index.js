@@ -12,6 +12,22 @@
 		return next;
 	}
 
+	function renderPreview( tiles, rootProps ) {
+		return el(
+			'div',
+			rootProps || { className: 'tvgf-stat-tiles' },
+			tiles.map( function ( tile, index ) {
+				return el(
+					'div',
+					{ key: index, className: 'tvgf-stat-tile' },
+					el( 'div', { className: 'tvgf-stat-value' }, tile.value ),
+					el( 'div', { className: 'tvgf-stat-label' }, tile.label ),
+					tile.trend ? el( 'div', { className: 'tvgf-stat-trend' }, tile.trend ) : null
+				);
+			} )
+		);
+	}
+
 	registerBlockType( 'tvgf/stat-tiles', {
 		edit: function ( props ) {
 			var tiles = props.attributes.tiles || [];
@@ -21,7 +37,9 @@
 			return el(
 				'div',
 				blockProps,
-				el( 'p', {}, el( 'strong', {}, 'Stat Tiles' ) ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Stat Tiles — preview' ),
+				renderPreview( tiles ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Edit tiles' ),
 				tiles.map( function ( tile, index ) {
 					return el(
 						'div',
@@ -75,21 +93,8 @@
 			);
 		},
 		save: function ( props ) {
-			var tiles = props.attributes.tiles || [];
 			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-stat-tiles' } );
-			return el(
-				'div',
-				blockProps,
-				tiles.map( function ( tile, index ) {
-					return el(
-						'div',
-						{ key: index, className: 'tvgf-stat-tile' },
-						el( 'div', { className: 'tvgf-stat-value' }, tile.value ),
-						el( 'div', { className: 'tvgf-stat-label' }, tile.label ),
-						tile.trend ? el( 'div', { className: 'tvgf-stat-trend' }, tile.trend ) : null
-					);
-				} )
-			);
+			return renderPreview( props.attributes.tiles || [], blockProps );
 		},
 	} );
 } )( window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components );

@@ -6,17 +6,27 @@
 	var TextareaControl = components.TextareaControl;
 	var SelectControl = components.SelectControl;
 
+	function renderPreview( a, rootProps ) {
+		return el(
+			'div',
+			rootProps || { className: 'tvgf-callout tvgf-callout-' + a.variant },
+			a.title ? el( 'div', { className: 'tvgf-callout-title' }, a.title ) : null,
+			el( 'p', { className: 'tvgf-callout-body' }, a.body || 'Callout body text…' )
+		);
+	}
+
 	registerBlockType( 'tvgf/callout', {
 		edit: function ( props ) {
 			var a = props.attributes;
 			var setAttributes = props.setAttributes;
-			var blockProps = useBlockProps( {
-				className: 'tvgf-callout-edit tvgf-callout-' + a.variant,
-			} );
+			var blockProps = useBlockProps( { className: 'tvgf-callout-edit' } );
 
 			return el(
 				'div',
 				blockProps,
+				el( 'p', { className: 'tvgf-block-label' }, 'Callout — preview' ),
+				renderPreview( a ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Edit' ),
 				el( SelectControl, {
 					label: 'Type',
 					value: a.variant,
@@ -49,12 +59,7 @@
 			var blockProps = blockEditor.useBlockProps.save( {
 				className: 'tvgf-callout tvgf-callout-' + a.variant,
 			} );
-			return el(
-				'div',
-				blockProps,
-				a.title ? el( 'div', { className: 'tvgf-callout-title' }, a.title ) : null,
-				el( 'p', { className: 'tvgf-callout-body' }, a.body )
-			);
+			return renderPreview( a, blockProps );
 		},
 	} );
 } )( window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components );

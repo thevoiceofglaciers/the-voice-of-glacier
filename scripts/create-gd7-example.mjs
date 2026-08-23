@@ -63,7 +63,25 @@ function extractBase64ImagesForSlug(slug) {
   return images;
 }
 
+async function findExistingMedia(filename) {
+  const res = await fetch(
+    `${SITE_URL}/wp-json/wp/v2/media?search=${encodeURIComponent(filename)}&per_page=5`,
+    { headers: { Authorization: authHeader } }
+  );
+  if (!res.ok) return null;
+  const items = await res.json();
+  const match = items.find((m) => m.slug === filename || m.slug?.startsWith(filename));
+  return match ? match.source_url : null;
+}
+
 async function uploadBase64Image(dataUri, filename, altText) {
+  // Re-running this script (e.g. after a content-only fix) shouldn't create
+  // duplicate Media Library entries for images already uploaded.
+  const existing = await findExistingMedia(filename);
+  if (existing) {
+    return existing;
+  }
+
   const [, mime, b64] = dataUri.match(/^data:(image\/[a-zA-Z]+);base64,(.+)$/);
   const buffer = Buffer.from(b64, "base64");
   const ext = mime.split("/")[1];
@@ -138,7 +156,7 @@ function contextStrip(items) {
         )}</div><div class="tvgf-context-value">${esc(i.value)}</div></div></div>`
     )
     .join("");
-  return `<!-- wp:tvgf/context-strip ${json} -->\n<div class="tvgf-context-strip">${html}</div>\n<!-- /wp:tvgf/context-strip -->`;
+  return `<!-- wp:tvgf/context-strip ${json} -->\n<div class="wp-block-tvgf-context-strip tvgf-context-strip">${html}</div>\n<!-- /wp:tvgf/context-strip -->`;
 }
 
 function statTiles(tiles) {
@@ -151,13 +169,13 @@ function statTiles(tiles) {
         )}</div><div class="tvgf-stat-label">${esc(t.label)}</div></div>`
     )
     .join("");
-  return `<!-- wp:tvgf/stat-tiles ${json} -->\n<div class="tvgf-stat-tiles">${html}</div>\n<!-- /wp:tvgf/stat-tiles -->`;
+  return `<!-- wp:tvgf/stat-tiles ${json} -->\n<div class="wp-block-tvgf-stat-tiles tvgf-stat-tiles">${html}</div>\n<!-- /wp:tvgf/stat-tiles -->`;
 }
 
 function speakerBio({ name, role, org, bio, photoUrl, photoAlt }) {
   const attrs = { name, role, org, bio, photoUrl: photoUrl || "", photoAlt: photoAlt || "" };
   const photoHtml = photoUrl ? `<img class="tvgf-speaker-photo" src="${photoUrl}" alt="${esc(photoAlt)}"/>` : "";
-  const html = `<div class="tvgf-speaker-bio">${photoHtml}<div class="tvgf-speaker-info"><div class="tvgf-speaker-name">${esc(
+  const html = `<div class="wp-block-tvgf-speaker-bio tvgf-speaker-bio">${photoHtml}<div class="tvgf-speaker-info"><div class="tvgf-speaker-name">${esc(
     name
   )}</div><div class="tvgf-speaker-role">${esc([role, org].filter(Boolean).join(", "))}</div>${
     bio ? `<p class="tvgf-speaker-bio-text">${esc(bio)}</p>` : ""
@@ -167,7 +185,7 @@ function speakerBio({ name, role, org, bio, photoUrl, photoAlt }) {
 
 function callout({ variant, title, body }) {
   const attrs = { variant, title: title || "", body };
-  const html = `<div class="tvgf-callout tvgf-callout-${variant}">${
+  const html = `<div class="wp-block-tvgf-callout tvgf-callout tvgf-callout-${variant}">${
     title ? `<div class="tvgf-callout-title">${esc(title)}</div>` : ""
   }<p class="tvgf-callout-body">${esc(body)}</p></div>`;
   return `<!-- wp:tvgf/callout ${JSON.stringify(attrs)} -->\n${html}\n<!-- /wp:tvgf/callout -->`;
@@ -564,32 +582,49 @@ async function main() {
     if (term) topicIds.push(term.id);
   }
 
-  const postRes = await fetch(`${SITE_URL}/wp-json/wp/v2/glacier_dialogue`, {
-    method: "POST",
-    headers: { Authorization: authHeader, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title: entry.title,
-      slug: entry.slug,
-      status: "draft",
-      content,
-      ...(featuredMediaId ? { featured_media: featuredMediaId } : {}),
-      ...(topicIds.length ? { dialogue_topic: topicIds } : {}),
-      meta: {
-        dialogue_date: "2026-05-23",
-        speaker_name: entry.speaker,
-        video_link: entry.videoLink || "",
-      },
-    }),
-  });
+  // Re-running this script should update the existing post's content rather
+  // than creating a duplicate (e.g. after fixing a block-markup bug).
+  const existingRes = await fetch(
+    `${SITE_URL}/wp-json/wp/v2/glacier_dialogue?slug=${entry.slug}&status=any`,
+    { headers: { Authorization: authHeader } }
+  );
+  const existing = existingRes.ok ? await existingRes.json() : [];
+  const existingPost = existing.find((p) => p.slug === entry.slug.toLowerCase());
+
+  const body = {
+    title: entry.title,
+    slug: entry.slug,
+    content,
+    ...(featuredMediaId ? { featured_media: featuredMediaId } : {}),
+    ...(topicIds.length ? { dialogue_topic: topicIds } : {}),
+    meta: {
+      dialogue_date: "2026-05-23",
+      speaker_name: entry.speaker,
+      video_link: entry.videoLink || "",
+    },
+  };
+  // Only new posts default to draft — never silently downgrade an already-published one.
+  if (!existingPost) {
+    body.status = "draft";
+  }
+
+  const postRes = await fetch(
+    `${SITE_URL}/wp-json/wp/v2/glacier_dialogue${existingPost ? `/${existingPost.id}` : ""}`,
+    {
+      method: "POST",
+      headers: { Authorization: authHeader, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }
+  );
 
   if (!postRes.ok) {
-    throw new Error(`Failed to create post: ${postRes.status} ${await postRes.text()}`);
+    throw new Error(`Failed to save post: ${postRes.status} ${await postRes.text()}`);
   }
 
   const post = await postRes.json();
-  console.log(`\nCreated draft post ID ${post.id}.`);
+  console.log(`\n${existingPost ? "Updated" : "Created"} post ID ${post.id} (status: ${post.status}).`);
   console.log(`Edit it: ${SITE_URL}/wp-admin/post.php?post=${post.id}&action=edit`);
-  console.log("Review the blocks, then publish when it looks right.");
+  console.log("Review the blocks — validation warnings should be gone now.");
 }
 
 main().catch((err) => {

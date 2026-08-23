@@ -12,6 +12,26 @@
 		return next;
 	}
 
+	function renderPreview( items, rootProps ) {
+		return el(
+			'div',
+			rootProps || { className: 'tvgf-context-strip' },
+			items.map( function ( item, index ) {
+				return el(
+					'div',
+					{ key: index, className: 'tvgf-context-item' },
+					el( 'span', { className: 'tvgf-context-icon' }, item.icon ),
+					el(
+						'div',
+						{},
+						el( 'div', { className: 'tvgf-context-label' }, item.label ),
+						el( 'div', { className: 'tvgf-context-value' }, item.value )
+					)
+				);
+			} )
+		);
+	}
+
 	registerBlockType( 'tvgf/context-strip', {
 		edit: function ( props ) {
 			var items = props.attributes.items || [];
@@ -21,7 +41,9 @@
 			return el(
 				'div',
 				blockProps,
-				el( 'p', {}, el( 'strong', {}, 'Context Strip' ) ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Context Strip — preview' ),
+				renderPreview( items ),
+				el( 'p', { className: 'tvgf-block-label' }, 'Edit items' ),
 				items.map( function ( item, index ) {
 					return el(
 						'div',
@@ -77,25 +99,8 @@
 			);
 		},
 		save: function ( props ) {
-			var items = props.attributes.items || [];
 			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-context-strip' } );
-			return el(
-				'div',
-				blockProps,
-				items.map( function ( item, index ) {
-					return el(
-						'div',
-						{ key: index, className: 'tvgf-context-item' },
-						el( 'span', { className: 'tvgf-context-icon' }, item.icon ),
-						el(
-							'div',
-							{},
-							el( 'div', { className: 'tvgf-context-label' }, item.label ),
-							el( 'div', { className: 'tvgf-context-value' }, item.value )
-						)
-					);
-				} )
-			);
+			return renderPreview( props.attributes.items || [], blockProps );
 		},
 	} );
 } )( window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components );
