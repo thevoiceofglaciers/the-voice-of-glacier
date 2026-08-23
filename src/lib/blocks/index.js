@@ -19,11 +19,36 @@ const registry = {
 
 export function renderBlocks(blocks = []) {
   let seenQuote = false;
+  const output = [];
+  let i = 0;
 
-  return blocks.map((block, index) => {
+  while (i < blocks.length) {
+    const block = blocks[i];
+
+    // Consecutive speaker-bio blocks (a session's panel) render together as
+    // one grid, matching the original per-article "panelist-row" layout,
+    // instead of each stacking full-width one after another.
+    if (block.name === "tvgf/speaker-bio") {
+      const group = [];
+      while (i < blocks.length && blocks[i].name === "tvgf/speaker-bio") {
+        group.push(blocks[i]);
+        i++;
+      }
+      output.push(
+        <div className="tvgf-panel-grid" key={"panel" + i}>
+          {group.map((b, idx) => (
+            <SpeakerBio key={"speaker" + idx} attributes={b.attributes || {}} />
+          ))}
+        </div>
+      );
+      continue;
+    }
+
     const Component = registry[block.name];
     if (Component) {
-      return <Component key={block.name + index} attributes={block.attributes || {}} />;
+      output.push(<Component key={block.name + i} attributes={block.attributes || {}} />);
+      i++;
+      continue;
     }
 
     // The article's first quote reads as its opening statement, so it gets a
@@ -31,6 +56,9 @@ export function renderBlocks(blocks = []) {
     const isOpenerQuote = block.name === "core/quote" && !seenQuote;
     if (isOpenerQuote) seenQuote = true;
 
-    return <FallbackHtml key={"fallback" + index} block={block} isOpenerQuote={isOpenerQuote} />;
-  });
+    output.push(<FallbackHtml key={"fallback" + i} block={block} isOpenerQuote={isOpenerQuote} />);
+    i++;
+  }
+
+  return output;
 }

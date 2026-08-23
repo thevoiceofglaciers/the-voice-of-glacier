@@ -18,7 +18,7 @@ export default function GlacierDialogueArticle({ content }) {
   ].filter(Boolean);
 
   return (
-    <div className="bg-glacier-light text-glacier-dark font-cabin relative">
+    <div className="text-glacier-dark font-cabin relative">
       <div className="max-w-6xl mx-auto px-6 pt-8">
         <BackButton />
       </div>

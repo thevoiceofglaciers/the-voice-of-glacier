@@ -51,12 +51,19 @@
   font-weight: 600;
 }
 
+/* Panel — the grid holding a group of consecutive Speaker Bio cards */
+.tvgf-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 32px 0 48px;
+}
+
 /* Speaker Bio */
 .tvgf-speaker-bio {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  margin: 20px 0;
   padding: 16px;
   background: #fff;
   border-radius: 12px;
