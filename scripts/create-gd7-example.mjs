@@ -631,6 +631,7 @@ async function main() {
       video_link: entry.videoLink || "",
       dialogue_subtitle:
         "When a glacier retreats, it is not only ice that disappears. It is wetlands, migration routes, nesting grounds, and the water that sustains agro-pastoral communities across the roof of the world.",
+      session_number: 6,
     },
   };
   // Only new posts default to draft — never silently downgrade an already-published one.

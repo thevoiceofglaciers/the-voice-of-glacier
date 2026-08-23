@@ -96,6 +96,13 @@ add_action( 'init', function () {
 		'show_in_rest'  => true,
 		'auth_callback' => $auth_callback,
 	] );
+
+	register_post_meta( 'glacier_dialogue', 'session_number', [
+		'type'          => 'integer',
+		'single'        => true,
+		'show_in_rest'  => true,
+		'auth_callback' => $auth_callback,
+	] );
 } );
 
 // ---------------------------------------------------------------------------
@@ -120,7 +127,13 @@ function tvgf_render_glacier_dialogue_meta_box( $post ) {
 	$speaker  = get_post_meta( $post->ID, 'speaker_name', true );
 	$video    = get_post_meta( $post->ID, 'video_link', true );
 	$subtitle = get_post_meta( $post->ID, 'dialogue_subtitle', true );
+	$session  = get_post_meta( $post->ID, 'session_number', true );
 	?>
+	<p>
+		<label for="tvgf_session_number"><strong>Session Number</strong></label><br>
+		<input type="number" id="tvgf_session_number" name="tvgf_session_number" min="1" step="1"
+			value="<?php echo esc_attr( $session ); ?>" style="width:100%" placeholder="6">
+	</p>
 	<p>
 		<label for="tvgf_dialogue_date"><strong>Dialogue Date</strong></label><br>
 		<input type="date" id="tvgf_dialogue_date" name="tvgf_dialogue_date"
@@ -174,6 +187,9 @@ add_action( 'save_post_glacier_dialogue', function ( $post_id ) {
 	if ( isset( $_POST['tvgf_dialogue_subtitle'] ) ) {
 		update_post_meta( $post_id, 'dialogue_subtitle', sanitize_textarea_field( $_POST['tvgf_dialogue_subtitle'] ) );
 	}
+	if ( isset( $_POST['tvgf_session_number'] ) && $_POST['tvgf_session_number'] !== '' ) {
+		update_post_meta( $post_id, 'session_number', absint( $_POST['tvgf_session_number'] ) );
+	}
 }, 10, 1 );
 
 // ---------------------------------------------------------------------------
@@ -214,6 +230,15 @@ add_action( 'graphql_register_types', function () {
 		'description' => 'One or two sentences shown under the title in the article hero.',
 		'resolve'     => function ( $post ) {
 			return get_post_meta( $post->ID, 'dialogue_subtitle', true );
+		},
+	] );
+
+	register_graphql_field( 'GlacierDialogue', 'sessionNumber', [
+		'type'        => 'Int',
+		'description' => 'Session number in the Glacier Dialogues series, shown in the hero eyebrow line.',
+		'resolve'     => function ( $post ) {
+			$value = get_post_meta( $post->ID, 'session_number', true );
+			return $value === '' ? null : (int) $value;
 		},
 	] );
 } );
