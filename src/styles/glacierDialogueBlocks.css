@@ -243,8 +243,35 @@
   border-radius: 8px;
   object-fit: cover;
 }
-.tvgf-wp-block figcaption {
+.tvgf-wp-block .wp-block-gallery figcaption {
   font-size: 0.75rem;
   color: #8aacac;
   margin-top: 4px;
+}
+
+/* Standalone captioned photo — matches the original .photo-block design */
+.tvgf-wp-block .wp-block-image {
+  margin: 40px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(4, 42, 51, 0.12);
+}
+.tvgf-wp-block .wp-block-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tvgf-wp-block .wp-block-image figcaption {
+  display: block;
+  background: #fff;
+  padding: 12px 20px;
+  border-top: 1px solid #e8f0f0;
+  font-size: 0.78rem !important;
+  color: #5a8a8c !important;
+  margin: 0 !important;
+  line-height: 1.5;
+}
+.tvgf-wp-block .wp-block-image figcaption em {
+  font-style: italic;
+  color: #5a8a8c;
 }
