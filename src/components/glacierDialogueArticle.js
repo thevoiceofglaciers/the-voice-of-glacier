@@ -1,3 +1,4 @@
+import { Video } from "lucide-react";
 import BackButton from "./backButton";
 import ShareButtons from "./shareButtons";
 import { renderBlocks } from "@/lib/blocks";
@@ -8,7 +9,7 @@ const HERO_PATTERN =
   "url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><circle cx=%22100%22 cy=%22100%22 r=%2280%22 fill=%22none%22 stroke=%22%232A787C%22 stroke-width=%221%22 opacity=%220.15%22/><circle cx=%22100%22 cy=%22100%22 r=%2250%22 fill=%22none%22 stroke=%22%232A787C%22 stroke-width=%221%22 opacity=%220.10%22/></svg>')";
 
 export default function GlacierDialogueArticle({ content }) {
-  const { title, date, speaker, subtitle, sessionNumber, topics = [], blocks = [] } = content;
+  const { title, date, speaker, subtitle, sessionNumber, videoLink, topics = [], blocks = [] } = content;
 
   const eyebrowParts = [
     "Glacier Dialogues",
@@ -45,6 +46,19 @@ export default function GlacierDialogueArticle({ content }) {
                   {topic}
                 </span>
               ))}
+            </div>
+          )}
+          {videoLink && (
+            <div className="pt-4">
+              <a
+                href={videoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-glacier-primary text-white text-sm font-bold hover:bg-glacier-accent transition-colors"
+              >
+                <Video size={16} />
+                Watch Video
+              </a>
             </div>
           )}
         </div>

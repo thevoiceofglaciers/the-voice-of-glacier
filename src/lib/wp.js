@@ -63,7 +63,8 @@ export function formatDialogueDate(isoDate) {
   if (!isoDate) return "";
   const date = new Date(isoDate);
   if (Number.isNaN(date.getTime())) return isoDate;
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  // "23 May 2026" everywhere — day, then month, then year.
+  return date.toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
 }
 
 function toCardShape(node) {
