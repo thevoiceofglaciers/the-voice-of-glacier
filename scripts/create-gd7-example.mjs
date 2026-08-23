@@ -229,9 +229,20 @@ async function buildContent(images, upload) {
 
   parts.push(
     statTiles([
-      { value: "64,000", label: "glaciers in the HKH region — 20% of glacial area lost in the 30 years to 2020" },
-      { value: "2 billion+", label: "people downstream depending on glacier-fed rivers, 29% of the global population" },
-      { value: "15–20 pairs", label: "of black-necked cranes breeding in India — each pair irreplaceable" },
+      {
+        value: "64,000",
+        label:
+          "glaciers in the HKH region, covering approximately 56,000 sq km — 20% of glacial area lost in the 30 years to 2020",
+      },
+      {
+        value: "2 billion+",
+        label:
+          "people downstream whose water security depends on glacier-fed rivers originating in the HKH, supporting 29% of the global population",
+      },
+      {
+        value: "15–20 pairs",
+        label: "of black-necked cranes breeding in India — each pair and each glacier-fed wetland irreplaceable",
+      },
     ])
   );
 
@@ -530,9 +541,17 @@ async function main() {
 
   const content = await buildContent(images, uploadBase64Image);
 
-  // Featured image (from the existing external URL in podcasts.js)
+  // Featured image (from the existing external URL in podcasts.js). Re-running
+  // this script shouldn't re-upload a duplicate every time.
   let featuredMediaId = null;
-  if (entry.image?.startsWith("http")) {
+  const featuredSearchRes = await fetch(`${SITE_URL}/wp-json/wp/v2/media?search=gd7-featured`, {
+    headers: { Authorization: authHeader },
+  });
+  const featuredMatches = featuredSearchRes.ok ? await featuredSearchRes.json() : [];
+  const existingFeatured = featuredMatches.find((m) => m.slug.startsWith("gd7-featured"));
+  if (existingFeatured) {
+    featuredMediaId = existingFeatured.id;
+  } else if (entry.image?.startsWith("http")) {
     const imgRes = await fetch(entry.image);
     if (imgRes.ok) {
       const buffer = Buffer.from(await imgRes.arrayBuffer());
@@ -565,12 +584,21 @@ async function main() {
   ];
   const topicIds = [];
   for (const name of topicNames) {
+    // WordPress stores term names with HTML entities encoded (e.g. "&amp;"),
+    // so a search containing a literal "&" never matches via its plain SQL
+    // LIKE lookup. Search on a safe substring instead (before any "&" or "/"),
+    // then compare the full decoded name below.
+    const searchTerm = name.split(/[&/]/)[0].trim();
     const searchRes = await fetch(
-      `${SITE_URL}/wp-json/wp/v2/dialogue_topic?search=${encodeURIComponent(name)}`,
+      `${SITE_URL}/wp-json/wp/v2/dialogue_topic?search=${encodeURIComponent(searchTerm)}`,
       { headers: { Authorization: authHeader } }
     );
     const found = searchRes.ok ? await searchRes.json() : [];
-    let term = found.find((t) => t.name === name);
+    // WP's REST API returns term names HTML-entity-encoded (e.g. "&amp;"),
+    // so compare against the decoded form or every match silently fails.
+    const decodeEntities = (s) =>
+      s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'");
+    let term = found.find((t) => decodeEntities(t.name) === name);
     if (!term) {
       const createRes = await fetch(`${SITE_URL}/wp-json/wp/v2/dialogue_topic`, {
         method: "POST",
@@ -601,6 +629,8 @@ async function main() {
       dialogue_date: "2026-05-23",
       speaker_name: entry.speaker,
       video_link: entry.videoLink || "",
+      dialogue_subtitle:
+        "When a glacier retreats, it is not only ice that disappears. It is wetlands, migration routes, nesting grounds, and the water that sustains agro-pastoral communities across the roof of the world.",
     },
   };
   // Only new posts default to draft — never silently downgrade an already-published one.

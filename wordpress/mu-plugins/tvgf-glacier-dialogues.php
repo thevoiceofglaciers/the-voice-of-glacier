@@ -89,6 +89,13 @@ add_action( 'init', function () {
 		'show_in_rest'  => true,
 		'auth_callback' => $auth_callback,
 	] );
+
+	register_post_meta( 'glacier_dialogue', 'dialogue_subtitle', [
+		'type'          => 'string',
+		'single'        => true,
+		'show_in_rest'  => true,
+		'auth_callback' => $auth_callback,
+	] );
 } );
 
 // ---------------------------------------------------------------------------
@@ -109,9 +116,10 @@ add_action( 'add_meta_boxes', function () {
 function tvgf_render_glacier_dialogue_meta_box( $post ) {
 	wp_nonce_field( 'tvgf_save_glacier_dialogue_meta', 'tvgf_glacier_dialogue_nonce' );
 
-	$date    = get_post_meta( $post->ID, 'dialogue_date', true );
-	$speaker = get_post_meta( $post->ID, 'speaker_name', true );
-	$video   = get_post_meta( $post->ID, 'video_link', true );
+	$date     = get_post_meta( $post->ID, 'dialogue_date', true );
+	$speaker  = get_post_meta( $post->ID, 'speaker_name', true );
+	$video    = get_post_meta( $post->ID, 'video_link', true );
+	$subtitle = get_post_meta( $post->ID, 'dialogue_subtitle', true );
 	?>
 	<p>
 		<label for="tvgf_dialogue_date"><strong>Dialogue Date</strong></label><br>
@@ -129,6 +137,11 @@ function tvgf_render_glacier_dialogue_meta_box( $post ) {
 		<input type="url" id="tvgf_video_link" name="tvgf_video_link"
 			value="<?php echo esc_attr( $video ); ?>" style="width:100%"
 			placeholder="https://www.youtube.com/watch?v=...">
+	</p>
+	<p>
+		<label for="tvgf_dialogue_subtitle"><strong>Hero Subtitle</strong></label><br>
+		<textarea id="tvgf_dialogue_subtitle" name="tvgf_dialogue_subtitle" rows="3" style="width:100%"
+			placeholder="One or two sentences shown under the title at the top of the article."><?php echo esc_textarea( $subtitle ); ?></textarea>
 	</p>
 	<p style="color:#666;font-size:12px;">
 		Also set a Featured Image (used as the listing card image) and assign one or
@@ -158,10 +171,13 @@ add_action( 'save_post_glacier_dialogue', function ( $post_id ) {
 	if ( isset( $_POST['tvgf_video_link'] ) ) {
 		update_post_meta( $post_id, 'video_link', esc_url_raw( $_POST['tvgf_video_link'] ) );
 	}
+	if ( isset( $_POST['tvgf_dialogue_subtitle'] ) ) {
+		update_post_meta( $post_id, 'dialogue_subtitle', sanitize_textarea_field( $_POST['tvgf_dialogue_subtitle'] ) );
+	}
 }, 10, 1 );
 
 // ---------------------------------------------------------------------------
-// Flatten the three meta fields directly onto the GraphQL GlacierDialogue type
+// Flatten the meta fields directly onto the GraphQL GlacierDialogue type
 // ---------------------------------------------------------------------------
 
 add_action( 'graphql_register_types', function () {
@@ -190,6 +206,14 @@ add_action( 'graphql_register_types', function () {
 		'description' => 'External video URL (e.g. YouTube), used for the "Watch Video" button.',
 		'resolve'     => function ( $post ) {
 			return get_post_meta( $post->ID, 'video_link', true );
+		},
+	] );
+
+	register_graphql_field( 'GlacierDialogue', 'dialogueSubtitle', [
+		'type'        => 'String',
+		'description' => 'One or two sentences shown under the title in the article hero.',
+		'resolve'     => function ( $post ) {
+			return get_post_meta( $post->ID, 'dialogue_subtitle', true );
 		},
 	] );
 } );

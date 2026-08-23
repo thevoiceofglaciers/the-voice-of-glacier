@@ -7,6 +7,7 @@ const DIALOGUE_FIELDS = `
   dialogueDate
   speakerName
   videoLink
+  dialogueSubtitle
   featuredImage {
     node {
       sourceUrl
@@ -72,6 +73,7 @@ function toCardShape(node) {
     date: node.dialogueDate,
     speaker: node.speakerName,
     videoLink: node.videoLink,
+    subtitle: node.dialogueSubtitle || null,
     image: node.featuredImage?.node?.sourceUrl || null,
     imageAlt: node.featuredImage?.node?.altText || node.title,
     topics: (node.dialogueTopics?.nodes || []).map((t) => t.name),

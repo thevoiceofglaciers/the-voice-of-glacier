@@ -5,7 +5,7 @@ import { formatDialogueDate } from "@/lib/wp";
 import "@/styles/glacierDialogueBlocks.css";
 
 export default function GlacierDialogueArticle({ content }) {
-  const { title, date, speaker, topics = [], blocks = [] } = content;
+  const { title, date, speaker, subtitle, topics = [], blocks = [] } = content;
 
   return (
     <div className="bg-glacier-light text-glacier-dark font-cabin relative">
@@ -20,6 +20,9 @@ export default function GlacierDialogueArticle({ content }) {
             Glacier Dialogues {date ? `· ${formatDialogueDate(date)}` : ""}
           </p>
           <h1 className="font-nohemi text-3xl md:text-5xl text-glacier-dark">{title}</h1>
+          {subtitle && (
+            <p className="max-w-2xl mx-auto text-glacier-dark/80 text-base md:text-lg">{subtitle}</p>
+          )}
           {speaker && (
             <p className="text-glacier-dark/70 text-lg">{speaker}</p>
           )}
