@@ -5,13 +5,10 @@
  * restyle them in globals via the .tvgf-wp-block wrapper (see
  * src/styles/glacierDialogueBlocks.css).
  */
-export default function FallbackHtml({ block }) {
+export default function FallbackHtml({ block, isOpenerQuote }) {
   if (!block?.renderedHtml) return null;
 
-  return (
-    <div
-      className="tvgf-wp-block"
-      dangerouslySetInnerHTML={{ __html: block.renderedHtml }}
-    />
-  );
+  const className = isOpenerQuote ? "tvgf-wp-block tvgf-quote-opener" : "tvgf-wp-block";
+
+  return <div className={className} dangerouslySetInnerHTML={{ __html: block.renderedHtml }} />;
 }

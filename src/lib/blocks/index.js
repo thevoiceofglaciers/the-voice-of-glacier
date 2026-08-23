@@ -18,11 +18,19 @@ const registry = {
 };
 
 export function renderBlocks(blocks = []) {
+  let seenQuote = false;
+
   return blocks.map((block, index) => {
     const Component = registry[block.name];
     if (Component) {
       return <Component key={block.name + index} attributes={block.attributes || {}} />;
     }
-    return <FallbackHtml key={"fallback" + index} block={block} />;
+
+    // The article's first quote reads as its opening statement, so it gets a
+    // more prominent style than the supporting pull-quotes later on.
+    const isOpenerQuote = block.name === "core/quote" && !seenQuote;
+    if (isOpenerQuote) seenQuote = true;
+
+    return <FallbackHtml key={"fallback" + index} block={block} isOpenerQuote={isOpenerQuote} />;
   });
 }

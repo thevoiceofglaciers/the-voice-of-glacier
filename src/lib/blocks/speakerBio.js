@@ -8,8 +8,8 @@ export default function SpeakerBio({ attributes }) {
       )}
       <div className="tvgf-speaker-info">
         <div className="tvgf-speaker-name">{name}</div>
-        <div className="tvgf-speaker-role">{[role, org].filter(Boolean).join(", ")}</div>
-        {bio && <p className="tvgf-speaker-bio-text">{bio}</p>}
+        <div className="tvgf-speaker-role">{[role, bio].filter(Boolean).join(" · ")}</div>
+        {org && <div className="tvgf-speaker-org">{org}</div>}
       </div>
     </div>
   );

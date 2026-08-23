@@ -75,12 +75,13 @@
 }
 .tvgf-speaker-role {
   font-size: 0.85rem;
-  color: #2a787c;
-  margin-bottom: 6px;
-}
-.tvgf-speaker-bio-text {
-  font-size: 0.9rem;
   color: #345;
+  margin-bottom: 4px;
+}
+.tvgf-speaker-org {
+  font-size: 0.78rem;
+  color: #2a787c;
+  font-weight: 600;
 }
 
 /* Stat Tiles */
@@ -159,6 +160,32 @@
   color: #234;
 }
 
+/* Section divider — a "kicker" paragraph (className tvgf-kicker) marking the
+   start of a new section, styled as a pill badge + rule line. */
+.tvgf-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 48px 0 8px !important;
+}
+.tvgf-kicker strong {
+  background: #042a33;
+  color: #2a787c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.tvgf-kicker::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #d4e0e0;
+}
+
 /* Fallback: WordPress core blocks (quote, gallery, list, paragraph, etc.) */
 .tvgf-wp-block {
   margin: 20px 0;
@@ -169,6 +196,30 @@
   padding: 8px 20px;
   font-style: italic;
   color: #042a33;
+}
+
+/* The first quote on the page reads as the article's opening statement —
+   styled larger and centered, matching the old per-article "opener quote". */
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote {
+  border-left: none;
+  border-top: 1px solid #e0ecec;
+  border-bottom: 1px solid #e0ecec;
+  padding: 32px 16px;
+  text-align: center;
+  font-style: normal;
+}
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote p {
+  font-family: "NohemiBlack", sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote cite {
+  font-size: 0.8rem;
+  color: #5a8a8c;
+  font-style: normal;
+  font-weight: 600;
 }
 .tvgf-wp-block .wp-block-gallery {
   display: grid;
