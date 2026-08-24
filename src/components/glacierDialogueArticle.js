@@ -67,7 +67,7 @@ export default function GlacierDialogueArticle({ content }) {
 
       <div className="max-w-4xl mx-auto px-6">
         {/* Article body — rendered from WordPress Gutenberg blocks */}
-        <div className="tvgf-dialogue-body">{renderBlocks(blocks)}</div>
+        {renderBlocks(blocks)}
 
         {/* Closing CTA — static template content, not a CMS block */}
         <div className="mt-14 mb-10 rounded-2xl bg-gradient-to-br from-[#042A33] to-[#0d4a55] text-white text-center py-12 px-10">

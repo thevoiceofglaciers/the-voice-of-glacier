@@ -2,14 +2,6 @@
    Replaces the old per-article inline <style> blob in dialogues.js —
    one stylesheet for every dialogue instead of bespoke CSS per entry. */
 
-.tvgf-dialogue-body {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 24px 64px;
-  color: #042a33;
-  line-height: 1.75;
-}
-
 /* Context Strip */
 .tvgf-context-strip {
   display: flex;
