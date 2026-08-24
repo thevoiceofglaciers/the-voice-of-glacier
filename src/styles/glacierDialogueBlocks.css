@@ -221,6 +221,15 @@
 .tvgf-wp-block {
   margin: 20px 0;
 }
+.tvgf-wp-block h2.wp-block-heading {
+  font-family: "Nohemi", "Segoe UI", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #042a33;
+  margin: 48px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0ecec;
+}
 .tvgf-wp-block .wp-block-quote,
 .tvgf-wp-block .wp-block-pullquote {
   border-left: 4px solid #2a787c;
