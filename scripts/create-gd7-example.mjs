@@ -196,6 +196,20 @@ function orderedList(items) {
   return `<!-- wp:list {"ordered":true} -->\n<ol class="wp-block-list">${lis}</ol>\n<!-- /wp:list -->`;
 }
 
+function takeaways(items) {
+  const json = JSON.stringify({ items: items.map((text) => ({ text })) });
+  const html = items
+    .map(
+      (text, index) =>
+        `<div class="tvgf-takeaway"><div class="tvgf-takeaway-number">${String(index + 1).padStart(
+          2,
+          "0"
+        )}</div><p>${esc(text)}</p></div>`
+    )
+    .join("");
+  return `<!-- wp:tvgf/takeaways ${json} -->\n<div class="wp-block-tvgf-takeaways-grid tvgf-takeaways-grid">${html}</div>\n<!-- /wp:tvgf/takeaways -->`;
+}
+
 // ---------------------------------------------------------------------------
 // 3. GD7 content, transcribed from src/data/dialogues.js
 // ---------------------------------------------------------------------------
@@ -513,7 +527,7 @@ async function buildContent(images, upload) {
 
   parts.push(kicker("What This Session Made Clear"));
   parts.push(
-    orderedList([
+    takeaways([
       "Newly exposed glacial terrain requires centuries to become habitable through ecological succession. Glacier retreat does not create new habitat for any species in a timeframe that matters to conservation.",
       "India's 15 to 20 breeding pairs of black-necked cranes return to the same nesting mound for up to 18 consecutive years. Site-specific habitat loss — a flooded mound, a drying wetland — can eliminate a breeding pair with no possibility of replacement.",
       "Small glaciers of just a few hectares sustain village-level water security. Their disappearance creates water crises within one to two generations for communities with no alternative sources.",
@@ -611,17 +625,29 @@ async function main() {
   }
 
   // Re-running this script should update the existing post's content rather
-  // than creating a duplicate (e.g. after fixing a block-markup bug).
-  const existingRes = await fetch(
-    `${SITE_URL}/wp-json/wp/v2/glacier_dialogue?slug=${entry.slug}&status=any`,
-    { headers: { Authorization: authHeader } }
-  );
-  const existing = existingRes.ok ? await existingRes.json() : [];
-  const existingPost = existing.find((p) => p.slug === entry.slug.toLowerCase());
+  // than creating a duplicate (e.g. after fixing a block-markup bug). Slugs
+  // (and titles) get hand-edited in wp-admin after the fact, so searching by
+  // the original entry.slug can miss the real post — WORDPRESS_POST_ID lets
+  // you point at it directly when that's happened.
+  let existingPost = null;
+  if (process.env.WORDPRESS_POST_ID) {
+    const byId = await fetch(`${SITE_URL}/wp-json/wp/v2/glacier_dialogue/${process.env.WORDPRESS_POST_ID}`, {
+      headers: { Authorization: authHeader },
+    });
+    if (byId.ok) existingPost = await byId.json();
+  } else {
+    const existingRes = await fetch(
+      `${SITE_URL}/wp-json/wp/v2/glacier_dialogue?slug=${entry.slug}&status=any`,
+      { headers: { Authorization: authHeader } }
+    );
+    const existing = existingRes.ok ? await existingRes.json() : [];
+    existingPost = existing.find((p) => p.slug === entry.slug.toLowerCase()) || null;
+  }
 
   const body = {
-    title: entry.title,
-    slug: entry.slug,
+    // Never overwrite title/slug on an existing post — those get hand-edited
+    // in wp-admin afterwards and shouldn't be reverted by re-running this.
+    ...(existingPost ? {} : { title: entry.title, slug: entry.slug }),
     content,
     ...(featuredMediaId ? { featured_media: featuredMediaId } : {}),
     ...(topicIds.length ? { dialogue_topic: topicIds } : {}),

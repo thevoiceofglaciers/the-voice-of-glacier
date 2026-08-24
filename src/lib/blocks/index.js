@@ -3,6 +3,7 @@ import SpeakerBio from "./speakerBio";
 import StatTiles from "./statTiles";
 import Callout from "./callout";
 import Comparison from "./comparison";
+import Takeaways from "./takeaways";
 import FallbackHtml from "./fallbackHtml";
 
 // Only our custom Gutenberg blocks need a dedicated React component. Every
@@ -15,6 +16,7 @@ const registry = {
   "tvgf/stat-tiles": StatTiles,
   "tvgf/callout": Callout,
   "tvgf/comparison": Comparison,
+  "tvgf/takeaways": Takeaways,
 };
 
 export function renderBlocks(blocks = []) {

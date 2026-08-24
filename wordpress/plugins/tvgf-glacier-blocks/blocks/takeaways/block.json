@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "tvgf/takeaways",
+	"title": "Takeaways",
+	"category": "text",
+	"icon": "editor-ol",
+	"description": "A numbered grid of key takeaways (e.g. 'What This Session Made Clear').",
+	"attributes": {
+		"items": { "type": "array", "default": [], "items": { "type": "object" } }
+	},
+	"supports": { "html": false },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}

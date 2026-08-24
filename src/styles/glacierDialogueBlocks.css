@@ -172,6 +172,33 @@
   color: #234;
 }
 
+/* Takeaways — matches the original .takeaways-grid design */
+.tvgf-takeaways-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 28px 0 40px;
+}
+.tvgf-takeaway {
+  background: #fff;
+  border-top: 3px solid #2a787c;
+  border-radius: 0 0 8px 8px;
+  padding: 18px 18px 20px;
+  box-shadow: 0 2px 6px rgba(4, 42, 51, 0.06);
+}
+.tvgf-takeaway-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e0eeee;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.tvgf-takeaway p {
+  font-size: 0.88rem;
+  color: #1e3035;
+  margin: 0;
+}
+
 /* Section divider — a "kicker" paragraph (className tvgf-kicker) marking the
    start of a new section, styled as a pill badge + rule line. */
 .tvgf-kicker {

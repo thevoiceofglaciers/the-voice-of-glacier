@@ -131,6 +131,7 @@ export async function getGlacierDialogueBySlug(slug, { preview = false } = {}) {
           ... on TvgfStatTiles { attributes { tiles } }
           ... on TvgfCallout { attributes { variant title body } }
           ... on TvgfComparison { attributes { columns } }
+          ... on TvgfTakeaways { attributes { items } }
         }
       }
     }
@@ -162,6 +163,7 @@ const JSON_ENCODED_ARRAY_FIELDS = {
   "tvgf/context-strip": "items",
   "tvgf/stat-tiles": "tiles",
   "tvgf/comparison": "columns",
+  "tvgf/takeaways": "items",
 };
 
 function parseJsonEncodedArray(raw) {
