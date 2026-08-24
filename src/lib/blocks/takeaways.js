@@ -3,7 +3,7 @@ export default function Takeaways({ attributes }) {
   if (!items.length) return null;
 
   return (
-    <div className="tvgf-takeaways-grid">
+    <div className="tvgf-takeaways">
       {items.map((item, index) => (
         <div key={index} className="tvgf-takeaway">
           <div className="tvgf-takeaway-number">{String(index + 1).padStart(2, "0")}</div>

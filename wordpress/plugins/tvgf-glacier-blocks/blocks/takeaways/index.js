@@ -12,7 +12,7 @@
 	function renderPreview( items, rootProps ) {
 		return el(
 			'div',
-			rootProps || { className: 'tvgf-takeaways-grid' },
+			rootProps || { className: 'tvgf-takeaways' },
 			items.map( function ( item, index ) {
 				return el(
 					'div',
@@ -77,7 +77,7 @@
 			);
 		},
 		save: function ( props ) {
-			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-takeaways-grid' } );
+			var blockProps = blockEditor.useBlockProps.save( { className: 'tvgf-takeaways' } );
 			return renderPreview( props.attributes.items || [], blockProps );
 		},
 	} );

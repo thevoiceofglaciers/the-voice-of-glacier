@@ -207,7 +207,7 @@ function takeaways(items) {
         )}</div><p>${esc(text)}</p></div>`
     )
     .join("");
-  return `<!-- wp:tvgf/takeaways ${json} -->\n<div class="wp-block-tvgf-takeaways-grid tvgf-takeaways-grid">${html}</div>\n<!-- /wp:tvgf/takeaways -->`;
+  return `<!-- wp:tvgf/takeaways ${json} -->\n<div class="wp-block-tvgf-takeaways tvgf-takeaways">${html}</div>\n<!-- /wp:tvgf/takeaways -->`;
 }
 
 // ---------------------------------------------------------------------------

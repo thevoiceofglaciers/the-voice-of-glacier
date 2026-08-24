@@ -165,7 +165,7 @@
 }
 
 /* Takeaways — matches the original .takeaways-grid design */
-.tvgf-takeaways-grid {
+.tvgf-takeaways {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
