@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import DushanbeConferenceSection from "@/components/DushanbeConferenceSection";
 import SDGGrid from "@/components/SDG";
 import { HiArrowDown } from "react-icons/hi";
@@ -121,7 +119,6 @@ export default function FlagshipPrograms() {
   };
   return (
     <div className="bg-glacier-light text-glacier-dark min-h-screen">
-      <Navbar />
 
       {/* Hero Banner */}
       <section
@@ -327,7 +324,6 @@ export default function FlagshipPrograms() {
         <span>Read the Dushanbe Declaration</span>
         <HiArrowDown className="bg-glacier-dark rounded-full  text-lg md:text-xl" />
       </button>
-      <Footer />
     </div>
   );
 }

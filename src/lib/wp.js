@@ -118,6 +118,92 @@ export async function getGlacierDialogues() {
   return { upcoming, past };
 }
 
+/**
+ * Fetches the main site navigation from WordPress's native Menus feature
+ * (Appearance > Menus, assigned to the "primary" location — see
+ * wordpress/mu-plugins/tvgf-glacier-dialogues.php). Mapped into the exact
+ * shape navbar.js already expects: { name, href, sublinks: [{label, href}] }.
+ *
+ * This now lives in the root layout, so a WordPress outage would otherwise
+ * take down every route — deliberately swallows errors and returns null so
+ * navbar.js can fall back to its hardcoded default links instead.
+ */
+export async function getMainMenu() {
+  const query = `
+    query GetMainMenu {
+      menuItems(where: { location: PRIMARY }, first: 50) {
+        nodes {
+          id
+          label
+          url
+          parentId
+          order
+          childItems(first: 20) {
+            nodes { id label url order }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, {}, { tags: ["site-menu"], revalidate: 3600 });
+    const nodes = data?.menuItems?.nodes || [];
+
+    return nodes
+      .filter((n) => !n.parentId)
+      .sort((a, b) => a.order - b.order)
+      .map((n) => ({
+        name: n.label,
+        href: n.url,
+        sublinks: (n.childItems?.nodes || [])
+          .sort((a, b) => a.order - b.order)
+          .map((c) => ({ label: c.label, href: c.url })),
+      }));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Fetches the announcement bar shown below the main menu on every page —
+ * the most recently published Announcement with "Active" still checked.
+ * Same fail-closed reasoning as getMainMenu(): returns null on any error so
+ * the bar just doesn't render rather than breaking every page.
+ */
+export async function getAnnouncement() {
+  const query = `
+    query GetAnnouncement {
+      announcements(first: 5, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          title
+          description
+          ctaLabel
+          ctaUrl
+          isActive
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, {}, { tags: ["announcement"], revalidate: 3600 });
+    const nodes = data?.announcements?.nodes || [];
+    const active = nodes.find((n) => n.isActive);
+    if (!active) return null;
+
+    return {
+      title: active.title,
+      description: active.description || "",
+      ctaLabel: active.ctaLabel || "",
+      ctaUrl: active.ctaUrl || "",
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function getGlacierDialogueBySlug(slug, { preview = false } = {}) {
   const query = `
     query GetGlacierDialogueBySlug($slug: ID!) {

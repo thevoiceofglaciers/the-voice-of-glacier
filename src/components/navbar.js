@@ -6,18 +6,10 @@ import { useRouter, usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [desktopDropdown, setDesktopDropdown] = useState(null);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const dropdownRef = useRef(null);
-
-  const structuredLinks = [
+// Used whenever WordPress's menu (Appearance > Menus, "primary" location)
+// can't be reached — see getMainMenu() in src/lib/wp.js — so the site still
+// has a working nav instead of an empty bar.
+const FALLBACK_LINKS = [
     {
       name: "Home",
       href: "/",
@@ -92,7 +84,20 @@ export default function Navbar() {
     },
     
     { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [{ label: "Go to Dialgoues", href: "/glacier-dialogues" }] }
-  ];
+];
+
+export default function Navbar({ links }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [desktopDropdown, setDesktopDropdown] = useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState(null);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const dropdownRef = useRef(null);
+
+  const structuredLinks = links?.length ? links : FALLBACK_LINKS;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,7 +123,21 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSmoothScroll = async (href) => {
+  const handleSmoothScroll = async (rawHref) => {
+    // WordPress menu items are hand-typed "Custom Links" — normalize away an
+    // accidentally-pasted full URL (e.g. "https://thevoiceofglaciers.org/x")
+    // to a relative path before splitting on "#", since router.push() needs
+    // an internal path, not an absolute URL with a host.
+    let href = rawHref;
+    if (typeof window !== "undefined") {
+      try {
+        const url = new URL(rawHref, window.location.origin);
+        href = url.pathname + url.search + url.hash;
+      } catch {
+        // Leave href as-is if it's not parseable as a URL at all.
+      }
+    }
+
     const [path, hash] = href.split("#");
 
     if (hash) {

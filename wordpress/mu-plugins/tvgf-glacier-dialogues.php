@@ -2,7 +2,9 @@
 /**
  * Plugin Name: TVGF Glacier Dialogues
  * Description: Custom post type, meta fields, taxonomy, GraphQL exposure, preview link,
- *              and Next.js revalidation webhook for the Glacier Dialogues series.
+ *              and Next.js revalidation webhook for the Glacier Dialogues series. Also
+ *              registers the "primary" nav menu location (Appearance > Menus) used by
+ *              the site's main navigation — see tvgf-site-content.php for Announcements.
  *
  * Install as a must-use plugin: upload this file to wp-content/mu-plugins/.
  * mu-plugins load automatically and can't be accidentally deactivated from the admin UI.
@@ -58,7 +60,42 @@ add_action( 'init', function () {
 		'graphql_single_name' => 'dialogueTopic',
 		'graphql_plural_name' => 'dialogueTopics',
 	] );
+
+	// Main site navigation, managed from Appearance > Menus and exposed to
+	// Next.js via WPGraphQL's built-in menuItems query (core WPGraphQL
+	// feature, no extra plugin needed).
+	register_nav_menu( 'primary', 'Main Navigation' );
 } );
+
+// ---------------------------------------------------------------------------
+// Revalidation webhook for menu changes. Hooked on both `wp_update_nav_menu`
+// (fires once from the classic wp-admin "Save Menu" button) and
+// `wp_update_nav_menu_item` (fires per item — covers REST/API-driven menu
+// edits, which don't go through wp_update_nav_menu at all). See
+// tvgf-site-content.php for the shared payload shape — each mu-plugin file
+// keeps its own tiny copy of this helper since mu-plugin load order isn't
+// something to depend on.
+// ---------------------------------------------------------------------------
+
+function tvgf_trigger_menu_revalidate() {
+	$nextjs_url = defined( 'TVGF_NEXTJS_URL' ) ? TVGF_NEXTJS_URL : '';
+	$secret     = defined( 'TVGF_REVALIDATE_SECRET' ) ? TVGF_REVALIDATE_SECRET : '';
+	if ( ! $nextjs_url || ! $secret ) {
+		return;
+	}
+
+	wp_remote_post(
+		rtrim( $nextjs_url, '/' ) . '/api/revalidate',
+		[
+			'timeout'  => 5,
+			'blocking' => false,
+			'headers'  => [ 'Content-Type' => 'application/json' ],
+			'body'     => wp_json_encode( [ 'secret' => $secret, 'type' => 'menu' ] ),
+		]
+	);
+}
+add_action( 'wp_update_nav_menu', 'tvgf_trigger_menu_revalidate' );
+add_action( 'wp_update_nav_menu_item', 'tvgf_trigger_menu_revalidate' );
 
 // ---------------------------------------------------------------------------
 // Post meta (plain fields — no ACF needed for these single-value fields)

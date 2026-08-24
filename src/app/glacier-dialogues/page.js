@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Calendar, PlayCircle, ArrowRight, Mic2, BookOpen, Video } from "lucide-react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { getGlacierDialogues, formatDialogueDate } from "@/lib/wp";
 import ShareButtons from "@/components/shareButtons";
 import ClickGuard from "@/components/clickGuard";
@@ -13,7 +11,6 @@ export default async function PodcastPage() {
 
   return (
     <div className="min-h-screen flex flex-col font-cabin bg-glacier-light dark:bg-glacier-dark transition-colors duration-300">
-      <Navbar />
 
       <main className="flex-grow pt-32 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-8">
@@ -64,7 +61,6 @@ export default async function PodcastPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

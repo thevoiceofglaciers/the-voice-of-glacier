@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { useEffect } from "react";
 import { FaDatabase, FaBookOpen, FaUsers, FaMicrophoneAlt, FaGavel  , FaBullseye , FaEye ,   FaHandsHelping,
   FaBalanceScale,
@@ -210,7 +208,6 @@ export default function StrategyPage() {
 
   return (
     <div className="bg-white text-glacier-dark min-h-screen">
-      <Navbar />
 
       {/* Hero Banner */}
       
@@ -475,7 +472,6 @@ export default function StrategyPage() {
 
      <TheoryOfChange/>
 
-      <Footer/>
     </div>
   );
 }

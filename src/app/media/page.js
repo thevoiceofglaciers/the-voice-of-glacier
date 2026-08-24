@@ -3,8 +3,6 @@
 import { useRef, useEffect, useState } from "react";
 import VideoCard from "@/components/videoCard";
 import ImageCard from "@/components/ImageCard";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import NewsFeed from "@/components/glacialNews";
 import axios from "axios";
 
@@ -31,7 +29,6 @@ export default function MediaPage() {
 
   return (
     <main className="w-full text-glacier-dark overflow-x-hidden font-cabin">
-      <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-[50vh] w-full overflow-hidden">
@@ -86,7 +83,6 @@ export default function MediaPage() {
 
       {/* Glacier News Section */}
       <NewsFeed />
-      <Footer />
     </main>
   );
 }

@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
@@ -43,7 +41,6 @@ export default function AnuraagStoryPage() {
 
   return (
     <main className="w-full bg-glacier-light text-glacier-dark min-h-screen">
-      <Navbar />
 
       {/* 📽️ Story Section with Background Video */}
       <section
@@ -121,7 +118,6 @@ export default function AnuraagStoryPage() {
       </section>
 
 
-      <Footer />
     </main>
   );
 }

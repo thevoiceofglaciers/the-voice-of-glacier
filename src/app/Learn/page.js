@@ -1,7 +1,5 @@
 "use client";
 
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import GlacierGlossary from "@/components/glossary";
 import GlacierCard from "@/components/GlacierCard";
 import QuizSection from "@/components/quizSection";
@@ -72,7 +70,6 @@ const glacierDetails = [
 export default function LearnPage() {
   return (
     <main className="w-full text-glacier-dark overflow-x-hidden scroll-smooth">
-      <Navbar />
 
       {/* Hero Section with Quick Links */}
       <section className="relative h-screen w-full overflow-hidden" id="hero">
@@ -242,7 +239,6 @@ export default function LearnPage() {
         <GlacierGlossary />
       </section>
 
-      <Footer />
     </main>
   );
 }

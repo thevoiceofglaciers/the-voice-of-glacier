@@ -1,14 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import CryosphereTimeline from "@/components/cryosphereTimeline";
 
 export default function WhyGlaciersPage() {
   return (
     <div className="bg-white text-glacier-dark">
-      <Navbar />
 
       {/* HERO */}
 <section className="relative h-[80vh] flex items-center justify-center text-center overflow-hidden">
@@ -249,7 +246,6 @@ export default function WhyGlaciersPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

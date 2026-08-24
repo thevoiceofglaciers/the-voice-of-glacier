@@ -1,4 +1,8 @@
 import { Inter, Cabin } from "next/font/google";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import AnnouncementBar from "@/components/announcementBar";
+import { getMainMenu, getAnnouncement } from "@/lib/wp";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +20,12 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // Both fail closed (return null) on any WordPress error — this layout
+  // wraps every route, so an outage must degrade gracefully (fallback nav
+  // links, no announcement bar) rather than 500ing the whole site.
+  const [links, announcement] = await Promise.all([getMainMenu(), getAnnouncement()]);
+
   return (
     <html lang="en">
       <head>
@@ -28,7 +37,12 @@ export default function RootLayout({ children }) {
           }
         `}</style>
       </head>
-      <body className={`${inter.className} ${cabin.variable}`}>{children}</body>
+      <body className={`${inter.className} ${cabin.variable}`}>
+        <Navbar links={links} />
+        <AnnouncementBar announcement={announcement} />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

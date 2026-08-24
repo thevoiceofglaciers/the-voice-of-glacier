@@ -1,7 +1,5 @@
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import GlacierDialogueArticle from "@/components/glacierDialogueArticle";
 import { getGlacierDialogueBySlug, getGlacierDialogues } from "@/lib/wp";
 
@@ -54,9 +52,7 @@ export default async function PodcastArticle({ params }) {
 
   return (
     <>
-      <Navbar />
       <GlacierDialogueArticle content={article} />
-      <Footer />
     </>
   );
 }

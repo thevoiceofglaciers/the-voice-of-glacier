@@ -13,8 +13,6 @@ import {
   FaCogs,
   FaExternalLinkAlt,
 } from "react-icons/fa"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
 
 // Reusable Section Header
 const SectionHeader = ({ title, description, Icon }) => (
@@ -38,7 +36,6 @@ const fadeInUp = {
 export default function CollaboratePage() {
   return (
     <div className="bg-glacier-background text-glacier-foreground min-h-screen">
-      <Navbar />
 
       {/* Hero Banner */}
       <div className="relative w-full h-[600px] md:h-[420px] overflow-hidden">
@@ -337,7 +334,6 @@ export default function CollaboratePage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   )
 }

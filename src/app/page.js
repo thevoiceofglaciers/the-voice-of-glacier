@@ -1,9 +1,7 @@
 "use client";
 
-import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Footer from "@/components/footer";
 import {
   FaMountain,
   FaTemperatureHigh,
@@ -133,7 +131,6 @@ useEffect(() => {
 
   return (
     <div className="bg-glacier-light text-glacier-dark">
-      <Navbar />
 
       {/* Hero Banner */}
       <HeroSection/>
@@ -319,7 +316,6 @@ useEffect(() => {
  
       
 
-      <Footer/>
     </div>
   );
 }
