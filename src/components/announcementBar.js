@@ -1,10 +1,17 @@
+import { forwardRef } from "react";
 import Link from "next/link";
 
 function isInternalUrl(url) {
   return url.startsWith("/") || url.startsWith("#");
 }
 
-export default function AnnouncementBar({ announcement, navbarVisible = true }) {
+// Forwards a ref to the root div so SiteHeader can measure its live rendered
+// height (it wraps to 2-3 lines on narrow screens) and reserve exactly that
+// much space for it — see src/components/siteHeader.js.
+const AnnouncementBar = forwardRef(function AnnouncementBar(
+  { announcement, navbarVisible = true },
+  ref
+) {
   if (!announcement) return null;
 
   const { title, description, ctaLabel, ctaUrl } = announcement;
@@ -18,6 +25,7 @@ export default function AnnouncementBar({ announcement, navbarVisible = true }) 
     // pinned below an invisible navbar (navbarVisible comes from the shared
     // scroll state in src/components/siteHeader.js).
     <div
+      ref={ref}
       className={`fixed inset-x-0 z-40 bg-glacier-primary text-white transition-[top] duration-300 ${
         navbarVisible ? "top-14" : "top-0"
       }`}
@@ -48,4 +56,6 @@ export default function AnnouncementBar({ announcement, navbarVisible = true }) 
       </div>
     </div>
   );
-}
+});
+
+export default AnnouncementBar;

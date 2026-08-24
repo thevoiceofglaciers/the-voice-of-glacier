@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/navbar";
 import AnnouncementBar from "@/components/announcementBar";
 
@@ -10,6 +10,8 @@ import AnnouncementBar from "@/components/announcementBar";
 export default function SiteHeader({ links, announcement }) {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [barHeight, setBarHeight] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,10 +27,31 @@ export default function SiteHeader({ links, announcement }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  // The announcement bar wraps to 2-3 lines on narrow screens, so its height
+  // isn't a fixed number — pages that assumed only the navbar's height (all
+  // of them; the bar didn't exist when their spacing was tuned) end up with
+  // the bar's extra height covering their content. Measuring it live and
+  // reserving that much space in normal flow fixes every page at once,
+  // without touching each page's own nav-clearance spacing. Height is 0
+  // (and this effect is a no-op) whenever there's no active announcement.
+  useEffect(() => {
+    if (!announcement || !barRef.current) {
+      setBarHeight(0);
+      return;
+    }
+    const el = barRef.current;
+    const observer = new ResizeObserver((entries) => {
+      setBarHeight(entries[0].contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [announcement]);
+
   return (
     <>
       <Navbar links={links} showNavbar={showNavbar} />
-      <AnnouncementBar announcement={announcement} navbarVisible={showNavbar} />
+      <AnnouncementBar ref={barRef} announcement={announcement} navbarVisible={showNavbar} />
+      <div style={{ height: barHeight }} aria-hidden="true" />
     </>
   );
 }

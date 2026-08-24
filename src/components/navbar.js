@@ -156,7 +156,7 @@ export default function Navbar({ links, showNavbar = true }) {
 
           {/* Desktop Nav */}
           <div
-            className="hidden md:flex md:space-x-4 lg:space-x-6 items-center relative"
+            className="hidden xl:flex xl:space-x-6 items-center relative"
             ref={dropdownRef}
           >
             {structuredLinks.map((link) => {
@@ -218,7 +218,7 @@ export default function Navbar({ links, showNavbar = true }) {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <button
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -235,7 +235,7 @@ export default function Navbar({ links, showNavbar = true }) {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
+        <div className="xl:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
           {structuredLinks.map((link) => {
             const hasChildren = link.sublinks?.length > 0;
             return (
