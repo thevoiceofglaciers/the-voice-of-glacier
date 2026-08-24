@@ -14,5 +14,5 @@ export async function GET(request) {
   }
 
   draftMode().enable();
-  redirect(`/glacierDialgoues/${slug}`);
+  redirect(`/glacier-dialogues/${slug}`);
 }

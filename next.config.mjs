@@ -26,6 +26,22 @@ const nextConfig = {
       ...wpRemotePatterns,
     ],
   },
+  async redirects() {
+    return [
+      // Fixes a typo in the original path ("glacierDialgoues" -> "glacier-dialogues").
+      // Permanent (308) so search engines transfer ranking to the new URLs.
+      {
+        source: "/glacierDialgoues",
+        destination: "/glacier-dialogues",
+        permanent: true,
+      },
+      {
+        source: "/glacierDialgoues/:slug",
+        destination: "/glacier-dialogues/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

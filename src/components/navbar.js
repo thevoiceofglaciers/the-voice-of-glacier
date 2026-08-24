@@ -91,7 +91,7 @@ export default function Navbar() {
       ],
     },
     
-    { name: "Glacier Dialogues", href: "/glacierDialgoues", sublinks: [{ label: "Go to Dialgoues", href: "/glacierDialgoues" }] }
+    { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [{ label: "Go to Dialgoues", href: "/glacier-dialogues" }] }
   ];
 
   useEffect(() => {

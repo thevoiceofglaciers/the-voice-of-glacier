@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: article.title,
       description,
-      url: `https://thevoiceofglaciers.org/glacierDialgoues/${slug}`,
+      url: `https://thevoiceofglaciers.org/glacier-dialogues/${slug}`,
       siteName: "The Voice Of Glaciers",
       images: [{ url: image, width: 1200, height: 630 }],
       type: "article",

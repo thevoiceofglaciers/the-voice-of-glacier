@@ -95,8 +95,8 @@ function Section({ data }) {
 /* ================= PODCAST CARD ================= */
 
 function PodcastCard({ podcast }) {
-  const dialogueUrl = `https://thevoiceofglaciers.org/glacierDialgoues/${podcast.slug}`;
-  const articlePath = `/glacierDialgoues/${podcast.slug}`;
+  const dialogueUrl = `https://thevoiceofglaciers.org/glacier-dialogues/${podcast.slug}`;
+  const articlePath = `/glacier-dialogues/${podcast.slug}`;
 
   return (
     <div className="group h-full bg-white dark:bg-glacier-primary/10 rounded-2xl border border-glacier-primary/10 hover:border-glacier-primary/40 hover:shadow-2xl hover:shadow-glacier-primary/5 transition-all duration-500 relative flex flex-col overflow-visible">

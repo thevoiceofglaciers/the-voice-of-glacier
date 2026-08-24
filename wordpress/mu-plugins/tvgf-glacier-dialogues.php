@@ -270,22 +270,21 @@ add_filter( 'preview_post_link', function ( $link, $post ) {
 // ---------------------------------------------------------------------------
 // "View Post" link (published posts) -> the real Next.js page, not the
 // WordPress theme. preview_post_link above only fires for drafts/unsaved
-// changes — once a post is published, WordPress uses the plain permalink for
-// the editor's "View Post" link instead, which without this filter would
-// point at WordPress's own (soon-to-be-blocked, see below) front-end.
+// changes — once a post is published, the editor's "View Post" button uses
+// the REST response's `link` field instead. We override only that REST
+// field (not get_permalink()/post_type_link globally) so the editor's
+// slug/permalink UI — which reads get_sample_permalink() — keeps working
+// against the real WordPress permalink structure.
 // ---------------------------------------------------------------------------
 
-add_filter( 'post_type_link', function ( $link, $post ) {
-	if ( ! $post || $post->post_type !== 'glacier_dialogue' ) {
-		return $link;
-	}
-
+add_filter( 'rest_prepare_glacier_dialogue', function ( $response, $post ) {
 	$nextjs_url = defined( 'TVGF_NEXTJS_URL' ) ? TVGF_NEXTJS_URL : '';
-	if ( ! $nextjs_url ) {
-		return $link;
+	if ( ! $nextjs_url || $post->post_status !== 'publish' ) {
+		return $response;
 	}
 
-	return rtrim( $nextjs_url, '/' ) . '/glacierDialgoues/' . $post->post_name;
+	$response->data['link'] = rtrim( $nextjs_url, '/' ) . '/glacier-dialogues/' . $post->post_name;
+	return $response;
 }, 10, 2 );
 
 // ---------------------------------------------------------------------------
