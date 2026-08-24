@@ -69,10 +69,6 @@ export default function GlacierDialogueArticle({ content }) {
         {/* Article body — rendered from WordPress Gutenberg blocks */}
         <div className="tvgf-dialogue-body">{renderBlocks(blocks)}</div>
 
-        <div className="max-w-4xl mx-auto pb-10">
-          <ShareButtons title={title || "Glacier Dialogue"} />
-        </div>
-
         {/* Closing CTA — static template content, not a CMS block */}
         <div className="mt-14 mb-10 rounded-2xl bg-gradient-to-br from-[#042A33] to-[#0d4a55] text-white text-center py-12 px-10">
           <h2 className="font-nohemi text-2xl mb-3">The Glacier Dialogues Continue</h2>
@@ -96,6 +92,10 @@ export default function GlacierDialogueArticle({ content }) {
               Register for the Next Session
             </a>
           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto pb-10">
+          <ShareButtons title={title || "Glacier Dialogue"} />
         </div>
       </div>
     </div>
