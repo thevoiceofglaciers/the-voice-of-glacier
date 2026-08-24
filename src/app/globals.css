@@ -156,9 +156,5 @@ body {
    the local file this used to point at, public/font/Cabin-VariableFont.ttf,
    never actually existed. */
 
-@font-face {
-  font-family: 'NohemiBlack';
-  src: url('/font/Nohemi-Black.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
+/* Nohemi Black was tried and dropped — didn't fit the theme. font-nohemi
+   (tailwind.config.js) now just reuses --font-cabin. */
