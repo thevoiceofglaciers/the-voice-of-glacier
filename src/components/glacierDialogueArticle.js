@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Video } from "lucide-react";
 import BackButton from "./backButton";
 import ShareButtons from "./shareButtons";
@@ -70,6 +71,31 @@ export default function GlacierDialogueArticle({ content }) {
 
         <div className="max-w-4xl mx-auto pb-10">
           <ShareButtons title={title || "Glacier Dialogue"} />
+        </div>
+
+        {/* Closing CTA — static template content, not a CMS block */}
+        <div className="mt-14 mb-10 rounded-2xl bg-gradient-to-br from-[#042A33] to-[#0d4a55] text-white text-center py-12 px-10">
+          <h2 className="font-nohemi text-2xl mb-3">The Glacier Dialogues Continue</h2>
+          <p className="max-w-md mx-auto mb-7 text-white/70 text-[0.97rem]">
+            Each month, the Glacier Dialogues series brings together scientists, communities,
+            journalists and policymakers to build the conversations that glacier preparedness demands.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3.5">
+            <Link
+              href="/glacier-dialogues"
+              className="px-7 py-3 rounded-md text-sm font-semibold bg-glacier-primary text-white hover:bg-[#1e5c5f] transition-colors"
+            >
+              Read the Full Series
+            </Link>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScDjUioymi4SOwbTgVgbgweD1XjTYEmtxRmBDpEmZz1WpGzuw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-3 rounded-md text-sm font-semibold bg-transparent text-white border-[1.5px] border-white/40 hover:border-white/80 transition-colors"
+            >
+              Register for the Next Session
+            </a>
+          </div>
         </div>
       </div>
     </div>
