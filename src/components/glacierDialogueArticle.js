@@ -25,7 +25,7 @@ export default function GlacierDialogueArticle({ content }) {
       </div>
 
       {/* Hero — derived from post metadata, not a CMS block */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-[#042A33] to-[#0d4a55] text-white py-16 px-6">
+      <header className="relative overflow-hidden bg-gradient-to-br from-[#042A33] to-[#0d4a55] text-white py-16 px-6 -mt-[5px]">
         <div
           className="absolute inset-0 opacity-30 pointer-events-none"
           style={{ backgroundImage: HERO_PATTERN, backgroundSize: "600px", backgroundRepeat: "repeat" }}
