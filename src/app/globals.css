@@ -152,12 +152,9 @@ body {
   }
 }
 
-@font-face {
-  font-family: 'Cabin';
-  src: url('/font/Cabin-VariableFont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Cabin is now loaded via next/font/google in layout.js (see --font-cabin) —
+   the local file this used to point at, public/font/Cabin-VariableFont.ttf,
+   never actually existed. */
 
 @font-face {
   font-family: 'NohemiBlack';

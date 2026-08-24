@@ -1,7 +1,12 @@
-import { Inter } from "next/font/google";
+import { Inter, Cabin } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+// The site's own font-cabin utility (tailwind.config.js) expects this custom
+// property — public/font/Cabin-VariableFont.ttf referenced in globals.css
+// never actually existed, so this replaces that broken @font-face with the
+// real Google Font of the same name (no file to host ourselves).
+const cabin = Cabin({ subsets: ["latin"], variable: "--font-cabin" });
 
 export const metadata = {
   title: "The Voice Of Glaciers",
@@ -23,7 +28,7 @@ export default function RootLayout({ children }) {
           }
         `}</style>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${cabin.variable}`}>{children}</body>
     </html>
   );
 }

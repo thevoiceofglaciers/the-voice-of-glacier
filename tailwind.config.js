@@ -9,7 +9,7 @@ module.exports = {
   theme: {
   	extend: {
 		fontFamily: {
-        	cabin: ['Cabin', 'sans-serif'],
+        	cabin: ['var(--font-cabin)', 'sans-serif'],
         	nohemi: ['NohemiBlack', 'sans-serif'],
       	},
   		colors: {
