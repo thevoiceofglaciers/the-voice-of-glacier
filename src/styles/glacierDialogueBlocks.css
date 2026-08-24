@@ -201,7 +201,7 @@
 }
 .tvgf-kicker strong {
   background: #042a33;
-  color: #2a787c;
+  color: #a8dfe1;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -215,6 +215,11 @@
   flex: 1;
   height: 1px;
   background: #d4e0e0;
+}
+@media (max-width: 640px) {
+  .tvgf-kicker strong {
+    white-space: break-spaces;
+  }
 }
 
 /* Fallback: WordPress core blocks (quote, gallery, list, paragraph, etc.) */
