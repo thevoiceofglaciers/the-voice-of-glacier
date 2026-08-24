@@ -86,10 +86,8 @@ const FALLBACK_LINKS = [
     { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [{ label: "Go to Dialgoues", href: "/glacier-dialogues" }] }
 ];
 
-export default function Navbar({ links }) {
+export default function Navbar({ links, showNavbar = true }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [desktopDropdown, setDesktopDropdown] = useState(null);
   const [mobileDropdown, setMobileDropdown] = useState(null);
 
@@ -98,20 +96,6 @@ export default function Navbar({ links }) {
   const dropdownRef = useRef(null);
 
   const structuredLinks = links?.length ? links : FALLBACK_LINKS;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -183,21 +167,34 @@ export default function Navbar({ links }) {
             ref={dropdownRef}
           >
             {structuredLinks.map((link) => (
-              <div key={link.name} className="relative">
-                <button
-                  onClick={() =>
-                    setDesktopDropdown(
-                      desktopDropdown === link.name ? null : link.name
-                    )
-                  }
-                  className="flex items-center gap-1 
+              <div key={link.name} className="relative flex items-center">
+                <a
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setDesktopDropdown(null);
+                    handleSmoothScroll(link.href);
+                  }}
+                  className="flex items-center gap-1
                              text-white font-medium
                              text-xs md:text-[11px] lg:text-sm
                              hover:text-glacier-dark transition-colors"
                 >
                   {link.name}
-                  {link.sublinks?.length > 0 && <ChevronDown size={14} />}
-                </button>
+                </a>
+                {link.sublinks?.length > 0 && (
+                  <button
+                    onClick={() =>
+                      setDesktopDropdown(
+                        desktopDropdown === link.name ? null : link.name
+                      )
+                    }
+                    aria-label={`Toggle ${link.name} submenu`}
+                    className="text-white hover:text-glacier-dark transition-colors pl-1"
+                  >
+                    <ChevronDown size={14} />
+                  </button>
+                )}
 
                 {link.sublinks?.length > 0 &&
                   desktopDropdown === link.name && (
@@ -243,17 +240,33 @@ export default function Navbar({ links }) {
         <div className="md:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
           {structuredLinks.map((link) => (
             <div key={link.name}>
-              <button
-                onClick={() =>
-                  setMobileDropdown((prev) =>
-                    prev === link.name ? null : link.name
-                  )
-                }
-                className="w-full flex justify-between items-center text-left text-white font-medium text-base py-2"
-              >
-                {link.name}
-                {link.sublinks?.length > 0 && <ChevronDown size={16} />}
-              </button>
+              <div className="w-full flex justify-between items-center py-2">
+                <a
+                  href={link.href}
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    setMobileDropdown(null);
+                    await handleSmoothScroll(link.href);
+                  }}
+                  className="text-left text-white font-medium text-base"
+                >
+                  {link.name}
+                </a>
+                {link.sublinks?.length > 0 && (
+                  <button
+                    onClick={() =>
+                      setMobileDropdown((prev) =>
+                        prev === link.name ? null : link.name
+                      )
+                    }
+                    aria-label={`Toggle ${link.name} submenu`}
+                    className="text-white p-1"
+                  >
+                    <ChevronDown size={16} />
+                  </button>
+                )}
+              </div>
 
               {mobileDropdown === link.name && link.sublinks?.length > 0 && (
                 <div className="ml-4 mt-2 space-y-2">

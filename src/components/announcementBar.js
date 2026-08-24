@@ -4,7 +4,7 @@ function isInternalUrl(url) {
   return url.startsWith("/") || url.startsWith("#");
 }
 
-export default function AnnouncementBar({ announcement }) {
+export default function AnnouncementBar({ announcement, navbarVisible = true }) {
   if (!announcement) return null;
 
   const { title, description, ctaLabel, ctaUrl } = announcement;
@@ -12,11 +12,16 @@ export default function AnnouncementBar({ announcement }) {
   const internal = hasCta && isInternalUrl(ctaUrl);
 
   return (
-    // Fixed and positioned directly below the (also-fixed) Navbar, whose
-    // content height is h-14 — see src/components/navbar.js. Existing pages
-    // already pad their content well past the navbar's height alone, so this
-    // doesn't require touching per-page top padding in the common case.
-    <div className="fixed top-14 inset-x-0 z-40 bg-glacier-primary text-white">
+    // Fixed, sitting directly below the (also-fixed) Navbar, whose content
+    // height is h-14 — see src/components/navbar.js. When the navbar hides
+    // itself on scroll-down, it slides up to top-0 instead of staying
+    // pinned below an invisible navbar (navbarVisible comes from the shared
+    // scroll state in src/components/siteHeader.js).
+    <div
+      className={`fixed inset-x-0 z-40 bg-glacier-primary text-white transition-[top] duration-300 ${
+        navbarVisible ? "top-14" : "top-0"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
         <p className="text-sm">
           <span className="font-bold">{title}</span>

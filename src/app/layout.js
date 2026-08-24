@@ -1,7 +1,6 @@
 import { Inter, Cabin } from "next/font/google";
-import Navbar from "@/components/navbar";
+import SiteHeader from "@/components/siteHeader";
 import Footer from "@/components/footer";
-import AnnouncementBar from "@/components/announcementBar";
 import { getMainMenu, getAnnouncement } from "@/lib/wp";
 import "./globals.css";
 
@@ -38,8 +37,7 @@ export default async function RootLayout({ children }) {
         `}</style>
       </head>
       <body className={`${inter.className} ${cabin.variable}`}>
-        <Navbar links={links} />
-        <AnnouncementBar announcement={announcement} />
+        <SiteHeader links={links} announcement={announcement} />
         {children}
         <Footer />
       </body>
