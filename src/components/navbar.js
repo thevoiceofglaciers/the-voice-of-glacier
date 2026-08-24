@@ -75,15 +75,8 @@ const FALLBACK_LINKS = [
         { label: "Join Us", href: "/collaborate#join" },
       ],
     },
-    {
-      name: "Media",
-      href: "/media",
-      sublinks: [
-        { label: "Go to media", href: "/media" }
-      ],
-    },
-    
-    { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [{ label: "Go to Dialgoues", href: "/glacier-dialogues" }] }
+    { name: "Media", href: "/media", sublinks: [] },
+    { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [] }
 ];
 
 export default function Navbar({ links, showNavbar = true }) {
@@ -166,38 +159,42 @@ export default function Navbar({ links, showNavbar = true }) {
             className="hidden md:flex md:space-x-4 lg:space-x-6 items-center relative"
             ref={dropdownRef}
           >
-            {structuredLinks.map((link) => (
-              <div key={link.name} className="relative flex items-center">
-                <a
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setDesktopDropdown(null);
-                    handleSmoothScroll(link.href);
-                  }}
-                  className="flex items-center gap-1
-                             text-white font-medium
-                             text-xs md:text-[11px] lg:text-sm
-                             hover:text-glacier-dark transition-colors"
-                >
-                  {link.name}
-                </a>
-                {link.sublinks?.length > 0 && (
-                  <button
-                    onClick={() =>
-                      setDesktopDropdown(
-                        desktopDropdown === link.name ? null : link.name
-                      )
-                    }
-                    aria-label={`Toggle ${link.name} submenu`}
-                    className="text-white hover:text-glacier-dark transition-colors pl-1"
-                  >
-                    <ChevronDown size={14} />
-                  </button>
-                )}
+            {structuredLinks.map((link) => {
+              const hasChildren = link.sublinks?.length > 0;
+              return (
+                <div key={link.name} className="relative flex items-center">
+                  {hasChildren ? (
+                    <button
+                      onClick={() =>
+                        setDesktopDropdown(
+                          desktopDropdown === link.name ? null : link.name
+                        )
+                      }
+                      className="flex items-center gap-1
+                                 text-white font-medium
+                                 text-xs md:text-[11px] lg:text-sm
+                                 hover:text-glacier-dark transition-colors"
+                    >
+                      {link.name}
+                      <ChevronDown size={14} />
+                    </button>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSmoothScroll(link.href);
+                      }}
+                      className="flex items-center gap-1
+                                 text-white font-medium
+                                 text-xs md:text-[11px] lg:text-sm
+                                 hover:text-glacier-dark transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  )}
 
-                {link.sublinks?.length > 0 &&
-                  desktopDropdown === link.name && (
+                  {hasChildren && desktopDropdown === link.name && (
                     <div className="absolute left-0 top-full mt-2 w-56 bg-white text-black rounded-md shadow-lg z-10">
                       {link.sublinks.map((sublink) => (
                         <a
@@ -215,8 +212,9 @@ export default function Navbar({ links, showNavbar = true }) {
                       ))}
                     </div>
                   )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
 
           {/* Mobile Toggle */}
@@ -238,9 +236,23 @@ export default function Navbar({ links, showNavbar = true }) {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
-          {structuredLinks.map((link) => (
+          {structuredLinks.map((link) => {
+            const hasChildren = link.sublinks?.length > 0;
+            return (
             <div key={link.name}>
-              <div className="w-full flex justify-between items-center py-2">
+              {hasChildren ? (
+                <button
+                  onClick={() =>
+                    setMobileDropdown((prev) =>
+                      prev === link.name ? null : link.name
+                    )
+                  }
+                  className="w-full flex justify-between items-center text-left text-white font-medium text-base py-2"
+                >
+                  {link.name}
+                  <ChevronDown size={16} />
+                </button>
+              ) : (
                 <a
                   href={link.href}
                   onClick={async (e) => {
@@ -249,24 +261,11 @@ export default function Navbar({ links, showNavbar = true }) {
                     setMobileDropdown(null);
                     await handleSmoothScroll(link.href);
                   }}
-                  className="text-left text-white font-medium text-base"
+                  className="block text-left text-white font-medium text-base py-2"
                 >
                   {link.name}
                 </a>
-                {link.sublinks?.length > 0 && (
-                  <button
-                    onClick={() =>
-                      setMobileDropdown((prev) =>
-                        prev === link.name ? null : link.name
-                      )
-                    }
-                    aria-label={`Toggle ${link.name} submenu`}
-                    className="text-white p-1"
-                  >
-                    <ChevronDown size={16} />
-                  </button>
-                )}
-              </div>
+              )}
 
               {mobileDropdown === link.name && link.sublinks?.length > 0 && (
                 <div className="ml-4 mt-2 space-y-2">
@@ -288,7 +287,8 @@ export default function Navbar({ links, showNavbar = true }) {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </nav>

@@ -9,7 +9,16 @@ const inter = Inter({ subsets: ["latin"] });
 // property — public/font/Cabin-VariableFont.ttf referenced in globals.css
 // never actually existed, so this replaces that broken @font-face with the
 // real Google Font of the same name (no file to host ourselves).
-const cabin = Cabin({ subsets: ["latin"], variable: "--font-cabin" });
+//
+// Pinned to weight 400 only (not the default variable range) to match
+// production: thevoiceofglaciers.org registers Cabin as a single static
+// weight-400 @font-face, so its "font-medium"/500 text measurably renders
+// identical to regular weight there (verified via canvas measureText — both
+// widths match exactly). Loading the true variable font here made
+// font-medium text visibly bolder than production, which read as "the menu
+// font changed". Pinning to 400 reproduces the same single-face fallback
+// behavior for every font-weight utility combined with font-cabin.
+const cabin = Cabin({ subsets: ["latin"], weight: "400", variable: "--font-cabin" });
 
 export const metadata = {
   title: "The Voice Of Glaciers",
