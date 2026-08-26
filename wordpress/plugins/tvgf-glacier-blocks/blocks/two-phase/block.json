@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "tvgf/two-phase",
+	"title": "TVGF - Two Phase",
+	"category": "text",
+	"icon": "columns",
+	"description": "A two-column phase comparison with colored headers (e.g. Now vs. Later).",
+	"attributes": {
+		"leftHeader": { "type": "string", "default": "" },
+		"leftColor": { "type": "string", "default": "teal" },
+		"leftLead": { "type": "string", "default": "" },
+		"leftText": { "type": "string", "default": "" },
+		"rightHeader": { "type": "string", "default": "" },
+		"rightColor": { "type": "string", "default": "navy" },
+		"rightLead": { "type": "string", "default": "" },
+		"rightText": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}

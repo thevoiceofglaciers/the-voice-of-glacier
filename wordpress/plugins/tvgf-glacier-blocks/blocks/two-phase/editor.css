@@ -1,0 +1,54 @@
+.tvgf-two-phase-edit {
+	border: 1px dashed #ccc;
+	padding: 16px;
+	border-radius: 6px;
+}
+.tvgf-block-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin: 16px 0 8px;
+}
+
+/* Live preview — mirrors src/styles/glacierDialogueBlocks.css */
+.tvgf-two-phase {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border-radius: 12px;
+	overflow: hidden;
+	margin: 24px 0;
+}
+.tvgf-phase-header {
+	padding: 14px 20px;
+	font-weight: 700;
+	font-size: 0.9rem;
+	color: #fff;
+}
+.tvgf-phase-teal {
+	background: #2a787c;
+}
+.tvgf-phase-navy {
+	background: #042a33;
+}
+.tvgf-phase-body {
+	background: #f4f9f9;
+	padding: 20px;
+	font-size: 0.9rem;
+	color: #1e3035;
+}
+.tvgf-phase-body p {
+	margin: 0;
+}
+.tvgf-phase-left {
+	border-right: 1px solid #d4e0e0;
+}
+@media (max-width: 640px) {
+	.tvgf-two-phase {
+		grid-template-columns: 1fr;
+	}
+	.tvgf-phase-left {
+		border-right: none;
+	}
+}

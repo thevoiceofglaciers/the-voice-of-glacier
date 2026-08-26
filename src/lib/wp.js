@@ -218,6 +218,8 @@ export async function getGlacierDialogueBySlug(slug, { preview = false } = {}) {
           ... on TvgfCallout { attributes { variant title body } }
           ... on TvgfComparison { attributes { columns } }
           ... on TvgfTakeaways { attributes { items } }
+          ... on TvgfDataTable { attributes { header rows } }
+          ... on TvgfTwoPhase { attributes { leftHeader leftColor leftLead leftText rightHeader rightColor rightLead rightText } }
         }
       }
     }
@@ -250,6 +252,7 @@ const JSON_ENCODED_ARRAY_FIELDS = {
   "tvgf/stat-tiles": "tiles",
   "tvgf/comparison": "columns",
   "tvgf/takeaways": "items",
+  "tvgf/data-table": "rows",
 };
 
 function parseJsonEncodedArray(raw) {

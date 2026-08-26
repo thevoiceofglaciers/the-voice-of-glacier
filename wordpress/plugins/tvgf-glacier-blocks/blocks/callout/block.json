@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "tvgf/callout",
-	"title": "Insight / Warning Callout",
+	"title": "TVGF - Insight / Warning Callout",
 	"category": "text",
 	"icon": "info",
 	"description": "A labeled callout box for a key insight or a risk/warning.",

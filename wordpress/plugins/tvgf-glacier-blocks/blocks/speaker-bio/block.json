@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "tvgf/speaker-bio",
-	"title": "Speaker Bio",
+	"title": "TVGF - Speaker Bio",
 	"category": "text",
 	"icon": "admin-users",
 	"description": "One panelist/speaker card. Insert one of these per speaker.",

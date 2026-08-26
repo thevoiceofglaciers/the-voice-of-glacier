@@ -4,6 +4,8 @@ import StatTiles from "./statTiles";
 import Callout from "./callout";
 import Comparison from "./comparison";
 import Takeaways from "./takeaways";
+import DataTable from "./dataTable";
+import TwoPhase from "./twoPhase";
 import FallbackHtml from "./fallbackHtml";
 
 // Only our custom Gutenberg blocks need a dedicated React component. Every
@@ -17,6 +19,8 @@ const registry = {
   "tvgf/callout": Callout,
   "tvgf/comparison": Comparison,
   "tvgf/takeaways": Takeaways,
+  "tvgf/data-table": DataTable,
+  "tvgf/two-phase": TwoPhase,
 };
 
 export function renderBlocks(blocks = []) {

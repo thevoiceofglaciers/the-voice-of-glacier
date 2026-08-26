@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'init', function () {
-	$blocks = [ 'context-strip', 'speaker-bio', 'stat-tiles', 'callout', 'comparison', 'takeaways' ];
+	$blocks = [ 'context-strip', 'speaker-bio', 'stat-tiles', 'callout', 'comparison', 'takeaways', 'data-table', 'two-phase' ];
 
 	foreach ( $blocks as $block ) {
 		register_block_type( __DIR__ . '/blocks/' . $block );
