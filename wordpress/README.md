@@ -22,7 +22,8 @@ From Plugins > Add New in wp-admin:
 
 ## 3. Install the custom plugin/blocks in this repo
 
-- Upload `mu-plugins/tvgf-glacier-dialogues.php` to `wp-content/mu-plugins/`
+- Upload `mu-plugins/tvgf-glacier-dialogues.php`, `mu-plugins/tvgf-site-content.php`
+  and `mu-plugins/tvgf-media.php` to `wp-content/mu-plugins/`
   on the server (create that folder if it doesn't exist). mu-plugins load
   automatically — no activation step, and it can't be accidentally
   deactivated from the admin UI.
@@ -81,3 +82,48 @@ base64-embedded photo essays get moved into real Media Library uploads.
 Publish each one once its body is rebuilt; publishing fires the revalidation
 webhook automatically, and the entry should appear on the live Next.js
 listing within seconds.
+
+## 9. Media page (`/media`)
+
+`mu-plugins/tvgf-media.php` adds two things:
+
+- **Media Posts** (wp-admin menu; named so it isn't confused with WordPress's
+  own Media Library). Each post is one card on `/media`: the title, the body
+  (shown in full in the card's "Show More" popup), and the **Card Image**
+  (featured image). Fill in the optional **Video Link** to make it a video
+  card — prefer YouTube/Vimeo links over uploading large video files to
+  Hostinger; a Media Library `.mp4` URL also works. Posts are shown newest
+  first by publish date, so change a post's date to reorder it.
+- **Page Hero** fields on every core Page. Create a Page with the slug
+  `media`, then set the **Hero Headline**, **Hero Background Video** (a
+  direct `.mp4` URL — upload it to the Media Library and paste its File URL)
+  and a Featured Image (shown while the video loads). Leaving these empty
+  keeps the site's built-in hero.
+
+Saving either one refreshes `/media` through the same revalidation webhook.
+Check the GraphQL contract in GraphiQL with:
+
+```graphql
+{
+  mediaPosts(first: 5) { nodes { title date excerpt videoUrl featuredImage { node { sourceUrl } } } }
+  page(id: "media", idType: URI) { heroHeadline heroVideoUrl }
+}
+```
+
+### Migrating the existing posts
+
+`scripts/migrate-media.mjs` copies every post from the legacy backend's
+`/getBlog` into draft Media Posts, moving images from Cloudinary into the
+Media Library (see the script header for the env vars). It's safe to re-run
+— existing slugs are skipped. Review each draft (the old posts used Unicode
+"fake bold" letters, which the script turns back into plain text — re-apply
+real bold where it matters), then publish.
+
+Once the WordPress posts are live, stop adding posts in the old backend.
+Keep it read-only for a few weeks as a fallback, then retire `/getBlog`.
+The backend's `/news` endpoint is still used for the automated "Latest
+News" section, so the backend itself stays up for now.
+
+If a Media Library upload fails for large videos, raise
+`upload_max_filesize` / `post_max_size` in Hostinger's PHP settings, or
+use a YouTube link instead.

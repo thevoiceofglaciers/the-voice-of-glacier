@@ -4,7 +4,7 @@ import { revalidateTag } from "next/cache";
 // Called by the WordPress mu-plugins' wp_remote_post whenever content is
 // saved/published, so the relevant Next.js pages refresh without a
 // redeploy. `type` selects which tag(s) to revalidate — see
-// wordpress/mu-plugins/tvgf-glacier-dialogues.php and tvgf-site-content.php.
+// wordpress/mu-plugins/tvgf-glacier-dialogues.php, tvgf-site-content.php and tvgf-media.php.
 const TAG_MAP = {
   glacier_dialogue: (body) => [
     "glacier-dialogues",
@@ -12,6 +12,8 @@ const TAG_MAP = {
   ],
   announcement: () => ["announcement"],
   menu: () => ["site-menu"],
+  media: () => ["media"],
+  page: (body) => (body.slug ? [`page:${body.slug}`] : []),
 };
 
 export async function POST(request) {

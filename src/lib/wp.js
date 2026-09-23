@@ -204,6 +204,129 @@ export async function getAnnouncement() {
   }
 }
 
+// WPGraphQL's public (RENDERED) title/excerpt fields come through
+// wptexturize, so "&" arrives as "&#038;", "..." as "&hellip;", etc. React
+// would print those literally — decode the handful WordPress actually emits.
+const NAMED_ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", hellip: "…", ndash: "–", mdash: "—", lsquo: "‘", rsquo: "’", ldquo: "“", rdquo: "”" };
+
+export function decodeEntities(str) {
+  if (!str) return "";
+  return str.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, code) => {
+    if (code[0] === "#") {
+      const n = code[1].toLowerCase() === "x" ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+      return Number.isNaN(n) ? match : String.fromCodePoint(n);
+    }
+    return NAMED_ENTITIES[code.toLowerCase()] ?? match;
+  });
+}
+
+export function htmlToText(html) {
+  return decodeEntities((html || "").replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+}
+
+function truncateWords(text, maxChars) {
+  if (text.length <= maxChars) return text;
+  const cut = text.slice(0, maxChars);
+  return `${cut.slice(0, cut.lastIndexOf(" ") > 0 ? cut.lastIndexOf(" ") : maxChars).replace(/[\s,.;:–—-]+$/, "")}…`;
+}
+
+/**
+ * Fetches the /media page feed (the "Media Posts" CPT from
+ * wordpress/mu-plugins/tvgf-media.php), newest first. Returns [] on any
+ * WordPress error so the page still renders its hero and news sections.
+ */
+export async function getMediaPosts() {
+  const query = `
+    query GetMediaPosts {
+      mediaPosts(first: 100, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          slug
+          title
+          date
+          excerpt
+          content
+          videoUrl
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, {}, { tags: ["media"], revalidate: 3600 });
+    const nodes = data?.mediaPosts?.nodes || [];
+
+    return nodes.map((node) => {
+      const title = decodeEntities(node.title);
+      // The auto-generated excerpt ends in "[…]" — drop it and re-truncate
+      // to the card's length ourselves.
+      const contentText = htmlToText(node.content);
+      const excerptSource = htmlToText(node.excerpt).replace(/\s*\[…\]\s*$/, "") || contentText;
+      let excerpt = truncateWords(excerptSource, 140);
+      // Whether the modal has anything the card doesn't already show.
+      const hasMore = contentText.length > excerpt.replace(/…$/, "").length;
+      // A short hand-written excerpt still needs to read as "continued".
+      if (hasMore && !excerpt.endsWith("…")) excerpt = `${excerpt.replace(/[\s,.;:–—-]+$/, "")}…`;
+
+      return {
+        id: node.id,
+        slug: node.slug,
+        title,
+        date: node.date,
+        excerpt,
+        hasMore,
+        contentHtml: node.content || "",
+        videoUrl: node.videoUrl || null,
+        imageUrl: node.featuredImage?.node?.sourceUrl || null,
+        imageAlt: node.featuredImage?.node?.altText || title,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Hero fields for a core WordPress Page, matched by slug (e.g. "media").
+ * Returns null on any error or when the Page doesn't exist, so callers fall
+ * back to their built-in hero.
+ */
+export async function getPageHero(slug) {
+  const query = `
+    query GetPageHero($uri: ID!) {
+      page(id: $uri, idType: URI) {
+        heroHeadline
+        heroVideoUrl
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, { uri: slug }, { tags: [`page:${slug}`], revalidate: 3600 });
+    const page = data?.page;
+    if (!page) return null;
+
+    return {
+      headline: page.heroHeadline || null,
+      videoUrl: page.heroVideoUrl || null,
+      posterUrl: page.featuredImage?.node?.sourceUrl || null,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function getGlacierDialogueBySlug(slug, { preview = false } = {}) {
   const query = `
     query GetGlacierDialogueBySlug($slug: ID!) {
