@@ -22,11 +22,13 @@ From Plugins > Add New in wp-admin:
 
 ## 3. Install the custom plugin/blocks in this repo
 
-- Upload `mu-plugins/tvgf-glacier-dialogues.php`, `mu-plugins/tvgf-site-content.php`
-  and `mu-plugins/tvgf-media.php` to `wp-content/mu-plugins/`
+- Upload `mu-plugins/tvgf-glacier-dialogues.php`, `mu-plugins/tvgf-site-content.php`,
+  `mu-plugins/tvgf-media.php`, `mu-plugins/tvgf-core.php` **and the
+  `mu-plugins/tvgf-core/` folder** to `wp-content/mu-plugins/`
   on the server (create that folder if it doesn't exist). mu-plugins load
   automatically — no activation step, and it can't be accidentally
-  deactivated from the admin UI.
+  deactivated from the admin UI. (WordPress only runs top-level mu-plugin
+  files; the `tvgf-core/` folder holds the field schemas and admin assets.)
 - Upload the whole `plugins/tvgf-glacier-blocks/` folder to
   `wp-content/plugins/`, then activate **TVGF Glacier Blocks** from
   Plugins in wp-admin. No build step needed — it's plain JS against the
@@ -127,3 +129,73 @@ News" section, so the backend itself stays up for now.
 If a Media Library upload fails for large videos, raise
 `upload_max_filesize` / `post_max_size` in Hostinger's PHP settings, or
 use a YouTube link instead.
+
+## 10. Every other page (`tvgf-core.php`)
+
+`mu-plugins/tvgf-core.php` puts the rest of the site under WordPress control:
+
+| Where in wp-admin | Controls |
+|---|---|
+| **Pages** › Home (`home`) | `/` — hero text/logo/buttons, crisis stats, How We Work pillars, Join the Movement |
+| **Pages** › Anurag's Story (`story`) | `/story` — slides, videos |
+| **Pages** › Our Strategy (`our-strategy`) | `/ourStrategy` — vision & mission, goals, values, gaps, engines, dual force, pillars, theory of change |
+| **Pages** › Programs (`programs`) | `/programs` — hero, effort tiles & sections, programs list, SDG grid, Dushanbe conference + PDF |
+| **Pages** › Learn (`learn`) | `/Learn` — hero, introduction, Explore links, section headings |
+| **Pages** › Why Glaciers Matter (`glacier-matters`) | `/GlacierMatters` — all text, images, videos, the glacier-loss chart data and references |
+| **Pages** › Collaborate (`collaborate`) | `/collaborate` — all text, cards, pathways, form link |
+| **Pages** › Glacier Dialogues (`dialogues`) | `/glacier-dialogues` header — tagline, mission, register button |
+| **Glossary Terms** | `/Learn` glossary (listed A–Z automatically) |
+| **Quiz Questions** | `/Learn` quiz |
+| **Glacier Profiles** | `/Learn` before/after glacier cards (sorted by the **Order** box) |
+| **Site Settings** | Footer (tagline, logo, social links, founder, email, credits) and the default page title/description for search engines |
+
+How it works:
+
+- A Page is matched to a website page by its **slug** (in brackets above). Opening
+  it shows one "… Page Content" box with every text, image and list on that
+  page, grouped into sections. The page body editor is hidden because nothing
+  on the site uses it.
+- Lists (stats, cards, slides…) have **+ Add**, **↑ / ↓** and **Remove**
+  buttons. Image, video and PDF fields have a **Choose from Media Library** button.
+- Icons are picked from a dropdown of the icons the site's design supports.
+- In headings like "Gaps We \*Bridge\*", the word in \*asterisks\* is shown in
+  the accent colour. Fields marked "Basic HTML allowed" take `<strong>`, `<em>`,
+  `<a href>`, `<p>` and `<ul><li>`.
+- **Clearing a field hides it** on the site. A field that has never been saved
+  (e.g. one added in a later code update) shows the site's built-in text.
+- Clicking **Update** / **Save** refreshes the live page within seconds, like
+  the other content types. If WordPress is ever unreachable, the site falls
+  back to its built-in copy of this content instead of breaking.
+
+The fields for each page — and the site's built-in copy of the content — live
+in `mu-plugins/tvgf-core/schemas/*.json`. The Next.js app reads the same files,
+so adding a field means editing that JSON (and using the new key in the page's
+component), then re-uploading the `tvgf-core/` folder.
+
+### Filling WordPress with the current content
+
+Once `tvgf-core.php` is installed, run from the repo root:
+
+```bash
+WORDPRESS_SITE_URL=https://cms.thevoiceofglaciers.org \
+WORDPRESS_PREVIEW_APP_USER=admin \
+WORDPRESS_PREVIEW_APP_PASSWORD="xxxx xxxx xxxx xxxx xxxx xxxx" \
+node scripts/migrate-site-content.mjs
+```
+
+It creates the eight Pages above with today's content already filled in, the
+86 glossary terms, 22 quiz questions and 6 glacier profiles, and the Site
+Settings — and copies every image, video and PDF into the Media Library
+(from the GitHub asset repo, the hotlinked Bing/Britannica/Unsplash images,
+and `public/`). It's safe to re-run: anything that already has content is
+skipped (`--overwrite` resets it to the built-in content; replaced list items
+go to the Trash). Files WordPress refuses are left at their old URL and listed
+at the end — typically:
+
+- **SVG icons** (Our Strategy gaps / dual-force) — WordPress blocks SVG uploads
+  by default. Either leave them, or upload PNG versions and pick them in the fields.
+- **Large videos** — over Hostinger's upload limit. Pass `--skip-videos` to
+  leave videos where they are, or move them to the Media Library by hand.
+
+After it runs, the public site looks exactly as before; from then on, edits
+in wp-admin show up on the site.

@@ -1,0 +1,41 @@
+{
+  "title": "Site Settings",
+  "sections": [
+    {
+      "title": "Search engines & browser tab",
+      "fields": [
+        { "key": "siteTitle", "label": "Site title", "type": "text", "default": "The Voice Of Glaciers" },
+        { "key": "siteDescription", "label": "Site description", "type": "textarea", "help": "Shown by search engines and link previews.", "default": "The Voice Of Glaciers website" }
+      ]
+    },
+    {
+      "title": "Footer",
+      "fields": [
+        { "key": "footerTagline", "label": "Tagline", "type": "textarea", "default": "Where glaciers speak, communities rise, and the world listens." },
+        { "key": "footerLogo", "label": "Logo", "type": "image", "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/comapny-dark-logo.webp" },
+        {
+          "key": "socialLinks",
+          "label": "Social links",
+          "type": "repeater",
+          "itemLabel": "Link",
+          "titleField": "platform",
+          "fields": [
+            { "key": "platform", "label": "Platform", "type": "select", "options": ["instagram", "facebook", "linkedin", "substack", "youtube", "x"] },
+            { "key": "url", "label": "Link", "type": "url" }
+          ],
+          "default": [
+            { "platform": "instagram", "url": "https://www.instagram.com/thevoiceofglaciers/" },
+            { "platform": "facebook", "url": "#" },
+            { "platform": "linkedin", "url": "https://www.linkedin.com/company/the-voice-of-glaciers-foundation/" },
+            { "platform": "substack", "url": "https://substack.com/@thevoiceofglaciers" }
+          ]
+        },
+        { "key": "founderName", "label": "Founder", "type": "text", "default": "Anurag Maloo" },
+        { "key": "contactEmail", "label": "Contact email", "type": "text", "default": "thevoiceofglaciers@gmail.com" },
+        { "key": "copyright", "label": "Copyright line", "type": "text", "help": "The current year is added in front automatically.", "default": "The Voice of Glaciers. All rights reserved." },
+        { "key": "creditText", "label": "Credit line", "type": "text", "default": "Created by Adarsh Tiwari with love for glaciers" },
+        { "key": "creditUrl", "label": "Credit link", "type": "url", "default": "https://www.linkedin.com/in/adarsh-tiwari-5084ab256/" }
+      ]
+    }
+  ]
+}

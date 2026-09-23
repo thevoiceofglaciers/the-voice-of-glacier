@@ -1,0 +1,373 @@
+{
+  "slug": "glacier-matters",
+  "path": "/GlacierMatters",
+  "title": "Why Glaciers Matter Page Content",
+  "pageTitle": "Why Glaciers Matter",
+  "sections": [
+    {
+      "title": "Hero",
+      "fields": [
+        {
+          "key": "heroTitle",
+          "label": "Headline",
+          "type": "text",
+          "default": "Why Glaciers Matter"
+        },
+        {
+          "key": "heroSubtitle",
+          "label": "Subheading",
+          "type": "text",
+          "default": "They store freshwater for billions — and regulate the Earth’s climate."
+        },
+        {
+          "key": "heroVideo",
+          "label": "Background video (.mp4)",
+          "type": "video",
+          "default": "/video/meltingGlacier.mp4"
+        }
+      ]
+    },
+    {
+      "title": "The Cryosphere Crisis",
+      "fields": [
+        {
+          "key": "crisisTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "The Cryosphere Crisis"
+        },
+        {
+          "key": "crisisIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "The cryosphere is warming at three times the global average. Glaciers are disappearing. Ecosystems are destabilizing. Entire cultures face displacement."
+        },
+        {
+          "key": "cryosphereTitle",
+          "label": "First card heading",
+          "type": "text",
+          "default": "What is the Cryosphere?"
+        },
+        {
+          "key": "cryosphereText",
+          "label": "First card text",
+          "type": "textarea",
+          "default": "The frozen parts of Earth — glaciers, snow, permafrost. When this system collapses, climate feedback loops accelerate."
+        },
+        {
+          "key": "impactsTitle",
+          "label": "Second card heading",
+          "type": "text",
+          "default": "Key Impacts"
+        },
+        {
+          "key": "impacts",
+          "label": "Second card bullet points",
+          "type": "lines",
+          "default": [
+            "Glaciers melting at 3x global rate",
+            "50% may disappear by 2100",
+            "Glacial lake floods increasing",
+            "2 billion people affected"
+          ]
+        },
+        {
+          "key": "crisisImage",
+          "label": "Image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img3.webp"
+        }
+      ]
+    },
+    {
+      "title": "Glacier loss chart",
+      "fields": [
+        {
+          "key": "timelineTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Cryosphere Loss Timeline (1985-2024)"
+        },
+        {
+          "key": "timelinePoints",
+          "label": "Data points",
+          "type": "repeater",
+          "itemLabel": "Data point",
+          "titleField": "year",
+          "fields": [
+            {
+              "key": "year",
+              "label": "Year",
+              "type": "number"
+            },
+            {
+              "key": "value",
+              "label": "Remaining glacial mass (%)",
+              "type": "number"
+            }
+          ],
+          "default": [
+            {
+              "year": 1985,
+              "value": 100
+            },
+            {
+              "year": 1992,
+              "value": 98
+            },
+            {
+              "year": 1995,
+              "value": 96
+            },
+            {
+              "year": 2000,
+              "value": 93
+            },
+            {
+              "year": 2003,
+              "value": 91
+            },
+            {
+              "year": 2005,
+              "value": 89
+            },
+            {
+              "year": 2007,
+              "value": 87
+            },
+            {
+              "year": 2010,
+              "value": 84
+            },
+            {
+              "year": 2012,
+              "value": 82
+            },
+            {
+              "year": 2014,
+              "value": 80
+            },
+            {
+              "year": 2015,
+              "value": 78
+            },
+            {
+              "year": 2017,
+              "value": 75
+            },
+            {
+              "year": 2019,
+              "value": 72
+            },
+            {
+              "year": 2020,
+              "value": 69
+            },
+            {
+              "year": 2021,
+              "value": 66
+            },
+            {
+              "year": 2022,
+              "value": 62
+            },
+            {
+              "year": 2023,
+              "value": 60
+            },
+            {
+              "year": 2024,
+              "value": 58
+            }
+          ]
+        },
+        {
+          "key": "timelineCaption",
+          "label": "Caption",
+          "type": "textarea",
+          "default": "This timeline visualizes the gradual loss of global glacier mass over the past four decades, reflecting the accelerated impact of climate change on the cryosphere."
+        },
+        {
+          "key": "timelineReferences",
+          "label": "References",
+          "type": "repeater",
+          "itemLabel": "Reference",
+          "fields": [
+            {
+              "key": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "url",
+              "label": "Link",
+              "type": "url"
+            }
+          ],
+          "default": [
+            {
+              "label": "Copernicus Earth Surface Dynamics - Global Glacier Mass Change (1976-2024)",
+              "url": "https://essd.copernicus.org/articles/17/1977/2025/essd-17-1977-2025.html"
+            },
+            {
+              "label": "UNESCO / WGMS Report (2025) - Global Glacier Loss since 1975",
+              "url": "https://www.reuters.com/business/environment/worlds-glaciers-are-losing-record-ice-global-temperatures-climb-un-says-2025-03-21/"
+            },
+            {
+              "label": "AP News Summary (2025) - Accelerating Glacier Melt Trends",
+              "url": "https://apnews.com/article/af8ff74dbbb9aabdc537adcbc9eb6010"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Why the Hindu Kush Himalaya matters",
+      "fields": [
+        {
+          "key": "hkhTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Why the Hindu Kush Himalaya Matters"
+        },
+        {
+          "key": "hkhText",
+          "label": "Text",
+          "type": "textarea",
+          "rows": 5,
+          "help": "A blank line starts a new paragraph.",
+          "default": "The Hindu Kush Himalaya is the world’s “Third Pole” — storing the largest volume of ice outside the Arctic and Antarctic. It feeds 10 major river systems across Asia.\n\nWhen Himalayan glaciers retreat, water security across South Asia is destabilized — affecting agriculture, cities, biodiversity, and regional stability."
+        },
+        {
+          "key": "hkhImages",
+          "label": "Images",
+          "type": "repeater",
+          "itemLabel": "Image",
+          "titleField": "alt",
+          "help": "Shown two per row; an odd last image spans the full width.",
+          "fields": [
+            {
+              "key": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "key": "alt",
+              "label": "Image description",
+              "type": "text"
+            }
+          ],
+          "default": [
+            {
+              "image": "https://th.bing.com/th/id/OIP.vk9Qspk3dLjSL1-Qa1QpkwHaE8?w=255&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+              "alt": "Himalayan glacier valley"
+            },
+            {
+              "image": "https://cdn.britannica.com/27/173827-050-DC76A2F3/Portion-Himalayas-Jammu-and-Kashmir-India-state.jpg",
+              "alt": "Snow-covered Himalayan peaks"
+            },
+            {
+              "image": "https://th.bing.com/th/id/R.8b9001e2d39021e7c701428ecea306ea?rik=H4ybye5xH2H7iQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2ff%2f6%2f741149-gorgerous-himalayas-wallpaper-1920x1080-desktop.jpg&ehk=1YRI72kYm0hEpk4reweuYnxlnEarE4xc%2bjzto1jGfvg%3d&risl=&pid=ImgRaw&r=0",
+              "alt": "Glacier in the Hindu Kush Himalaya"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What happens when glaciers disappear",
+      "fields": [
+        {
+          "key": "disappearTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "What Happens When Glaciers Disappear?"
+        },
+        {
+          "key": "disappearText",
+          "label": "Text",
+          "type": "textarea",
+          "default": "Rivers shrink. Agriculture fails. Migration increases. Glacial lake floods destroy villages. Cultural memory tied to ice vanishes."
+        },
+        {
+          "key": "disappearNote",
+          "label": "Closing line",
+          "type": "textarea",
+          "default": "This is not a distant crisis. It is unfolding now."
+        },
+        {
+          "key": "disappearVideo",
+          "label": "Video (.mp4)",
+          "type": "video",
+          "default": "/video/disappear.mp4"
+        }
+      ]
+    },
+    {
+      "title": "Water, risk & livelihoods",
+      "fields": [
+        {
+          "key": "livelihoodsTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Water, Risk, and Livelihoods"
+        },
+        {
+          "key": "livelihoodsCards",
+          "label": "Cards",
+          "type": "repeater",
+          "itemLabel": "Card",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Text",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "title": "Water Security",
+              "description": "Billions rely on glacier-fed rivers for drinking water and farming."
+            },
+            {
+              "title": "Disaster Risk",
+              "description": "Rising glacial lake outburst floods threaten mountain communities."
+            },
+            {
+              "title": "Livelihoods",
+              "description": "Tourism, farming, and local economies depend on stable ice systems."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Stories from the mountains",
+      "fields": [
+        {
+          "key": "storiesTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Stories from the Mountains"
+        },
+        {
+          "key": "storiesText",
+          "label": "Text",
+          "type": "textarea",
+          "default": "Behind every glacier is a community. Behind every melt curve is a human story. From mountaineers to shepherds, these are voices of a changing cryosphere."
+        },
+        {
+          "key": "storiesImage",
+          "label": "Background image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/anurag-snow.png"
+        }
+      ]
+    }
+  ]
+}

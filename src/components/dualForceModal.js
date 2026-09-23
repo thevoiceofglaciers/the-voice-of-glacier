@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Accent } from '@/lib/content';
 
-const DualForceModel = () => {
+// `content` is the "our-strategy" page content (dual* / *Force* fields).
+const DualForceModel = ({ content }) => {
   // Animation variants for the "Data Pulses"
   const pulseVariants = {
     topToBottom: {
@@ -30,10 +32,10 @@ const DualForceModel = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-6xl font-nohemi text-glacier-dark"
           >
-            Dual-Force <span className="text-glacier-primary italic">Action</span>
+            <Accent text={content.dualTitle} />
           </motion.h2>
           <p className="text-glacier-dark/50 uppercase tracking-[0.2em] md:tracking-[0.3em] text-[9px] md:text-[10px] mt-2 font-bold">
-            Synchronized Structural Change
+            {content.dualSubtitle}
           </p>
         </header>
 
@@ -64,11 +66,11 @@ const DualForceModel = () => {
             <div className="flex-1 flex justify-center md:justify-end w-full">
               <div className="bg-white p-5 md:p-6 rounded-2xl shadow-xl border border-glacier-dark/5 max-w-sm md:max-w-md flex items-center gap-4 md:gap-6 group hover:border-glacier-primary/30 transition-colors">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-glacier-dark flex items-center justify-center flex-shrink-0">
-                  <img src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/goverment-building-svgrepo-com.svg" className="w-6 h-6 md:w-8 md:h-8 invert" alt="" />
+                  {content.topForceIcon && <img src={content.topForceIcon} className="w-6 h-6 md:w-8 md:h-8 invert" alt="" />}
                 </div>
                 <div>
-                  <h4 className="font-nohemi text-glacier-dark text-base md:text-lg uppercase tracking-wider">Institutional Force</h4>
-                  <p className="text-xs md:text-sm text-glacier-dark/60 leading-relaxed">Partnering with governments to shape global policy and legislative protection.</p>
+                  <h4 className="font-nohemi text-glacier-dark text-base md:text-lg uppercase tracking-wider">{content.topForceTitle}</h4>
+                  <p className="text-xs md:text-sm text-glacier-dark/60 leading-relaxed">{content.topForceText}</p>
                 </div>
               </div>
             </div>
@@ -92,7 +94,7 @@ const DualForceModel = () => {
           {/* MID-POINT SYNERGY */}
           <div className="relative py-2 md:py-8">
              <div className="px-4 py-1.5 rounded-full bg-white border border-glacier-dark/10 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-glacier-primary shadow-sm z-30 relative">
-               Data Exchange Hub
+               {content.hubLabel}
              </div>
           </div>
 
@@ -106,11 +108,11 @@ const DualForceModel = () => {
             <div className="flex-1 flex justify-center md:justify-start w-full">
               <div className="bg-white p-5 md:p-6 rounded-2xl shadow-xl border border-glacier-dark/5 max-w-sm md:max-w-md flex items-center gap-4 md:gap-6 group hover:border-glacier-accent/30 transition-colors">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-glacier-accent flex items-center justify-center flex-shrink-0">
-                  <img src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/flag.svg" className="w-6 h-6 md:w-8 md:h-8 invert" alt="" />
+                  {content.bottomForceIcon && <img src={content.bottomForceIcon} className="w-6 h-6 md:w-8 md:h-8 invert" alt="" />}
                 </div>
                 <div>
-                  <h4 className="font-nohemi text-glacier-dark text-base md:text-lg uppercase tracking-wider">Community Force</h4>
-                  <p className="text-xs md:text-sm text-glacier-dark/60 leading-relaxed">Empowering youth and indigenous guardians through grassroots campaigns.</p>
+                  <h4 className="font-nohemi text-glacier-dark text-base md:text-lg uppercase tracking-wider">{content.bottomForceTitle}</h4>
+                  <p className="text-xs md:text-sm text-glacier-dark/60 leading-relaxed">{content.bottomForceText}</p>
                 </div>
               </div>
             </div>
@@ -136,9 +138,12 @@ const DualForceModel = () => {
         {/* Footer Link */}
         <footer className="mt-12 md:mt-16 flex justify-center">
           <div className="h-10 px-6 rounded-full border border-glacier-dark/10 flex items-center gap-3 md:gap-4 text-[9px] md:text-[10px] font-bold text-glacier-dark/40 tracking-widest uppercase">
-            <span>Legislation</span>
-            <div className="w-1 h-1 bg-glacier-primary rounded-full" />
-            <span>Mobilization</span>
+            {content.dualFooterTags.map((tag, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <div className="w-1 h-1 bg-glacier-primary rounded-full" />}
+                <span>{tag}</span>
+              </React.Fragment>
+            ))}
           </div>
         </footer>
       </div>

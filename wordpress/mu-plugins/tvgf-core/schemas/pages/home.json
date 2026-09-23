@@ -1,0 +1,317 @@
+{
+  "slug": "home",
+  "path": "/",
+  "title": "Home Page Content",
+  "pageTitle": "Home",
+  "sections": [
+    {
+      "title": "Hero",
+      "description": "The layered mountain artwork and its scroll animation are part of the site design and stay in code.",
+      "fields": [
+        {
+          "key": "heroLogo",
+          "label": "Logo",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/comapny-hero-logo.webp"
+        },
+        {
+          "key": "heroTitle",
+          "label": "Headline",
+          "type": "textarea",
+          "rows": 2,
+          "help": "Each line break starts a new line on the site.",
+          "default": "Protecting Glaciers.\nPreparing Communities."
+        },
+        {
+          "key": "heroSubtitle",
+          "label": "Subheading",
+          "type": "textarea",
+          "rows": 2,
+          "default": "Enabling communities to adapt, lead and act in a changing climate."
+        },
+        {
+          "key": "heroPrimaryLabel",
+          "label": "First button label",
+          "type": "text",
+          "default": "Learn More"
+        },
+        {
+          "key": "heroPrimaryLink",
+          "label": "First button link",
+          "type": "url",
+          "default": "#crisis"
+        },
+        {
+          "key": "heroSecondaryLabel",
+          "label": "Second button label",
+          "type": "text",
+          "default": "Partner With Us"
+        },
+        {
+          "key": "heroSecondaryLink",
+          "label": "Second button link",
+          "type": "url",
+          "default": "/collaborate"
+        }
+      ]
+    },
+    {
+      "title": "The Crisis",
+      "fields": [
+        {
+          "key": "crisisTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "The Crisis"
+        },
+        {
+          "key": "crisisIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "Glaciers are vanishing fast, threatening water, ecosystems, and life."
+        },
+        {
+          "key": "crisisStats",
+          "label": "Stat cards",
+          "type": "repeater",
+          "itemLabel": "Stat",
+          "titleField": "label",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "label",
+              "label": "Headline",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Detail (shown on hover)",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "icon": "temperature",
+              "label": "3x Faster Warming",
+              "description": "The Cryosphere is warming three times faster than the global average, signaling an urgent climate crisis."
+            },
+            {
+              "icon": "water",
+              "label": "50% Melt by 2100",
+              "description": "Half of the world's glaciers could disappear by 2100, threatening ecosystems, water supplies, and sea levels."
+            },
+            {
+              "icon": "mountain",
+              "label": "Himalayan Ice Loss",
+              "description": "Himalayan glaciers have lost over 40% of their ice volume since 2000, destabilizing regional water systems."
+            },
+            {
+              "icon": "people-carry",
+              "label": "2 Billion Lives at Risk",
+              "description": "Over 2 billion people rely on glacier-fed rivers like the Ganges, Indus, Brahmaputra, and Yangtze for water and food."
+            },
+            {
+              "icon": "tractor",
+              "label": "Disrupted Livelihoods",
+              "description": "Glacier retreat disrupts agriculture, hydropower generation, and water security, especially in vulnerable regions."
+            },
+            {
+              "icon": "warning",
+              "label": "Glacial Flood Threat",
+              "description": "Glacial lake outburst floods (GLOFs) are increasing in frequency, putting lives, infrastructure, and economies at risk."
+            },
+            {
+              "icon": "globe-americas",
+              "label": "Albedo Loss",
+              "description": "Melting glaciers reduce Earth's reflectivity (albedo), causing the planet to absorb more heat and warm even faster."
+            },
+            {
+              "icon": "leaf",
+              "label": "Ecological & Cultural Loss",
+              "description": "Fragile mountain ecosystems are collapsing, and Indigenous cultures rooted in the cryosphere are eroding rapidly."
+            }
+          ]
+        },
+        {
+          "key": "crisisText",
+          "label": "Text",
+          "type": "html",
+          "rows": 3,
+          "help": "Words in &lt;strong&gt; are highlighted.",
+          "default": "Without glaciers, we lose <strong>water</strong>, <strong>wisdom</strong>, and <strong>wonder</strong>. Yet they remain invisible in policy, education, and public imagination."
+        },
+        {
+          "key": "crisisQuote",
+          "label": "Quote",
+          "type": "textarea",
+          "default": "Glaciers store the world's freshwater, cool the planet, and sustain life. Their rapid disappearance is not just a climate crisis — it's a life crisis. The Voice of Glaciers Foundation exists to protect what remains, before silence replaces ice."
+        },
+        {
+          "key": "crisisImage",
+          "label": "Side image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img1.webp"
+        },
+        {
+          "key": "crisisBackgroundImage",
+          "label": "Faint background image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img1.webp"
+        }
+      ]
+    },
+    {
+      "title": "How We Work",
+      "fields": [
+        {
+          "key": "howTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "How We Work"
+        },
+        {
+          "key": "howIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "A dual-force ecosystem blending culture, science, and policy to protect glaciers and reimagine humanity’s bond with the cryosphere."
+        },
+        {
+          "key": "howPillars",
+          "label": "Pillars",
+          "type": "repeater",
+          "itemLabel": "Pillar",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "subtitle",
+              "label": "Subtitle",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "key": "content",
+              "label": "Text",
+              "type": "textarea",
+              "rows": 4,
+              "help": "Line breaks are kept."
+            }
+          ],
+          "default": [
+            {
+              "title": "Foundation",
+              "subtitle": "Voice of Glaciers Foundation",
+              "image": "/home/himalyanGlacier.jpg",
+              "content": "Born inside a Himalayan glacier, TVGF is a gratitude movement rooted in lived survival.\nWe unite science, storytelling, spirituality, and stewardship to protect glaciers as sacred lifelines.\nWhere glaciers speak, communities rise, and the world listens."
+            },
+            {
+              "title": "Innovation Lab",
+              "subtitle": "GlacierX & Creative Systems",
+              "image": "/home/work1.png",
+              "content": "A living lab blending art, science, youth leadership, and policy.\nFrom GlacierX gatherings and residencies to citizen science dashboards,\nwe design immersive experiences that turn awareness into action."
+            },
+            {
+              "title": "Catalytic Fund",
+              "subtitle": "Sustaining Cryosphere Justice",
+              "image": "/home/work2.png",
+              "content": "We mobilize philanthropic capital, CSR, and global partnerships\nto accelerate glacier protection, education, monitoring,\nand policy recognition across regions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Join the Movement",
+      "fields": [
+        {
+          "key": "ctaVideo",
+          "label": "Background video (.mp4)",
+          "type": "video",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/AnuragMaloo.mp4"
+        },
+        {
+          "key": "founderImage",
+          "label": "Founder photo",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/hero-image.webp"
+        },
+        {
+          "key": "founderName",
+          "label": "Founder name",
+          "type": "text",
+          "default": "Anurag Maloo"
+        },
+        {
+          "key": "founderRole",
+          "label": "Founder role",
+          "type": "text",
+          "default": "Founder"
+        },
+        {
+          "key": "founderButtonLabel",
+          "label": "Founder button label",
+          "type": "text",
+          "default": "Watch Anurag's Story"
+        },
+        {
+          "key": "founderButtonLink",
+          "label": "Founder button link",
+          "type": "url",
+          "default": "/story"
+        },
+        {
+          "key": "ctaTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Join the Movement"
+        },
+        {
+          "key": "ctaText",
+          "label": "Text",
+          "type": "textarea",
+          "default": "Join researchers, storytellers, communities, and leaders working to protect glaciers and the people who depend on them."
+        },
+        {
+          "key": "ctaButtons",
+          "label": "Buttons",
+          "type": "repeater",
+          "itemLabel": "Button",
+          "titleField": "label",
+          "fields": [
+            {
+              "key": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "link",
+              "label": "Link",
+              "type": "url"
+            }
+          ],
+          "default": [
+            {
+              "label": "Get Involved",
+              "link": "/collaborate"
+            },
+            {
+              "label": "Explore our Media",
+              "link": "/media"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

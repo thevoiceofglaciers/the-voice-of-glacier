@@ -1,3 +1,5 @@
+import { schemaDefaults, mergeContent, parseJson } from "@/lib/content";
+
 const WORDPRESS_GRAPHQL_URL = process.env.WORDPRESS_GRAPHQL_URL;
 
 const DIALOGUE_FIELDS = `
@@ -324,6 +326,85 @@ export async function getPageHero(slug) {
     };
   } catch {
     return null;
+  }
+}
+
+/**
+ * Text, images and lists for a page described by a schema in
+ * wordpress/mu-plugins/tvgf-core/schemas/pages (edited on the WordPress Page
+ * with the schema's slug). Always resolves: saved values are merged over the
+ * schema's defaults, and any WordPress error returns the defaults alone.
+ */
+export async function getPageContent(schema) {
+  const defaults = schemaDefaults(schema);
+  const query = `
+    query GetPageContent($uri: ID!) {
+      page(id: $uri, idType: URI) {
+        pageContent
+      }
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, { uri: schema.slug }, { tags: [`page:${schema.slug}`], revalidate: 3600 });
+    return mergeContent(defaults, parseJson(data?.page?.pageContent));
+  } catch {
+    return defaults;
+  }
+}
+
+/**
+ * Published items of a collection (tvgf-core/schemas/collections), as
+ * [{ id, title, ...fields }]. Falls back to the schema's built-in items when
+ * WordPress is unreachable or the collection has no published items yet.
+ */
+export async function getCollection(schema) {
+  const orderby =
+    schema.orderBy === "TITLE"
+      ? "[{ field: TITLE, order: ASC }]"
+      : "[{ field: MENU_ORDER, order: ASC }, { field: TITLE, order: ASC }]";
+  const query = `
+    query GetCollection {
+      ${schema.graphqlPlural}(first: 500, where: { status: PUBLISH, orderby: ${orderby} }) {
+        nodes {
+          databaseId
+          title
+          tvgfFields
+        }
+      }
+    }
+  `;
+  const fallback = schema.defaults.map((item, i) => ({ id: `default-${i}`, ...item }));
+
+  try {
+    const data = await wpFetch(query, {}, { tags: [`collection:${schema.postType}`], revalidate: 3600 });
+    const nodes = data?.[schema.graphqlPlural]?.nodes || [];
+    if (nodes.length === 0) return fallback;
+
+    return nodes.map((node) => ({
+      ...(parseJson(node.tvgfFields) || {}),
+      id: node.databaseId,
+      title: decodeEntities(node.title),
+    }));
+  } catch {
+    return fallback;
+  }
+}
+
+/** Site Settings screen (footer, social links, SEO defaults), merged over its defaults. */
+export async function getSiteSettings(schema) {
+  const defaults = schemaDefaults(schema);
+  const query = `
+    query GetSiteSettings {
+      tvgfSiteSettings
+    }
+  `;
+
+  try {
+    const data = await wpFetch(query, {}, { tags: ["site-settings"], revalidate: 3600 });
+    return mergeContent(defaults, parseJson(data?.tvgfSiteSettings));
+  } catch {
+    return defaults;
   }
 }
 

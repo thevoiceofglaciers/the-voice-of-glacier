@@ -1,73 +1,25 @@
-"use client";
-
 import GlacierGlossary from "@/components/glossary";
 import GlacierCard from "@/components/GlacierCard";
 import QuizSection from "@/components/quizSection";
+import { getCollection, getPageContent } from "@/lib/wp";
+import { Html } from "@/lib/content";
+import learnSchema from "@schemas/pages/learn.json";
+import glacierProfileSchema from "@schemas/collections/glacier_profile.json";
+import quizQuestionSchema from "@schemas/collections/quiz_question.json";
+import glossaryTermSchema from "@schemas/collections/glossary_term.json";
 
-const glacierDetails = [
-  {
-    title: "Gangotri Glacier (Uttarakhand)",
-    location: "Garhwal Himalayas, source of the Ganga River",
-    retreat: "~1 km in the last 70 years (~15-20 meters/year)",
-    concern: "Significant mass & length loss; freshwater source for millions.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/gangotri-new.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/gangotri-old.webp",
-    beforeLabel: "1984",
-    afterLabel: "2023",
-  },
-  {
-    title: "Siachen Glacier (Ladakh)",
-    location: "Eastern Karakoram Range",
-    retreat: "~1,000 meters over 30 years",
-    concern: "Military activity accelerates melt; climate sensitive.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/siachen-old.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/siachen-new.webp",
-    beforeLabel: "1984",
-    afterLabel: "2020",
-  },
-  {
-    title: "Pindari Glacier (Uttarakhand)",
-    location: "Kumaon region",
-    retreat: "~135 meters from 1958 to 2020 (~2 meters/year recently)",
-    concern: "Moraine shift observed; high scientific attention.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Pindari-old.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Pindari-new.webp",
-    beforeLabel: "1984",
-    afterLabel: "2020",
-  },
-  {
-    title: "Zemu Glacier (Sikkim)",
-    location: "Near Kanchenjunga, Eastern Himalayas",
-    retreat: "~27% area loss in recent decades",
-    concern: "Vital for Teesta River; rapid satellite-observed retreat.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Zemu-old.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Zemu-new.webp",
-    beforeLabel: "1984",
-    afterLabel: "2020",
-  },
-  {
-    title: "Dokriani Glacier (Uttarakhand)",
-    location: "Bhagirathi Valley",
-    retreat: "~20 meters/year",
-    concern: "Volume loss confirmed by Wadia Institute studies.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/DokrainGlacier-old.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/DokrianiGlacier-new.webp",
-    beforeLabel: "1984",
-    afterLabel: "2020",
-  },
-  {
-    title: "Chhota Shigri Glacier (Himachal Pradesh)",
-    location: "Lahaul-Spiti region",
-    retreat: "~15-20 meters/year",
-    concern: "One of India's benchmark glaciers with detailed data.",
-    beforeImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/chotta-old.webp",
-    afterImage: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/chotta-new.webp",
-    beforeLabel: "1984",
-    afterLabel: "2020",
-  },
-];
+export const revalidate = 3600;
 
-export default function LearnPage() {
+export default async function LearnPage() {
+  // All four fall back to the built-in content in the schemas on any
+  // WordPress error, so the page always renders.
+  const [content, glaciers, questions, terms] = await Promise.all([
+    getPageContent(learnSchema),
+    getCollection(glacierProfileSchema),
+    getCollection(quizQuestionSchema),
+    getCollection(glossaryTermSchema),
+  ]);
+
   return (
     <main className="w-full text-glacier-dark overflow-x-hidden scroll-smooth">
 
@@ -79,15 +31,17 @@ export default function LearnPage() {
           muted
           playsInline
           className="absolute w-full h-full object-cover"
-          src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/AnuragMaloo.mp4"
+          src={content.heroVideo || undefined}
         />
         <div className="absolute inset-0 bg-glacier-dark bg-opacity-60 flex flex-col items-center justify-center text-white text-center p-6">
           <h1 className="text-4xl sm:text-5xl font-nohemi mb-4">
-            Learn about Glaciers
+            {content.heroTitle}
           </h1>
-          <p className="text-lg sm:text-xl max-w-2xl font-cabin mb-8">
-            One of the most valuable components of nature
-          </p>
+          {content.heroSubtitle && (
+            <p className="text-lg sm:text-xl max-w-2xl font-cabin mb-8">
+              {content.heroSubtitle}
+            </p>
+          )}
 
           <div className="flex flex-wrap gap-4 justify-center">
             {[
@@ -114,36 +68,19 @@ export default function LearnPage() {
         id="introduction"
       >
         <h2 className=" md:text-4xl text-3xl font-nohemi mb-8 text-glacier-primary">
-          Introduction
+          {content.introTitle}
         </h2>
 
-        <blockquote className="md:text-xl text-md italic mb-8 text-center text-glacier-dark">
-          &#8220;When the ice melts, it&#39;s not just water that disappears&mdash;it&#39;s
-          memory, balance, and the future.&#8221;
-        </blockquote>
+        {content.introQuote && (
+          <blockquote className="md:text-xl text-md italic mb-8 text-center text-glacier-dark whitespace-pre-line">
+            {content.introQuote}
+          </blockquote>
+        )}
 
-        <p className="mb-6 md:text-lg text-sm leading-relaxed">
-          The <strong>cryosphere</strong> includes all components of the Earth
-          System that are frozen&mdash;such as snow cover, glaciers, ice sheets,
-          ice shelves, icebergs, sea ice, lake ice, river ice, permafrost, and
-          seasonally frozen ground. It plays a critical role in regulating
-          Earth&#39;s climate, supporting ecosystems, and providing water to
-          billions of people.
-        </p>
-
-        <p className="mb-6 md:text-lg text-md leading-relaxed">
-          According to the <strong>IPCC Special Report</strong>, the cryosphere
-          is undergoing rapid and alarming changes:
-        </p>
-
-        <ul className="list-disc list-inside mb-8 space-y-3 text-glacier-dark md:text-lg text-sm">
-          <li>🌐 <strong>70%</strong> of Earth&#39;s freshwater is locked in snow and ice</li>
-          <li>🧊 <strong>10%</strong> of Earth&#39;s land area is covered by glaciers or ice sheets</li>
-          <li>🌊 Sea level rise (2006-2015) was <strong>2.5x faster</strong> than 1901-1990</li>
-          <li>🌨 Arctic snow cover in June dropped <strong>13.4%</strong> per decade since 1967</li>
-          <li>🏔 Ice sheets are up to <strong>4 km</strong> thick in East Antarctica</li>
-          <li>🧱 Antarctica holds ice that could raise sea levels by <strong>58 meters</strong></li>
-        </ul>
+        <Html
+          html={content.introBody}
+          className="[&_p]:mb-6 [&_p]:text-sm md:[&_p]:text-lg [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:list-inside [&_ul]:mb-8 [&_ul]:space-y-3 [&_ul]:text-glacier-dark [&_ul]:text-sm md:[&_ul]:text-lg [&_a]:underline"
+        />
       </section>
 
       {/* Section 2: Explore */}
@@ -152,40 +89,14 @@ export default function LearnPage() {
         id="explore"
       >
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 font-nohemi text-glacier-primary">
-          Explore
+          {content.exploreTitle}
         </h2>
 
         <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory custom-scrollbar">
-          {[
-            {
-              title: "NASA Climate Change",
-              link: "https://climate.nasa.gov/",
-              image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/nasa.webp",
-            },
-            {
-              title: "Learn about Cryosphere",
-              link: "https://wmo.int/topics/cryosphere",
-              image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/cryosphere.webp",
-            },
-            {
-              title: "International Year of Glaciers' Preservation 2025",
-              link: "https://wmo.int/resources/campaigns/launch-of-website-international-year-of-glaciers-preservation-2025",
-              image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/YearOfGlacier.webp",
-            },
-            {
-              title: "National Snow and Ice Data Center",
-              link: "https://nsidc.org/learn/parts-cryosphere/glaciers",
-              image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/NationalSnowIceDomain.webp",
-            },
-            {
-              title: "List of Glaciers in India",
-              link: "https://en.wikipedia.org/wiki/List_of_glaciers_in_India",
-              image: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/ListOfGlacier.webp",
-            },
-          ].map((item, i) => (
+          {content.exploreLinks.map((item, i) => (
             <a
               key={i}
-              href={item.link}
+              href={item.url}
               target="_blank"
               rel="noopener noreferrer"
               className="relative group rounded-lg overflow-hidden min-w-[250px] sm:min-w-[300px] md:min-w-[350px] max-w-sm flex-shrink-0 h-60 sm:h-64 md:h-72 shadow-lg snap-start"
@@ -211,13 +122,13 @@ export default function LearnPage() {
         id="glacier-data"
       >
         <h2 className="text-4xl font-nohemi mb-8 text-glacier-primary">
-          Glacier Changes Over Time
+          {content.glacierDataTitle}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-10">
-          {glacierDetails.map((glacier, index) => (
+          {glaciers.map((glacier) => (
             <GlacierCard
-              key={index}
+              key={glacier.id}
               title={glacier.title}
               location={glacier.location}
               retreat={glacier.retreat}
@@ -232,11 +143,11 @@ export default function LearnPage() {
       </section>
 
       {/* Quiz */}
-      <QuizSection />
+      <QuizSection title={content.quizTitle} questions={questions} />
 
       {/* Section 4: Glossary */}
       <section className="py-20 px-6 md:px-20 bg-glacier-soft" id="glossary">
-        <GlacierGlossary />
+        <GlacierGlossary title={content.glossaryTitle} terms={terms} />
       </section>
 
     </main>

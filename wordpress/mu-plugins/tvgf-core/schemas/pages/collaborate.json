@@ -1,0 +1,264 @@
+{
+  "slug": "collaborate",
+  "path": "/collaborate",
+  "title": "Collaborate Page Content",
+  "pageTitle": "Collaborate",
+  "sections": [
+    {
+      "title": "Hero",
+      "fields": [
+        {
+          "key": "heroImage",
+          "label": "Background image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sun-glacier.webp"
+        },
+        {
+          "key": "heroImageAlt",
+          "label": "Image description",
+          "type": "text",
+          "default": "Sunrise over a glacier landscape"
+        },
+        {
+          "key": "heroTitle",
+          "label": "Headline",
+          "type": "text",
+          "default": "Be The Voice Of Glaciers Foundation"
+        },
+        {
+          "key": "heroText",
+          "label": "Text",
+          "type": "textarea",
+          "rows": 4,
+          "default": "Join the multidisciplinary community of Glacier Guardians, as researchers, glaciologists, climate scientists, storytellers, artists, climbers, mountaineers, filmmakers, photographers, policymakers, journalists, media representatives, innovators, entrepreneurs, indigenous communities, and young leaders working to protect glaciers and the people who depend on them."
+        }
+      ]
+    },
+    {
+      "title": "Why collaborate",
+      "fields": [
+        {
+          "key": "whyTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Why Collaborate with TVGF?"
+        },
+        {
+          "key": "whyCards",
+          "label": "Cards",
+          "type": "repeater",
+          "itemLabel": "Card",
+          "titleField": "title",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Text",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "icon": "globe",
+              "title": "Global Network",
+              "description": "Connect with scientists, explorers, communities, and leaders across 60+ countries."
+            },
+            {
+              "icon": "people-carry",
+              "title": "Lived Experience",
+              "description": "Rooted in a survival story from the Himalayas, our movement blends human resilience with environmental urgency."
+            },
+            {
+              "icon": "hands-helping",
+              "title": "Collective Action",
+              "description": "Together we bridge science, storytelling, and indigenous wisdom to give glaciers—and the communities they sustain—a voice."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ways to collaborate",
+      "fields": [
+        {
+          "key": "waysTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Ways to Collaborate"
+        },
+        {
+          "key": "waysList",
+          "label": "List",
+          "type": "html",
+          "rows": 10,
+          "help": "A bullet list: &lt;ul&gt;&lt;li&gt;&lt;strong&gt;Title:&lt;/strong&gt; text&lt;/li&gt;…&lt;/ul&gt;",
+          "default": "<ul>\n<li><strong>Partner With Us:</strong> Corporates, nonprofits, academic institutions, and agencies—co-create programs that drive awareness, resilience, and policy change.</li>\n<li><strong>Support Our Projects:</strong> From climate education to community resilience, your support helps us scale impact in glacier regions and beyond.</li>\n<li><strong>Volunteer & Internships:</strong> Bring your skills in research, media, design, or grassroots mobilization.</li>\n<li><strong>Join Our Climate & Glacier Network:</strong> Become a Glacier Guardian—explorers, youth leaders, artists, and scientists uniting to protect frozen frontiers.</li>\n<li><strong>Collaborate on Storytelling:</strong> Help us bring glacier stories alive through art, film, journalism, podcasts, and cultural projects.</li>\n</ul>"
+        },
+        {
+          "key": "waysImage",
+          "label": "Image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/speaker.webp"
+        },
+        {
+          "key": "waysImageAlt",
+          "label": "Image description",
+          "type": "text",
+          "default": "A field team collaborating during a glacier expedition"
+        },
+        {
+          "key": "waysCaption",
+          "label": "Image caption",
+          "type": "text",
+          "default": "Field collaboration accelerates science, storytelling, and community impact."
+        }
+      ]
+    },
+    {
+      "title": "Collaboration pathways",
+      "fields": [
+        {
+          "key": "pathwaysTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Collaboration Pathways"
+        },
+        {
+          "key": "pathwaysIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "Select the pathway that best describes how you want to collaborate. You can choose more than one."
+        },
+        {
+          "key": "pathways",
+          "label": "Pathways",
+          "type": "repeater",
+          "itemLabel": "Pathway",
+          "titleField": "title",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "points",
+              "label": "Bullet points",
+              "type": "lines",
+              "rows": 4
+            }
+          ],
+          "default": [
+            {
+              "icon": "microscope",
+              "title": "Knowledge Partner",
+              "points": [
+                "Share research, data, and expertise on glaciers, climate change, and ecosystems.",
+                "Co-create reports, whitepapers, and academic exchanges.",
+                "Support evidence-based storytelling and policy briefs."
+              ]
+            },
+            {
+              "icon": "hands-helping",
+              "title": "Funding & Resource Partner",
+              "points": [
+                "Provide philanthropic support, CSR funding, or grants.",
+                "Contribute in-kind resources such as equipment, technology, or space.",
+                "Enable scaling of local and global programs."
+              ]
+            },
+            {
+              "icon": "users",
+              "title": "Community Partner",
+              "points": [
+                "Work directly with glacier-adjacent communities.",
+                "Co-design resilience programs, education, and awareness campaigns.",
+                "Bridge indigenous knowledge with global platforms."
+              ]
+            },
+            {
+              "icon": "bullhorn",
+              "title": "Policy & Advocacy Partner",
+              "points": [
+                "Collaborate on climate diplomacy and policy reforms.",
+                "Influence decision-making at national and international levels.",
+                "Organize roundtables, briefings, and advocacy campaigns."
+              ]
+            },
+            {
+              "icon": "pen",
+              "title": "Storytelling & Media Partner",
+              "points": [
+                "Collaborate on films, podcasts, art projects, and exhibitions.",
+                "Amplify voices of local communities and Glacier Guardians.",
+                "Shape global narratives around glaciers and climate justice."
+              ]
+            },
+            {
+              "icon": "cogs",
+              "title": "Innovation & Technology Partner",
+              "points": [
+                "Provide technological solutions for glacier monitoring, climate adaptation, or data visualization.",
+                "Collaborate on hackathons, innovation labs, and pilots.",
+                "Support open-source tools for global use."
+              ]
+            },
+            {
+              "icon": "users",
+              "title": "Volunteer & Talent Partner",
+              "points": [
+                "Offer skilled volunteers, interns, or fellows.",
+                "Provide mentorship and leadership development.",
+                "Support training and capacity building within TVGF."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Call to action",
+      "fields": [
+        {
+          "key": "ctaTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Let's Climb Together"
+        },
+        {
+          "key": "ctaText",
+          "label": "Text",
+          "type": "html",
+          "rows": 4,
+          "default": "If you or your organization want to partner, co-create, or contribute, we’d love to hear from you. Write to us at <strong>thevoiceofglaciers@gmail.com</strong> or use the form below."
+        },
+        {
+          "key": "ctaButtonLabel",
+          "label": "Button label",
+          "type": "text",
+          "default": "Collaboration form"
+        },
+        {
+          "key": "ctaButtonUrl",
+          "label": "Button link",
+          "type": "url",
+          "default": "https://docs.google.com/forms/d/e/1FAIpQLScxbQubbwUS2rdI3KRD9ZGbppWN5B6ZITGw7SmDHMG34c2CXw/viewform?usp=preview"
+        }
+      ]
+    }
+  ]
+}

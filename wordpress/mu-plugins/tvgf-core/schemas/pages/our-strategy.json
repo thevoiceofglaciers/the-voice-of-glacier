@@ -1,0 +1,575 @@
+{
+  "slug": "our-strategy",
+  "path": "/ourStrategy",
+  "title": "Our Strategy Page Content",
+  "pageTitle": "Our Strategy",
+  "sections": [
+    {
+      "title": "Vision & Mission",
+      "fields": [
+        {
+          "key": "vmBackground",
+          "label": "Background image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img2.webp"
+        },
+        {
+          "key": "vmTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Our Vision & Mission"
+        },
+        {
+          "key": "vmIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "Guided by our North Star Goals for 2035, we empower communities, protect glaciers, and advance climate resilience."
+        },
+        {
+          "key": "visionTitle",
+          "label": "Vision card heading",
+          "type": "text",
+          "default": "Vision"
+        },
+        {
+          "key": "visionText",
+          "label": "Vision",
+          "type": "html",
+          "rows": 4,
+          "default": "To spark a global movement that unites science, storytelling, and community action to protect glaciers and reimagine humanity's bond with the cryosphere."
+        },
+        {
+          "key": "missionTitle",
+          "label": "Mission card heading",
+          "type": "text",
+          "default": "Mission"
+        },
+        {
+          "key": "missionText",
+          "label": "Mission",
+          "type": "html",
+          "rows": 4,
+          "default": "To activate global and local ecosystems for glacier preservation by weaving <b>science, storytelling, spirituality, and stewardship</b> into transformative experiences that inspire policy, protect ecosystems, and reshape human relationships with the cryosphere."
+        }
+      ]
+    },
+    {
+      "title": "North Star goals & core values",
+      "fields": [
+        {
+          "key": "northStarTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "TVGF's North Star: Goals by 2035"
+        },
+        {
+          "key": "northStarIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "By 2035, we envision a world transformed in its relationship with glaciers."
+        },
+        {
+          "key": "goals",
+          "label": "Goals",
+          "type": "repeater",
+          "itemLabel": "Goal",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "title": "A Cryosphere Justice Framework",
+              "description": "Glaciers legally and culturally protected in 10+ countries."
+            },
+            {
+              "title": "Cryosphere Pedagogy & Education",
+              "description": "Embedded in school systems worldwide."
+            },
+            {
+              "title": "Real-time Glacier Monitoring",
+              "description": "Publicly accessible data for all."
+            },
+            {
+              "title": "Global Glacier Guardians Network",
+              "description": "Mobilizing 100,000+ individuals across continents."
+            },
+            {
+              "title": "Glaciers Resacralized",
+              "description": "Through art, ritual, memory, and community initiatives."
+            },
+            {
+              "title": "Humanity & Glaciers",
+              "description": "A relationship built on reverence and reciprocity."
+            }
+          ]
+        },
+        {
+          "key": "northStarImage",
+          "label": "Image",
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200"
+        },
+        {
+          "key": "coreValuesTitle",
+          "label": "Core values heading",
+          "type": "text",
+          "default": "Our Core Values"
+        },
+        {
+          "key": "coreValues",
+          "label": "Core values",
+          "type": "repeater",
+          "itemLabel": "Value",
+          "titleField": "name",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "name",
+              "label": "Name",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "icon": "hands-helping",
+              "name": "Collaboration",
+              "description": "Bridging diverse disciplines and cultures for collective impact."
+            },
+            {
+              "icon": "balance",
+              "name": "Integrity",
+              "description": "Grounded in robust scientific evidence and deep community respect."
+            },
+            {
+              "icon": "people-arrows",
+              "name": "Equity",
+              "description": "Uplifting indigenous wisdom and empowering local leadership."
+            },
+            {
+              "icon": "paintbrush",
+              "name": "Creativity",
+              "description": "Driving change through storytelling, science, and co-created art."
+            },
+            {
+              "icon": "mountain",
+              "name": "Resilience",
+              "description": "Fostering long-term glacier guardianships and adaptive strategies."
+            },
+            {
+              "icon": "eye",
+              "name": "Transparency",
+              "description": "Operating with open governance and unwavering accountability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Gaps we bridge",
+      "fields": [
+        {
+          "key": "gapsEyebrow",
+          "label": "Small label above heading",
+          "type": "text",
+          "default": "Strategic Framework"
+        },
+        {
+          "key": "gapsTitle",
+          "label": "Heading",
+          "type": "text",
+          "help": "Wrap a word in *asterisks* to show it in the accent colour.",
+          "default": "Gaps We *Bridge*"
+        },
+        {
+          "key": "gaps",
+          "label": "Gaps",
+          "type": "repeater",
+          "itemLabel": "Gap",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            },
+            {
+              "key": "icon",
+              "label": "Icon image (SVG or PNG)",
+              "type": "image"
+            }
+          ],
+          "default": [
+            {
+              "title": "Knowledge Fragmentation",
+              "description": "Bridging the divide between scientific data and indigenous wisdom.",
+              "icon": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/book-open-svgrepo-com.svg"
+            },
+            {
+              "title": "Legislative Voids",
+              "description": "Developing legal frameworks that recognize glaciers as entities with rights.",
+              "icon": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/file-svgrepo-com.svg"
+            },
+            {
+              "title": "Leadership Deficits",
+              "description": "Empowering climate leaders trained in cryosphere advocacy.",
+              "icon": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/file-svgrepo-com.svg"
+            },
+            {
+              "title": "Global Disconnect",
+              "description": "Transforming glacial melting into a localized, urgent call for action.",
+              "icon": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/globe-2-svgrepo-com.svg"
+            }
+          ]
+        },
+        {
+          "key": "gapsFooterLabel",
+          "label": "Footer label",
+          "type": "text",
+          "default": "Targeting Structural Failures"
+        },
+        {
+          "key": "gapsFooterTags",
+          "label": "Footer tags",
+          "type": "lines",
+          "default": [
+            "Science",
+            "Law",
+            "Equity"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Three-Engine Model",
+      "fields": [
+        {
+          "key": "enginesEyebrow",
+          "label": "Small label above heading",
+          "type": "text",
+          "default": "Strategic Propulsion"
+        },
+        {
+          "key": "enginesTitle",
+          "label": "Heading",
+          "type": "text",
+          "help": "Wrap a word in *asterisks* to show it in the accent colour.",
+          "default": "The Three-*Engine* Model"
+        },
+        {
+          "key": "engines",
+          "label": "Engines",
+          "type": "repeater",
+          "itemLabel": "Engine",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "subtitle",
+              "label": "Subtitle",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "icon": "search-outline",
+              "title": "Knowledge Engine",
+              "subtitle": "The Foundation",
+              "description": "Glacier literacy, open data platforms, citizen science, and curriculum development to democratize glacial intelligence."
+            },
+            {
+              "icon": "edit-outline",
+              "title": "Culture Engine",
+              "subtitle": "The Heart",
+              "description": "Storytelling, rituals, and art reframing glaciers as living systems to rekindle human reverence and reciprocity."
+            },
+            {
+              "icon": "shield-outline",
+              "title": "Policy Engine",
+              "subtitle": "The Shield",
+              "description": "Advocacy at COP, UN platforms, and national climate plans to establish legal recognition frameworks for ice."
+            }
+          ]
+        },
+        {
+          "key": "enginesLegend",
+          "label": "Legend words",
+          "type": "lines",
+          "help": "One per engine, in the same order — highlighted with the active engine.",
+          "default": [
+            "Inquire",
+            "Inspire",
+            "Impact"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dual-Force Action",
+      "fields": [
+        {
+          "key": "dualTitle",
+          "label": "Heading",
+          "type": "text",
+          "help": "Wrap a word in *asterisks* to show it in the accent colour.",
+          "default": "Dual-Force *Action*"
+        },
+        {
+          "key": "dualSubtitle",
+          "label": "Subheading",
+          "type": "text",
+          "default": "Synchronized Structural Change"
+        },
+        {
+          "key": "topForceTitle",
+          "label": "Top-down force title",
+          "type": "text",
+          "default": "Institutional Force"
+        },
+        {
+          "key": "topForceText",
+          "label": "Top-down force text",
+          "type": "textarea",
+          "default": "Partnering with governments to shape global policy and legislative protection."
+        },
+        {
+          "key": "topForceIcon",
+          "label": "Top-down force icon (SVG or PNG)",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/goverment-building-svgrepo-com.svg"
+        },
+        {
+          "key": "hubLabel",
+          "label": "Middle label",
+          "type": "text",
+          "default": "Data Exchange Hub"
+        },
+        {
+          "key": "bottomForceTitle",
+          "label": "Bottom-up force title",
+          "type": "text",
+          "default": "Community Force"
+        },
+        {
+          "key": "bottomForceText",
+          "label": "Bottom-up force text",
+          "type": "textarea",
+          "default": "Empowering youth and indigenous guardians through grassroots campaigns."
+        },
+        {
+          "key": "bottomForceIcon",
+          "label": "Bottom-up force icon (SVG or PNG)",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/dual-force/flag.svg"
+        },
+        {
+          "key": "dualFooterTags",
+          "label": "Footer tags",
+          "type": "lines",
+          "default": [
+            "Legislation",
+            "Mobilization"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Core Solution Pillars",
+      "fields": [
+        {
+          "key": "pillarsTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Core Solution Pillars"
+        },
+        {
+          "key": "pillars",
+          "label": "Pillars",
+          "type": "repeater",
+          "itemLabel": "Pillar",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            }
+          ],
+          "default": [
+            {
+              "icon": "database",
+              "title": "Open Data",
+              "description": "Ensuring glacier-related information is accessible, transparent, and openly shared."
+            },
+            {
+              "icon": "book",
+              "title": "Glacier Literacy",
+              "description": "Educating the public and institutions about glaciers and their climate relevance."
+            },
+            {
+              "icon": "users",
+              "title": "Community Engagement",
+              "description": "Involving local communities in glacier conservation through grassroots participation."
+            },
+            {
+              "icon": "microphone",
+              "title": "Creative Comms",
+              "description": "Using storytelling, media, and design to spread glacier awareness widely."
+            },
+            {
+              "icon": "gavel",
+              "title": "Policy Advocacy",
+              "description": "Shaping policies by influencing institutions and decision-makers globally."
+            }
+          ]
+        },
+        {
+          "key": "pillarsOutro",
+          "label": "Closing text",
+          "type": "textarea",
+          "default": "These core pillars form the foundation of our approach to cryosphere justice — integrating knowledge, community power, data transparency, creative storytelling, and global policy change."
+        }
+      ]
+    },
+    {
+      "title": "Theory of Change",
+      "fields": [
+        {
+          "key": "tocEyebrow",
+          "label": "Small label above heading",
+          "type": "text",
+          "default": "The Logic of Action"
+        },
+        {
+          "key": "tocTitle",
+          "label": "Heading",
+          "type": "text",
+          "help": "Wrap a word in *asterisks* to show it in the accent colour.",
+          "default": "Theory of *Change*"
+        },
+        {
+          "key": "tocStages",
+          "label": "Stages",
+          "type": "repeater",
+          "itemLabel": "Stage",
+          "fields": [
+            {
+              "key": "icon",
+              "label": "Icon",
+              "type": "icon"
+            },
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "items",
+              "label": "Items",
+              "type": "lines"
+            }
+          ],
+          "default": [
+            {
+              "icon": "database-outline",
+              "title": "Inputs",
+              "items": [
+                "Scientific Data",
+                "Indigenous Wisdom",
+                "Youth Advocacy"
+              ]
+            },
+            {
+              "icon": "zap-outline",
+              "title": "Actions",
+              "items": [
+                "Policy Drafting",
+                "Cultural Rituals",
+                "Digital Portals"
+              ]
+            },
+            {
+              "icon": "award-outline",
+              "title": "Outcomes",
+              "items": [
+                "Legal Rights",
+                "Increased Literacy",
+                "Global Solidarity"
+              ]
+            },
+            {
+              "icon": "globe-outline",
+              "title": "Impact",
+              "items": [
+                "Cryosphere Stability",
+                "Reciprocal Living",
+                "10+ Protected Zones"
+              ]
+            }
+          ]
+        },
+        {
+          "key": "tocLegendIncremental",
+          "label": "Legend: first dot",
+          "type": "text",
+          "default": "Incremental Progress"
+        },
+        {
+          "key": "tocLegendSystemic",
+          "label": "Legend: second dot",
+          "type": "text",
+          "default": "Systemic Transformation"
+        },
+        {
+          "key": "tocVersion",
+          "label": "Framework label (bottom right)",
+          "type": "text",
+          "default": "Glacier Framework v2.0"
+        }
+      ]
+    }
+  ]
+}

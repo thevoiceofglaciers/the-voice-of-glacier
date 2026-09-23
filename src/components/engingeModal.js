@@ -1,33 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiEdit3, FiShield } from 'react-icons/fi';
+import { Accent } from '@/lib/content';
+import { Icon } from '@/lib/icons';
 
-const EngineModel = () => {
+// Accent colour of each engine's active indicator, by position.
+const ENGINE_COLORS = ["bg-blue-400", "bg-glacier-primary", "bg-glacier-dark"];
+
+const EngineModel = ({ eyebrow, title, engines = [], legend = [] }) => {
   const [activeEngine, setActiveEngine] = useState(0);
-
-  const engines = [
-    {
-      title: "Knowledge Engine",
-      subtitle: "The Foundation",
-      desc: "Glacier literacy, open data platforms, citizen science, and curriculum development to democratize glacial intelligence.",
-      color: "bg-blue-400",
-      icon: <FiSearch />
-    },
-    {
-      title: "Culture Engine",
-      subtitle: "The Heart",
-      desc: "Storytelling, rituals, and art reframing glaciers as living systems to rekindle human reverence and reciprocity.",
-      color: "bg-glacier-primary",
-      icon: <FiEdit3 />
-    },
-    {
-      title: "Policy Engine",
-      subtitle: "The Shield",
-      desc: "Advocacy at COP, UN platforms, and national climate plans to establish legal recognition frameworks for ice.",
-      color: "bg-glacier-dark",
-      icon: <FiShield />
-    }
-  ];
 
   return (
     <section id="The-Three-Engine-Model" className="relative w-full min-h-screen py-16 md:py-0 overflow-hidden bg-glacier-light flex flex-col justify-center px-6 md:px-16 font-cabin">
@@ -46,12 +26,12 @@ const EngineModel = () => {
           >
             <span className="w-2 h-2 bg-glacier-primary rounded-full animate-pulse" />
             <span className="text-glacier-primary font-bold tracking-[0.2em] uppercase text-[9px] md:text-[10px]">
-              Strategic Propulsion
+              {eyebrow}
             </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-nohemi text-glacier-dark leading-tight">
-            The Three-<span className="text-glacier-primary italic">Engine</span> Model
+            <Accent text={title} />
           </h2>
         </header>
 
@@ -75,10 +55,10 @@ const EngineModel = () => {
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className={`text-3xl md:text-4xl text-glacier-primary transition-transform duration-500 ${activeEngine === index ? 'rotate-12 scale-110' : ''}`}>
-                    {engine.icon}
+                    <Icon name={engine.icon} />
                   </span>
                   <span className="font-nohemi text-glacier-soft/30 text-xl md:text-2xl italic">
-                    0{index + 1}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
                 
@@ -97,14 +77,14 @@ const EngineModel = () => {
                     ? 'text-glacier-dark/80' 
                     : 'text-glacier-dark/60 md:text-glacier-dark/40'
                 }`}>
-                  {engine.desc}
+                  {engine.description}
                 </p>
                 
                 {/* Gear Indicator */}
                 <div className="pt-4 border-t border-glacier-dark/5 flex items-center gap-3">
                   <div className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${
                     activeEngine === index 
-                      ? `${engine.color} w-10 md:w-12` 
+                      ? `${ENGINE_COLORS[index % ENGINE_COLORS.length]} w-10 md:w-12` 
                       : 'bg-glacier-soft/30'
                   }`} />
                   <div className="h-1.5 w-1.5 rounded-full bg-glacier-soft/30" />
@@ -130,9 +110,9 @@ const EngineModel = () => {
 
         {/* Bottom Legend */}
         <footer className="mt-12 flex flex-wrap justify-center items-center gap-6 md:gap-12 text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] text-glacier-dark/40 uppercase font-bold border-t border-glacier-dark/5 pt-8 md:pt-6">
-          <span className={`transition-colors duration-300 ${activeEngine === 0 ? 'text-glacier-primary' : ''}`}>Inquire</span>
-          <span className={`transition-colors duration-300 ${activeEngine === 1 ? 'text-glacier-primary' : ''}`}>Inspire</span>
-          <span className={`transition-colors duration-300 ${activeEngine === 2 ? 'text-glacier-primary' : ''}`}>Impact</span>
+          {legend.map((word, i) => (
+            <span key={i} className={`transition-colors duration-300 ${activeEngine === i ? 'text-glacier-primary' : ''}`}>{word}</span>
+          ))}
         </footer>
       </div>
     </section>

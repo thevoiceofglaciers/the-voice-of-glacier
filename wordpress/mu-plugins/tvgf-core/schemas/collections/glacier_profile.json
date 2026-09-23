@@ -1,0 +1,111 @@
+{
+  "postType": "glacier_profile",
+  "label": "Glacier Profiles",
+  "singular": "Glacier Profile",
+  "graphqlSingle": "glacierProfile",
+  "graphqlPlural": "glacierProfiles",
+  "menuIcon": "dashicons-image-flip-horizontal",
+  "titleLabel": "Glacier name (e.g. Gangotri Glacier (Uttarakhand))",
+  "path": "/Learn#glacier-data",
+  "description": "Each profile is a card with a before/after image slider. Use the <strong>Order</strong> box (Page Attributes) to arrange the cards — lowest number first.",
+  "fields": [
+    {
+      "key": "location",
+      "label": "Location",
+      "type": "text"
+    },
+    {
+      "key": "retreat",
+      "label": "Retreat",
+      "type": "text"
+    },
+    {
+      "key": "concern",
+      "label": "Concern",
+      "type": "text"
+    },
+    {
+      "key": "beforeImage",
+      "label": "Left image (slider)",
+      "type": "image"
+    },
+    {
+      "key": "beforeLabel",
+      "label": "Left image label",
+      "type": "text",
+      "help": "Usually the year, e.g. 1984."
+    },
+    {
+      "key": "afterImage",
+      "label": "Right image (slider)",
+      "type": "image"
+    },
+    {
+      "key": "afterLabel",
+      "label": "Right image label",
+      "type": "text"
+    }
+  ],
+  "defaults": [
+    {
+      "title": "Gangotri Glacier (Uttarakhand)",
+      "location": "Garhwal Himalayas, source of the Ganga River",
+      "retreat": "~1 km in the last 70 years (~15-20 meters/year)",
+      "concern": "Significant mass & length loss; freshwater source for millions.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/gangotri-new.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/gangotri-old.webp",
+      "afterLabel": "2023"
+    },
+    {
+      "title": "Siachen Glacier (Ladakh)",
+      "location": "Eastern Karakoram Range",
+      "retreat": "~1,000 meters over 30 years",
+      "concern": "Military activity accelerates melt; climate sensitive.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/siachen-old.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/siachen-new.webp",
+      "afterLabel": "2020"
+    },
+    {
+      "title": "Pindari Glacier (Uttarakhand)",
+      "location": "Kumaon region",
+      "retreat": "~135 meters from 1958 to 2020 (~2 meters/year recently)",
+      "concern": "Moraine shift observed; high scientific attention.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Pindari-old.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Pindari-new.webp",
+      "afterLabel": "2020"
+    },
+    {
+      "title": "Zemu Glacier (Sikkim)",
+      "location": "Near Kanchenjunga, Eastern Himalayas",
+      "retreat": "~27% area loss in recent decades",
+      "concern": "Vital for Teesta River; rapid satellite-observed retreat.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Zemu-old.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/Zemu-new.webp",
+      "afterLabel": "2020"
+    },
+    {
+      "title": "Dokriani Glacier (Uttarakhand)",
+      "location": "Bhagirathi Valley",
+      "retreat": "~20 meters/year",
+      "concern": "Volume loss confirmed by Wadia Institute studies.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/DokrainGlacier-old.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/DokrianiGlacier-new.webp",
+      "afterLabel": "2020"
+    },
+    {
+      "title": "Chhota Shigri Glacier (Himachal Pradesh)",
+      "location": "Lahaul-Spiti region",
+      "retreat": "~15-20 meters/year",
+      "concern": "One of India's benchmark glaciers with detailed data.",
+      "beforeImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/chotta-old.webp",
+      "beforeLabel": "1984",
+      "afterImage": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacierData/chotta-new.webp",
+      "afterLabel": "2020"
+    }
+  ]
+}

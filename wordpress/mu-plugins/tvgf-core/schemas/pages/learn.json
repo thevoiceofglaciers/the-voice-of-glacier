@@ -1,0 +1,64 @@
+{
+  "slug": "learn",
+  "path": "/Learn",
+  "title": "Learn Page Content",
+  "pageTitle": "Learn",
+  "sections": [
+    {
+      "title": "Hero",
+      "fields": [
+        { "key": "heroTitle", "label": "Headline", "type": "text", "default": "Learn about Glaciers" },
+        { "key": "heroSubtitle", "label": "Subheading", "type": "text", "default": "One of the most valuable components of nature" },
+        { "key": "heroVideo", "label": "Background video (.mp4)", "type": "video", "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/AnuragMaloo.mp4" }
+      ]
+    },
+    {
+      "title": "Introduction",
+      "fields": [
+        { "key": "introTitle", "label": "Heading", "type": "text", "default": "Introduction" },
+        { "key": "introQuote", "label": "Quote", "type": "textarea", "default": "“When the ice melts, it's not just water that disappears—it's memory, balance, and the future.”" },
+        {
+          "key": "introBody",
+          "label": "Body",
+          "type": "html",
+          "rows": 12,
+          "help": "Paragraphs (&lt;p&gt;) and a bullet list (&lt;ul&gt;&lt;li&gt;…&lt;/li&gt;&lt;/ul&gt;) are styled automatically.",
+          "default": "<p>The <strong>cryosphere</strong> includes all components of the Earth System that are frozen—such as snow cover, glaciers, ice sheets, ice shelves, icebergs, sea ice, lake ice, river ice, permafrost, and seasonally frozen ground. It plays a critical role in regulating Earth's climate, supporting ecosystems, and providing water to billions of people.</p>\n<p>According to the <strong>IPCC Special Report</strong>, the cryosphere is undergoing rapid and alarming changes:</p>\n<ul>\n<li>🌐 <strong>70%</strong> of Earth's freshwater is locked in snow and ice</li>\n<li>🧊 <strong>10%</strong> of Earth's land area is covered by glaciers or ice sheets</li>\n<li>🌊 Sea level rise (2006-2015) was <strong>2.5x faster</strong> than 1901-1990</li>\n<li>🌨 Arctic snow cover in June dropped <strong>13.4%</strong> per decade since 1967</li>\n<li>🏔 Ice sheets are up to <strong>4 km</strong> thick in East Antarctica</li>\n<li>🧱 Antarctica holds ice that could raise sea levels by <strong>58 meters</strong></li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Explore (external resources)",
+      "fields": [
+        { "key": "exploreTitle", "label": "Heading", "type": "text", "default": "Explore" },
+        {
+          "key": "exploreLinks",
+          "label": "Resource cards",
+          "type": "repeater",
+          "itemLabel": "Resource",
+          "fields": [
+            { "key": "title", "label": "Title", "type": "text" },
+            { "key": "url", "label": "Link", "type": "url" },
+            { "key": "image", "label": "Card image", "type": "image" }
+          ],
+          "default": [
+            { "title": "NASA Climate Change", "url": "https://climate.nasa.gov/", "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/nasa.webp" },
+            { "title": "Learn about Cryosphere", "url": "https://wmo.int/topics/cryosphere", "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/cryosphere.webp" },
+            { "title": "International Year of Glaciers' Preservation 2025", "url": "https://wmo.int/resources/campaigns/launch-of-website-international-year-of-glaciers-preservation-2025", "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/YearOfGlacier.webp" },
+            { "title": "National Snow and Ice Data Center", "url": "https://nsidc.org/learn/parts-cryosphere/glaciers", "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/NationalSnowIceDomain.webp" },
+            { "title": "List of Glaciers in India", "url": "https://en.wikipedia.org/wiki/List_of_glaciers_in_India", "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/explore/ListOfGlacier.webp" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Glacier data, quiz & glossary headings",
+      "description": "The glacier cards, quiz questions and glossary terms themselves are edited under <strong>Glacier Profiles</strong>, <strong>Quiz Questions</strong> and <strong>Glossary Terms</strong> in the admin menu.",
+      "fields": [
+        { "key": "glacierDataTitle", "label": "Glacier data heading", "type": "text", "default": "Glacier Changes Over Time" },
+        { "key": "quizTitle", "label": "Quiz heading", "type": "text", "default": "Do you know enough about glaciers?" },
+        { "key": "glossaryTitle", "label": "Glossary heading", "type": "text", "default": "Glacier Glossary" }
+      ]
+    }
+  ]
+}

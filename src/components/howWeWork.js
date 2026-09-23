@@ -71,49 +71,16 @@ function PillarCard({ pillar, index }) {
   );
 }
 
-export default function HowWeWorkSection() {
-  const pillars = [
-    {
-      title: "Foundation",
-      subtitle: "Voice of Glaciers Foundation",
-      image:
-        "/home/himalyanGlacier.jpg",
-      content: `Born inside a Himalayan glacier, TVGF is a gratitude movement rooted in lived survival.
-We unite science, storytelling, spirituality, and stewardship to protect glaciers as sacred lifelines.
-Where glaciers speak, communities rise, and the world listens.`,
-    },
-    {
-      title: "Innovation Lab",
-      subtitle: "GlacierX & Creative Systems",
-      image:
-        "/home/work1.png",
-      content: `A living lab blending art, science, youth leadership, and policy.
-From GlacierX gatherings and residencies to citizen science dashboards,
-we design immersive experiences that turn awareness into action.`,
-    },
-    {
-      title: "Catalytic Fund",
-      subtitle: "Sustaining Cryosphere Justice",
-      image:
-        "/home/work2.png",
-      content: `We mobilize philanthropic capital, CSR, and global partnerships
-to accelerate glacier protection, education, monitoring,
-and policy recognition across regions.`,
-    },
-  ];
-
+export default function HowWeWorkSection({ title, intro, pillars = [] }) {
   return (
     <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-glacier-light overflow-hidden">
       
       {/* Header */}
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-glacier-primary">
-          How We Work
+          {title}
         </h2>
-        <p className="mt-4 text-lg text-glacier-dark/80">
-          A dual-force ecosystem blending culture, science, and policy
-          to protect glaciers and reimagine humanity’s bond with the cryosphere.
-        </p>
+        {intro && <p className="mt-4 text-lg text-glacier-dark/80">{intro}</p>}
       </div>
 
       {/* Pillars */}

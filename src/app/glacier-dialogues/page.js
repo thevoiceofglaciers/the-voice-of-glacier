@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { Calendar, PlayCircle, ArrowRight, Mic2, BookOpen, Video } from "lucide-react";
-import { getGlacierDialogues, formatDialogueDate } from "@/lib/wp";
+import { getGlacierDialogues, formatDialogueDate, getPageContent } from "@/lib/wp";
+import dialoguesSchema from "@schemas/pages/dialogues.json";
 import ShareButtons from "@/components/shareButtons";
 import ClickGuard from "@/components/clickGuard";
 
 export const revalidate = 3600;
 
 export default async function PodcastPage() {
-  const { past } = await getGlacierDialogues();
+  const [{ past }, content] = await Promise.all([getGlacierDialogues(), getPageContent(dialoguesSchema)]);
 
   return (
     <div className="min-h-screen flex flex-col font-cabin bg-glacier-light dark:bg-glacier-dark transition-colors duration-300">
@@ -19,37 +20,38 @@ export default async function PodcastPage() {
           <header className="text-center mb-16 space-y-6">
             <div className="space-y-2">
               <h1 className="font-nohemi text-4xl md:text-6xl text-glacier-dark dark:text-glacier-light tracking-tight">
-                Glacier Dialogues
+                {content.title}
               </h1>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-glacier-primary dark:text-glacier-soft opacity-80">
-                When glaciers speak, the world must listen.
-              </p>
+              {content.tagline && (
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-glacier-primary dark:text-glacier-soft opacity-80">
+                  {content.tagline}
+                </p>
+              )}
             </div>
 
             {/* STYLIZED MISSION STATEMENT */}
-            <div className="relative max-w-3xl mx-auto mt-8 p-8 rounded-2xl bg-white/40 dark:bg-glacier-primary/5 backdrop-blur-sm border-l-4 border-glacier-primary shadow-sm">
-              <p className="text-lg md:text-xl leading-relaxed text-glacier-dark/90 dark:text-glacier-light/90 font-medium">
-                TVGF Glacier Dialogues is a monthly interdisciplinary conversation
-                series convened by The Voice of Glaciers Foundation, bringing
-                together glacier scientists, policymakers, practitioners, and
-                mountain communities to examine how rapidly changing cryospheric
-                systems are reshaping lives, landscapes, and glacial futures across
-                the Hindu Kush Himalaya.
-              </p>
-            </div>
+            {content.mission && (
+              <div className="relative max-w-3xl mx-auto mt-8 p-8 rounded-2xl bg-white/40 dark:bg-glacier-primary/5 backdrop-blur-sm border-l-4 border-glacier-primary shadow-sm">
+                <p className="text-lg md:text-xl leading-relaxed text-glacier-dark/90 dark:text-glacier-light/90 font-medium whitespace-pre-line">
+                  {content.mission}
+                </p>
+              </div>
+            )}
 
             {/* CALL TO ACTION */}
+            {content.ctaLabel && content.ctaUrl && (
             <div className="mt-10">
               <a
-                href="https://forms.gle/2zSuf4cgMzZ2QawPA"
+                href={content.ctaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-8 py-3 rounded-full bg-glacier-primary text-white font-bold hover:bg-glacier-dark hover:shadow-xl hover:shadow-glacier-primary/20 transition-all active:scale-95"
               >
-                Register for Upcoming Dialogues
+                {content.ctaLabel}
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
+            )}
           </header>
 
           {/* SECTION DIVIDER */}
@@ -57,7 +59,7 @@ export default async function PodcastPage() {
             <div className="h-[1px] flex-grow bg-glacier-primary/20"></div>
           </div>
 
-          <Section data={past} />
+          <Section data={past} emptyText={content.emptyText} />
         </div>
       </main>
 
@@ -67,12 +69,12 @@ export default async function PodcastPage() {
 
 /* ================= SECTION ================= */
 
-function Section({ data }) {
+function Section({ data, emptyText }) {
   if (data.length === 0) {
     return (
       <div className="text-center py-20 bg-white/20 dark:bg-white/5 rounded-3xl border border-dashed border-glacier-primary/30">
         <Mic2 className="mx-auto mb-4 text-glacier-primary opacity-40" size={48} />
-        <p className="font-nohemi text-xl text-glacier-dark/50 dark:text-glacier-light/50">New dialogues arriving soon...</p>
+        <p className="font-nohemi text-xl text-glacier-dark/50 dark:text-glacier-light/50">{emptyText}</p>
       </div>
     );
   }

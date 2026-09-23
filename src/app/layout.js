@@ -1,7 +1,8 @@
 import { Inter, Cabin } from "next/font/google";
 import SiteHeader from "@/components/siteHeader";
 import Footer from "@/components/footer";
-import { getMainMenu, getAnnouncement } from "@/lib/wp";
+import { getMainMenu, getAnnouncement, getSiteSettings } from "@/lib/wp";
+import siteSettingsSchema from "@schemas/site-settings.json";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,19 +21,28 @@ const inter = Inter({ subsets: ["latin"] });
 // behavior for every font-weight utility combined with font-cabin.
 const cabin = Cabin({ subsets: ["latin"], weight: "400", variable: "--font-cabin" });
 
-export const metadata = {
-  title: "The Voice Of Glaciers",
-  description: "The Voice Of Glaciers website",
-  icons: {
-    icon: "/favicon.ico", // relative to /public
-  },
-};
+// Title/description come from WordPress Site Settings (defaults in
+// site-settings.json). Pages without their own metadata inherit these.
+export async function generateMetadata() {
+  const settings = await getSiteSettings(siteSettingsSchema);
+  return {
+    title: settings.siteTitle,
+    description: settings.siteDescription,
+    icons: {
+      icon: "/favicon.ico", // relative to /public
+    },
+  };
+}
 
 export default async function RootLayout({ children }) {
-  // Both fail closed (return null) on any WordPress error — this layout
-  // wraps every route, so an outage must degrade gracefully (fallback nav
-  // links, no announcement bar) rather than 500ing the whole site.
-  const [links, announcement] = await Promise.all([getMainMenu(), getAnnouncement()]);
+  // All fail closed on any WordPress error — this layout wraps every route,
+  // so an outage must degrade gracefully (fallback nav links, no
+  // announcement bar, default footer) rather than 500ing the whole site.
+  const [links, announcement, settings] = await Promise.all([
+    getMainMenu(),
+    getAnnouncement(),
+    getSiteSettings(siteSettingsSchema),
+  ]);
 
   return (
     <html lang="en">
@@ -48,7 +58,7 @@ export default async function RootLayout({ children }) {
       <body className={`${inter.className} ${cabin.variable}`}>
         <SiteHeader links={links} announcement={announcement} />
         {children}
-        <Footer />
+        <Footer settings={settings} />
       </body>
     </html>
   );

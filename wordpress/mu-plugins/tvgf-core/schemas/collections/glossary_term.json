@@ -1,0 +1,456 @@
+{
+  "postType": "glossary_term",
+  "label": "Glossary Terms",
+  "singular": "Glossary Term",
+  "graphqlSingle": "glossaryTerm",
+  "graphqlPlural": "glossaryTerms",
+  "menuIcon": "dashicons-book-alt",
+  "titleLabel": "Term (e.g. Moraine)",
+  "path": "/Learn#glossary",
+  "orderBy": "TITLE",
+  "description": "Terms are listed alphabetically under their first letter.",
+  "fields": [
+    {
+      "key": "scientificDefinition",
+      "label": "Scientific definition",
+      "type": "textarea"
+    },
+    {
+      "key": "simpleDefinition",
+      "label": "Simple definition",
+      "type": "textarea"
+    }
+  ],
+  "defaults": [
+    {
+      "title": "Ablation",
+      "scientificDefinition": "Loss of ice or snow from a glacier due to melting, sublimation, or calving.",
+      "simpleDefinition": "The glacier is shrinking as ice melts or breaks off."
+    },
+    {
+      "title": "Accumulation",
+      "scientificDefinition": "The addition of snow and ice to a glacier, primarily through snowfall.",
+      "simpleDefinition": "New snow builds up on the glacier, making it grow."
+    },
+    {
+      "title": "Alpine Glacier",
+      "scientificDefinition": "A glacier formed in mountainous regions, typically flowing down valleys.",
+      "simpleDefinition": "A mountain glacier moving like a slow river."
+    },
+    {
+      "title": "Arete",
+      "scientificDefinition": "A sharp ridge formed between two glaciers eroding parallel valleys.",
+      "simpleDefinition": "A narrow mountain ridge shaped by glaciers on both both sides."
+    },
+    {
+      "title": "Avalanche",
+      "scientificDefinition": "A rapid flow of snow down a slope, often involving ice and debris.",
+      "simpleDefinition": "A big rush of snow sliding down a mountain."
+    },
+    {
+      "title": "Ablation Zone",
+      "scientificDefinition": "The lower part of a glacier where melting and ice loss exceed accumulation.",
+      "simpleDefinition": "The part of the glacier that loses more ice than it gains."
+    },
+    {
+      "title": "Active Layer",
+      "scientificDefinition": "The surface layer of soil above permafrost that thaws and refreezes annually.",
+      "simpleDefinition": "The top soil that melts in summer and freezes again in winter."
+    },
+    {
+      "title": "Arctic Amplification",
+      "scientificDefinition": "The phenomenon where the Arctic warms faster than the global average due to feedback mechanisms.",
+      "simpleDefinition": "The Arctic is heating up faster than the rest of the world."
+    },
+    {
+      "title": "Bergschrund",
+      "scientificDefinition": "A deep crevasse separating moving glacier ice from the stagnant ice or rock at the head of a glacier.",
+      "simpleDefinition": "A big crack near the top of a glacier."
+    },
+    {
+      "title": "Basal Sliding",
+      "scientificDefinition": "The movement of glacier ice over the bedrock, lubricated by meltwater.",
+      "simpleDefinition": "The glacier slips over wet ground underneath."
+    },
+    {
+      "title": "Blue Ice",
+      "scientificDefinition": "Densely packed glacier ice that appears blue due to the absorption of red light.",
+      "simpleDefinition": "Very old, dense glacier ice that looks blue."
+    },
+    {
+      "title": "Brittle Zone",
+      "scientificDefinition": "The upper glacier layer where ice breaks under stress, forming crevasses.",
+      "simpleDefinition": "The top part of the glacier where cracks easily form."
+    },
+    {
+      "title": "Bedrock",
+      "scientificDefinition": "The solid rock beneath glacier ice or soil.",
+      "simpleDefinition": "The hard rock under the glacier."
+    },
+    {
+      "title": "Basal Melt",
+      "scientificDefinition": "Melting of glacier ice at its base due to geothermal heat or friction.",
+      "simpleDefinition": "Ice melting at the bottom of the glacier."
+    },
+    {
+      "title": "Basal Till",
+      "scientificDefinition": "Sediment deposited directly under a glacier as it moves.",
+      "simpleDefinition": "Mud and rocks left behind by a moving glacier."
+    },
+    {
+      "title": "Black Carbon",
+      "scientificDefinition": "Soot particles that settle on glaciers, reducing albedo and accelerating melt.",
+      "simpleDefinition": "Dark dust on ice that makes glaciers melt faster."
+    },
+    {
+      "title": "Crevasse",
+      "scientificDefinition": "A deep crack or fracture in the glacier surface caused by stress.",
+      "simpleDefinition": "A big crack on top of a glacier."
+    },
+    {
+      "title": "Cirque",
+      "scientificDefinition": "A bowl-shaped depression carved by a glacier at the head of a valley.",
+      "simpleDefinition": "A big scoop in the mountain where a glacier started."
+    },
+    {
+      "title": "Continental Glacier",
+      "scientificDefinition": "Massive ice sheets covering large land areas like Antarctica or Greenland.",
+      "simpleDefinition": "A huge glacier covering a whole continent."
+    },
+    {
+      "title": "Calving",
+      "scientificDefinition": "The breaking off of ice chunks from the edge of a glacier, often forming icebergs.",
+      "simpleDefinition": "When pieces of glacier fall into the ocean."
+    },
+    {
+      "title": "Cryosphere",
+      "scientificDefinition": "All frozen water parts on Earth, including glaciers, ice caps, and permafrost.",
+      "simpleDefinition": "All the icy places on Earth."
+    },
+    {
+      "title": "Cold-based Glacier",
+      "scientificDefinition": "A glacier frozen to its bed, with little or no movement at the base.",
+      "simpleDefinition": "A glacier stuck to the ground with no sliding."
+    },
+    {
+      "title": "Cryoconite",
+      "scientificDefinition": "Dark dust on glacier surfaces that absorbs heat and speeds up melting.",
+      "simpleDefinition": "Dirty spots on a glacier that make it melt faster."
+    },
+    {
+      "title": "Climate Change",
+      "scientificDefinition": "Long-term change in global temperatures and weather patterns affecting glacier dynamics.",
+      "simpleDefinition": "The Earth is getting warmer, which melts glaciers."
+    },
+    {
+      "title": "Core Sampling",
+      "scientificDefinition": "A method of extracting ice cylinders to study past climate.",
+      "simpleDefinition": "Taking deep ice samples to learn about Earth’s history."
+    },
+    {
+      "title": "Carbon Sink",
+      "scientificDefinition": "A natural system that absorbs more carbon than it releases. Glaciers may indirectly act as carbon sinks through ecosystems.",
+      "simpleDefinition": "Nature storing away harmful gases."
+    },
+    {
+      "title": "Debris-covered Glacier",
+      "scientificDefinition": "A glacier whose surface is partially or fully covered with rock debris.",
+      "simpleDefinition": "A glacier hidden under a layer of rocks."
+    },
+    {
+      "title": "Drumlin",
+      "scientificDefinition": "A streamlined hill formed beneath a glacier, shaped by ice movement and till.",
+      "simpleDefinition": "A smooth, long hill made by a glacier."
+    },
+    {
+      "title": "Delta",
+      "scientificDefinition": "A landform at the mouth of a river where sediment is deposited as the water flow slows.",
+      "simpleDefinition": "A fan-shaped area where a glacier-fed river ends."
+    },
+    {
+      "title": "Deflation",
+      "scientificDefinition": "Wind-driven removal of fine sediment from a glacier's surface.",
+      "simpleDefinition": "Wind blowing away dust from a glacier."
+    },
+    {
+      "title": "Erratic",
+      "scientificDefinition": "A large rock transported by a glacier far from its origin.",
+      "simpleDefinition": "A big boulder left behind by a glacier in a strange place."
+    },
+    {
+      "title": "Esker",
+      "scientificDefinition": "A winding ridge formed from sediments deposited by meltwater streams beneath a glacier.",
+      "simpleDefinition": "A long, twisty hill made by water under a glacier."
+    },
+    {
+      "title": "Englacial",
+      "scientificDefinition": "Located within the glacier ice.",
+      "simpleDefinition": "Something stuck inside a glacier."
+    },
+    {
+      "title": "Equilibrium Line",
+      "scientificDefinition": "The dividing line on a glacier between the accumulation and ablation zones.",
+      "simpleDefinition": "Where the glacier neither grows nor shrinks."
+    },
+    {
+      "title": "Firn",
+      "scientificDefinition": "Granular snow that has survived one melt season but has not yet turned into ice.",
+      "simpleDefinition": "Snow that’s a bit like ice but not quite."
+    },
+    {
+      "title": "Fjord",
+      "scientificDefinition": "A deep, glacially carved valley flooded by seawater.",
+      "simpleDefinition": "A deep sea inlet made by glaciers."
+    },
+    {
+      "title": "Flow Line",
+      "scientificDefinition": "Path followed by particles within a glacier as it moves.",
+      "simpleDefinition": "The glacier’s trail as it slowly flows downhill."
+    },
+    {
+      "title": "Freeze-Thaw Weathering",
+      "scientificDefinition": "The breaking of rock due to water freezing and expanding in cracks.",
+      "simpleDefinition": "When water freezes in cracks and breaks rocks."
+    },
+    {
+      "title": "Glacier",
+      "scientificDefinition": "A large, persistent body of ice that forms on land and moves under its own weight.",
+      "simpleDefinition": "A big, slow-moving river of ice."
+    },
+    {
+      "title": "Glacial Retreat",
+      "scientificDefinition": "The process of a glacier shrinking back due to melting and reduced snowfall.",
+      "simpleDefinition": "When a glacier melts and gets smaller."
+    },
+    {
+      "title": "Glacial Advance",
+      "scientificDefinition": "When a glacier grows and moves forward.",
+      "simpleDefinition": "The glacier is growing and sliding ahead."
+    },
+    {
+      "title": "Glacial Erratic",
+      "scientificDefinition": "A large rock carried and deposited by a glacier far from its source.",
+      "simpleDefinition": "A big rock out of place thanks to a glacier."
+    },
+    {
+      "title": "Horn",
+      "scientificDefinition": "A sharp mountain peak formed by glacial erosion from multiple sides.",
+      "simpleDefinition": "A pointed mountain carved by glaciers."
+    },
+    {
+      "title": "Hanging Valley",
+      "scientificDefinition": "A smaller valley left above the main valley, often with waterfalls, after glacial erosion.",
+      "simpleDefinition": "A side valley that hangs above a bigger one."
+    },
+    {
+      "title": "Hydrofracture",
+      "scientificDefinition": "Cracking of ice due to water pressure.",
+      "simpleDefinition": "Water breaking through glacier ice."
+    },
+    {
+      "title": "Hydrology",
+      "scientificDefinition": "The study of water flow and storage in glacier systems.",
+      "simpleDefinition": "How water moves in and around glaciers."
+    },
+    {
+      "title": "Ice Cap",
+      "scientificDefinition": "A dome-shaped glacier covering less than 50,000 square kilometers.",
+      "simpleDefinition": "A smaller ice sheet over land."
+    },
+    {
+      "title": "Ice Sheet",
+      "scientificDefinition": "A massive glacier covering more than 50,000 square kilometers.",
+      "simpleDefinition": "A giant slab of ice over a large area."
+    },
+    {
+      "title": "Iceberg",
+      "scientificDefinition": "A large chunk of ice that broke off from a glacier and floats in the ocean.",
+      "simpleDefinition": "A piece of glacier floating in water."
+    },
+    {
+      "title": "Icefall",
+      "scientificDefinition": "A steep section of a glacier with rapid ice flow and crevasses.",
+      "simpleDefinition": "A frozen waterfall made of glacier ice."
+    },
+    {
+      "title": "Jokulhlaup",
+      "scientificDefinition": "A sudden, glacial outburst flood.",
+      "simpleDefinition": "A surprise flood from a glacier."
+    },
+    {
+      "title": "Kettle Lake",
+      "scientificDefinition": "A lake formed when a buried chunk of glacier ice melts.",
+      "simpleDefinition": "A small lake left behind by melting glacier ice."
+    },
+    {
+      "title": "Kame",
+      "scientificDefinition": "A hill made of sand and gravel deposited by meltwater.",
+      "simpleDefinition": "A mound formed by water from a melting glacier."
+    },
+    {
+      "title": "Lateral Moraine",
+      "scientificDefinition": "A ridge of debris deposited along the sides of a glacier.",
+      "simpleDefinition": "A rocky edge next to a glacier."
+    },
+    {
+      "title": "Loess",
+      "scientificDefinition": "Fine, wind-blown sediment from glacial outwash plains.",
+      "simpleDefinition": "Dusty soil blown from glacier areas."
+    },
+    {
+      "title": "Lag Deposit",
+      "scientificDefinition": "Coarse material left behind after finer sediments are blown or washed away.",
+      "simpleDefinition": "The heavier stuff left behind when the light stuff is blown off."
+    },
+    {
+      "title": "Moraine",
+      "scientificDefinition": "An accumulation of debris deposited by a glacier.",
+      "simpleDefinition": "A pile of rocks and dirt from a glacier."
+    },
+    {
+      "title": "Medial Moraine",
+      "scientificDefinition": "A stripe of debris formed where two glaciers meet.",
+      "simpleDefinition": "A line of rocks in the middle of a glacier."
+    },
+    {
+      "title": "Mass Balance",
+      "scientificDefinition": "The difference between accumulation and ablation on a glacier.",
+      "simpleDefinition": "Whether a glacier is growing or shrinking overall."
+    },
+    {
+      "title": "Meltwater",
+      "scientificDefinition": "Water from melting glacier ice.",
+      "simpleDefinition": "Melted ice from the glacier."
+    },
+    {
+      "title": "Neve",
+      "scientificDefinition": "Compacted snow that is in the process of becoming glacier ice.",
+      "simpleDefinition": "Snow that’s turning into glacier ice."
+    },
+    {
+      "title": "Nunatak",
+      "scientificDefinition": "A mountain peak or rocky ridge that sticks out above a glacier.",
+      "simpleDefinition": "A rocky island sticking up out of the ice."
+    },
+    {
+      "title": "Outwash Plain",
+      "scientificDefinition": "Flat area formed by sediment deposited by meltwater from a glacier.",
+      "simpleDefinition": "A flat land made from melted glacier water and dirt."
+    },
+    {
+      "title": "Overdeepening",
+      "scientificDefinition": "When glaciers erode bedrock to form deep basins below sea level.",
+      "simpleDefinition": "A deep hole carved under the glacier."
+    },
+    {
+      "title": "Permafrost",
+      "scientificDefinition": "Ground that stays frozen for at least two years.",
+      "simpleDefinition": "Soil that’s always frozen."
+    },
+    {
+      "title": "Plucking",
+      "scientificDefinition": "A glacier pulling rocks away from the ground as it moves.",
+      "simpleDefinition": "The glacier yanks rocks from the ground."
+    },
+    {
+      "title": "Piedmont Glacier",
+      "scientificDefinition": "A glacier that spreads out at the base of a mountain range.",
+      "simpleDefinition": "A glacier that flattens out when it hits a plain."
+    },
+    {
+      "title": "Quaternary Glaciation",
+      "scientificDefinition": "The most recent period of ice ages spanning the last 2.6 million years.",
+      "simpleDefinition": "The time of Earth’s recent ice ages."
+    },
+    {
+      "title": "Roche Moutonnée",
+      "scientificDefinition": "A rock formation smoothed by glacier ice on one side and steep on the other.",
+      "simpleDefinition": "A rock shaped by glaciers, smooth on one side, rough on the other."
+    },
+    {
+      "title": "Rift",
+      "scientificDefinition": "A crack or gap formed by ice pulling apart.",
+      "simpleDefinition": "A split in the glacier."
+    },
+    {
+      "title": "Snowline",
+      "scientificDefinition": "The lowest elevation where snow remains year-round.",
+      "simpleDefinition": "The height on a mountain where snow doesn’t melt."
+    },
+    {
+      "title": "Surge",
+      "scientificDefinition": "A short, rapid advance of a glacier.",
+      "simpleDefinition": "When the glacier suddenly moves fast."
+    },
+    {
+      "title": "Sublimation",
+      "scientificDefinition": "Ice turning straight into vapor without melting first.",
+      "simpleDefinition": "Ice disappearing into air without becoming water."
+    },
+    {
+      "title": "Terminus",
+      "scientificDefinition": "The end or snout of a glacier.",
+      "simpleDefinition": "The bottom or end of a glacier."
+    },
+    {
+      "title": "Tarn",
+      "scientificDefinition": "A lake formed in a cirque after a glacier melts.",
+      "simpleDefinition": "A small lake left in a mountain bowl."
+    },
+    {
+      "title": "Till",
+      "scientificDefinition": "Unsorted sediment deposited directly by a glacier.",
+      "simpleDefinition": "A mix of rocks and dirt dropped by a glacier."
+    },
+    {
+      "title": "U-shaped Valley",
+      "scientificDefinition": "A valley with a rounded bottom carved by glacier movement.",
+      "simpleDefinition": "A valley shaped like a big “U.”"
+    },
+    {
+      "title": "Valley Glacier",
+      "scientificDefinition": "A glacier that flows down a mountain valley.",
+      "simpleDefinition": "A glacier squeezed into a mountain path."
+    },
+    {
+      "title": "Vegetation Feedback",
+      "scientificDefinition": "How plants growing on glacial land can affect melting and climate.",
+      "simpleDefinition": "Plants growing on glaciers can speed up melting."
+    },
+    {
+      "title": "White Ice",
+      "scientificDefinition": "Newly fallen or less compressed glacier ice that appears white.",
+      "simpleDefinition": "Fresh or fluffy-looking glacier ice."
+    },
+    {
+      "title": "Watershed",
+      "scientificDefinition": "A land area where all the water drains to one place, influenced by glaciers.",
+      "simpleDefinition": "Where melted glacier water flows into rivers."
+    },
+    {
+      "title": "Xerothermic Period",
+      "scientificDefinition": "A hot and dry climatic phase often used in paleoclimatic studies.",
+      "simpleDefinition": "A very warm, dry time in Earth’s history."
+    },
+    {
+      "title": "Yenisei Glacier Influence",
+      "scientificDefinition": "Refers to glacial impact on the Yenisei River system in Siberia.",
+      "simpleDefinition": "How glaciers shaped the rivers in Siberia."
+    },
+    {
+      "title": "Younger Dryas",
+      "scientificDefinition": "A sudden return to glacial conditions about 12,800 years ago.",
+      "simpleDefinition": "A short, cold period during the end of the last ice age."
+    },
+    {
+      "title": "Zone of Ablation",
+      "scientificDefinition": "The area of a glacier where ice loss exceeds gain.",
+      "simpleDefinition": "Where the glacier melts more than it grows."
+    },
+    {
+      "title": "Zone of Accumulation",
+      "scientificDefinition": "The region where snowfall adds to the glacier.",
+      "simpleDefinition": "Where snow keeps adding ice to the glacier."
+    }
+  ]
+}

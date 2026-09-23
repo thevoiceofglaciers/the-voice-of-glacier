@@ -1,30 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Accent } from '@/lib/content';
 
-const StrategicGaps = () => {
-  const strategyGaps = [
-    {
-      title: "Knowledge Fragmentation",
-      content: "Bridging the divide between scientific data and indigenous wisdom.",
-      icon: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/book-open-svgrepo-com.svg",
-    },
-    {
-      title: "Legislative Voids",
-      content: "Developing legal frameworks that recognize glaciers as entities with rights.",
-      icon: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/file-svgrepo-com.svg",
-    },
-    {
-      title: "Leadership Deficits",
-      content: "Empowering climate leaders trained in cryosphere advocacy.",
-      icon: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/file-svgrepo-com.svg",
-    },
-    {
-      title: "Global Disconnect",
-      content: "Transforming glacial melting into a localized, urgent call for action.",
-      icon: "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/strategicGaps/globe-2-svgrepo-com.svg",
-    },
-  ];
-
+const StrategicGaps = ({ eyebrow, title, gaps = [], footerLabel, footerTags = [] }) => {
   return (
     <section 
       id="gaps" 
@@ -43,16 +21,16 @@ const StrategicGaps = () => {
             className="flex items-center gap-3 mb-3"
           >
             <span className="w-8 h-[2px] bg-glacier-accent" />
-            <span className="text-glacier-accent font-bold tracking-widest uppercase text-[9px] md:text-[10px]">Strategic Framework</span>
+            <span className="text-glacier-accent font-bold tracking-widest uppercase text-[9px] md:text-[10px]">{eyebrow}</span>
           </motion.div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-nohemi text-glacier-dark leading-tight max-w-2xl">
-            Gaps We <span className="text-glacier-primary italic">Bridge</span>
+            <Accent text={title} />
           </h2>
         </header>
 
         {/* Bento Grid - Responsive Column Spans */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {strategyGaps.map((gap, index) => (
+          {gaps.map((gap, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -65,10 +43,10 @@ const StrategicGaps = () => {
                 {/* Number and Icon Row */}
                 <div className="flex justify-between items-start mb-8">
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-xl shadow-sm flex items-center justify-center p-2 group-hover:scale-110 transition-transform">
-                    <img src={gap.icon} alt="" className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all" />
+                    {gap.icon && <img src={gap.icon} alt="" className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all" />}
                   </div>
                   <span className="font-nohemi text-2xl md:text-3xl text-glacier-soft/30 group-hover:text-glacier-primary/20 transition-colors">
-                    0{index + 1}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
 
@@ -79,7 +57,7 @@ const StrategicGaps = () => {
 
               <div className="relative z-10">
                 <p className="text-glacier-dark/60 text-sm md:text-base leading-relaxed mb-6 group-hover:text-glacier-dark/80 transition-colors">
-                  {gap.content}
+                  {gap.description}
                 </p>
                 
                 {/* Interactive Indicator - Modified to show slightly on mobile to suggest interaction */}
@@ -102,11 +80,11 @@ const StrategicGaps = () => {
 
         {/* Bottom Utility Text */}
         <footer className="mt-12 flex flex-col md:flex-row gap-4 justify-between items-center text-[9px] md:text-[10px] tracking-widest text-glacier-dark/30 uppercase font-bold border-t border-glacier-dark/5 pt-8">
-          <span>Targeting Structural Failures</span>
+          <span>{footerLabel}</span>
           <div className="flex gap-6">
-            <span className="hover:text-glacier-primary transition-colors cursor-default">Science</span>
-            <span className="hover:text-glacier-primary transition-colors cursor-default">Law</span>
-            <span className="hover:text-glacier-primary transition-colors cursor-default">Equity</span>
+            {footerTags.map((tag, i) => (
+              <span key={i} className="hover:text-glacier-primary transition-colors cursor-default">{tag}</span>
+            ))}
           </div>
         </footer>
       </div>

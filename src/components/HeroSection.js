@@ -7,10 +7,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Lines } from "@/lib/content";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection() {
+// Text, logo and buttons come from the WordPress "home" Page (see
+// schemas/pages/home.json); the parallax mountain layers are design, not content.
+export default function HeroSection({ content }) {
   const containerRef = useRef(null);
   const skyRef = useRef(null);
   const mountainBackRef = useRef(null);
@@ -104,6 +107,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-40 flex flex-col items-center justify-center text-center text-white px-6">
         
         {/* 🧊 Hero Logo */}
+        {content.heroLogo && (
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,7 +115,7 @@ export default function HeroSection() {
           className="mb-8"
         >
           <Image
-            src="https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/comapny-hero-logo.webp"
+            src={content.heroLogo}
             alt="Voice of Glacier Logo"
             width={220}
             height={120}
@@ -119,6 +123,7 @@ export default function HeroSection() {
             priority
           />
         </motion.div>
+        )}
 
         {/* Headline */}
         <motion.h1
@@ -127,9 +132,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-2xl md:text-6xl lg:text-7xl font-bold leading-tight max-w-4xl"
         >
-          Protecting Glaciers.
-          <br />
-          Preparing Communities.
+          <Lines text={content.heroTitle} />
         </motion.h1>
 
         {/* Subtext */}
@@ -139,7 +142,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
           className="mt-6 text-sm md:text-xl text-white/90 max-w-2xl"
         >
-          Enabling communities to adapt, lead and act in a changing climate.
+          {content.heroSubtitle}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -149,21 +152,25 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-10 flex md:gap-5 gap-2"
         >
-          <Link href="#crisis">
+          {content.heroPrimaryLabel && (
+          <Link href={content.heroPrimaryLink || "#crisis"}>
             <Button className="bg-glacier-primary md:text-base text-xs hover:bg-glacier-dark md:px-8 md:py-4 px-4 py-2 text-white">
-              Learn More
+              {content.heroPrimaryLabel}
             </Button>
           </Link>
+          )}
 
 
-          <Link href="/collaborate">
+          {content.heroSecondaryLabel && (
+          <Link href={content.heroSecondaryLink || "/collaborate"}>
             <Button
               variant="outline"
               className="border-white text-white bg-white/10 hover:bg-white/20 md:px-8  md:py-4 px-4 py-2 md:text-base text-xs"
             >
-              Partner With Us
+              {content.heroSecondaryLabel}
             </Button>
           </Link>
+          )}
         </motion.div>
       </div>
     </section>
