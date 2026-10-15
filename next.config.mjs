@@ -40,6 +40,18 @@ const nextConfig = {
         destination: "/glacier-dialogues/:slug",
         permanent: true,
       },
+      // Old camelCase routes -> lowercase, hyphenated SEO-friendly ones.
+      // (#hash anchors are kept by the browser across the redirect.)
+      {
+        source: "/GlacierMatters",
+        destination: "/why-glaciers-matter",
+        permanent: true,
+      },
+      {
+        source: "/ourStrategy",
+        destination: "/our-strategy",
+        permanent: true,
+      },
     ];
   },
 };

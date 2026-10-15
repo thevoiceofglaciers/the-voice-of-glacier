@@ -24,27 +24,27 @@ const FALLBACK_LINKS = [
     },
     {
       name: "Why Glaciers Matter",
-      href: "/GlacierMatters",
+      href: "/why-glaciers-matter",
       sublinks: [
-        { label: "Cryosphere Crisis", href: "/GlacierMatters#cryosphere-crisis" },
-        { label: "The Hindu Kush Himalaya", href: "/GlacierMatters#Kush-Himalaya" },
-        { label: "What If Glaciers Disappear", href: "/GlacierMatters#Disappear" }
+        { label: "Cryosphere Crisis", href: "/why-glaciers-matter#cryosphere-crisis" },
+        { label: "The Hindu Kush Himalaya", href: "/why-glaciers-matter#Kush-Himalaya" },
+        { label: "What If Glaciers Disappear", href: "/why-glaciers-matter#Disappear" }
       ],
     },
     {
       name: "Our Strategy",
-      href: "/ourStrategy",
+      href: "/our-strategy",
       sublinks: [
-        { label: "Vision & Mission", href: "/ourStrategy#vision-mission" },
-        { label: "North Star", href: "/ourStrategy#north-star" },
-        { label: "Core Values", href: "/ourStrategy#core-values" },
-        { label: "Gaps We Bridge", href: "/ourStrategy#gaps" },
-        { label: "The Three-Engine Model", href: "/ourStrategy#The-Three-Engine-Model" },
-        { label: "Dual-Force Action", href: "/ourStrategy#Dual-Force-Action" },
+        { label: "Vision & Mission", href: "/our-strategy#vision-mission" },
+        { label: "North Star", href: "/our-strategy#north-star" },
+        { label: "Core Values", href: "/our-strategy#core-values" },
+        { label: "Gaps We Bridge", href: "/our-strategy#gaps" },
+        { label: "The Three-Engine Model", href: "/our-strategy#The-Three-Engine-Model" },
+        { label: "Dual-Force Action", href: "/our-strategy#Dual-Force-Action" },
         
-        { label: "Solution Pillars", href: "/ourStrategy#Solution-pillars" },
+        { label: "Solution Pillars", href: "/our-strategy#Solution-pillars" },
         
-        { label: "Theory of Change", href: "/ourStrategy#Theory-of-Change" },
+        { label: "Theory of Change", href: "/our-strategy#Theory-of-Change" },
       ],
     },
     {

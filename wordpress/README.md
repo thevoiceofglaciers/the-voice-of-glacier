@@ -138,10 +138,10 @@ use a YouTube link instead.
 |---|---|
 | **Pages** › Home (`home`) | `/` — hero text/logo/buttons, crisis stats, How We Work pillars, Join the Movement |
 | **Pages** › Anurag's Story (`story`) | `/story` — slides, videos |
-| **Pages** › Our Strategy (`our-strategy`) | `/ourStrategy` — vision & mission, goals, values, gaps, engines, dual force, pillars, theory of change |
+| **Pages** › Our Strategy (`our-strategy`) | `/our-strategy` — vision & mission, goals, values, gaps, engines, dual force, pillars, theory of change |
 | **Pages** › Programs (`programs`) | `/programs` — hero, effort tiles & sections, programs list, SDG grid, Dushanbe conference + PDF |
 | **Pages** › Learn (`learn`) | `/Learn` — hero, introduction, Explore links, section headings |
-| **Pages** › Why Glaciers Matter (`glacier-matters`) | `/GlacierMatters` — all text, images, videos, the glacier-loss chart data and references |
+| **Pages** › Why Glaciers Matter (`glacier-matters`) | `/why-glaciers-matter` — all text, images, videos, the glacier-loss chart data and references |
 | **Pages** › Collaborate (`collaborate`) | `/collaborate` — all text, cards, pathways, form link |
 | **Pages** › Glacier Dialogues (`dialogues`) | `/glacier-dialogues` header — tagline, mission, register button |
 | **Glossary Terms** | `/Learn` glossary (listed A–Z automatically) |
