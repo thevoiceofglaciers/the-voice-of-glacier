@@ -23,7 +23,7 @@ From Plugins > Add New in wp-admin:
 ## 3. Install the custom plugin/blocks in this repo
 
 - Upload `mu-plugins/tvgf-glacier-dialogues.php`, `mu-plugins/tvgf-site-content.php`,
-  `mu-plugins/tvgf-media.php`, `mu-plugins/tvgf-core.php` **and the
+  `mu-plugins/tvgf-media.php`, `mu-plugins/tvgf-news.php`, `mu-plugins/tvgf-core.php` **and the
   `mu-plugins/tvgf-core/` folder** to `wp-content/mu-plugins/`
   on the server (create that folder if it doesn't exist). mu-plugins load
   automatically — no activation step, and it can't be accidentally
@@ -123,8 +123,8 @@ real bold where it matters), then publish.
 
 Once the WordPress posts are live, stop adding posts in the old backend.
 Keep it read-only for a few weeks as a fallback, then retire `/getBlog`.
-The backend's `/news` endpoint is still used for the automated "Latest
-News" section, so the backend itself stays up for now.
+The backend's `/news` endpoint still feeds the "Latest News" sync (see
+below), so the backend itself stays up for now.
 
 If a Media Library upload fails for large videos, raise
 `upload_max_filesize` / `post_max_size` in Hostinger's PHP settings, or
@@ -199,3 +199,36 @@ at the end — typically:
 
 After it runs, the public site looks exactly as before; from then on, edits
 in wp-admin show up on the site.
+
+## 11. Latest News (`tvgf-news.php`)
+
+The "Latest News" section on `/media` shows **News Links** (wp-admin menu),
+pinned ones first, then newest by publish date, up to 10.
+
+- **Add one by hand:** News Links > Add New. Fill in the headline, Article
+  Link, Source, Summary, and either upload an Image or paste an Image Link.
+  Tick **Pin to top** to keep it first. Publishing refreshes `/media`
+  within seconds.
+- **Automatic sync:** News Links > **Sync Settings** imports new articles
+  from `https://glacier-server.onrender.com/news` every 24 hours by default.
+  From that screen you can turn it off, change how often it runs (every
+  hour / 12 hours / 24 hours), choose whether imports go live immediately
+  or wait as drafts for review, set how many days imported articles are
+  kept (pinned and hand-added links are never removed), change the feed
+  URL, and press **Sync now**. It also shows when the last sync ran, what
+  it did, and when the next one is due.
+- Imported items are ordinary News Links marked "Feed sync" in the list —
+  edit or pin them freely; the sync never overwrites an existing item.
+  Trash or delete one and it won't be imported again.
+
+If WordPress itself is unreachable, the site reads the feed directly so the
+section doesn't disappear (needs `BACKEND_URL` in the Next.js env).
+
+**Make the schedule dependable on Hostinger.** WP-Cron only runs when
+WordPress gets a request. Add `define( 'DISABLE_WP_CRON', true );` to
+`wp-config.php` and create a real cron job in hPanel (Advanced > Cron Jobs)
+that runs every 15 minutes:
+
+```
+wget -q -O - https://<your-wp-domain>/wp-cron.php?doing_wp_cron >/dev/null 2>&1
+```

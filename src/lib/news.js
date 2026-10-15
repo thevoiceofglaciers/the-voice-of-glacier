@@ -1,10 +1,11 @@
-import { decodeEntities, htmlToText } from "@/lib/wp";
+import { decodeEntities, htmlToText, getNewsLinks } from "@/lib/wp";
 
-// Server-only: the automated "Latest News" feed comes from the legacy
-// backend's /news proxy (NewsAPI-shaped: { articles: [{ title, description,
-// url, urlToImage }] }). Fetched here on the server and cached for an hour
-// rather than on every visit in the browser. NEXT_PUBLIC_BACKEND_URL is
-// still accepted as a fallback until the deployment env is renamed.
+// The "Latest News" section on /media. Its source of truth is WordPress's
+// News Links (wordpress/mu-plugins/tvgf-news.php): links editors add by hand
+// plus articles a scheduled sync imports from the legacy backend's /news feed.
+// If WordPress itself is unreachable, read that feed directly instead so the
+// section doesn't vanish. NEXT_PUBLIC_BACKEND_URL is still accepted as a
+// fallback until the deployment env is renamed.
 const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const MAX_ARTICLES = 10;
@@ -21,14 +22,32 @@ function isPlaceholderImage(url) {
   }
 }
 
+function sourceFromUrl(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
+}
+
 /**
- * Returns [] on any error so the page just omits the section.
+ * Returns [] when neither WordPress nor the feed can be read, so the page
+ * just omits the section.
  */
 export async function getGlacierNews() {
+  try {
+    const links = await getNewsLinks();
+    return links.slice(0, MAX_ARTICLES).map((a) => ({ ...a, source: a.source || sourceFromUrl(a.url) }));
+  } catch {
+    return getFeedNews();
+  }
+}
+
+async function getFeedNews() {
   if (!BACKEND_URL) return [];
 
   try {
-    const res = await fetch(`${BACKEND_URL}/news`, { next: { tags: ["news"], revalidate: 3600 } });
+    const res = await fetch(`${BACKEND_URL.replace(/\/+$/, "")}/news`, { next: { tags: ["news"], revalidate: 3600 } });
     if (!res.ok) return [];
 
     const data = await res.json();
@@ -44,6 +63,8 @@ export async function getGlacierNews() {
         description: htmlToText(a.description),
         url: a.url,
         imageUrl: a.urlToImage,
+        source: a.source?.name || sourceFromUrl(a.url),
+        isPinned: false,
       }));
   } catch {
     return [];

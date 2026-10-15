@@ -295,6 +295,47 @@ export async function getMediaPosts() {
 }
 
 /**
+ * Published News Links (wordpress/mu-plugins/tvgf-news.php) — both the ones
+ * editors add by hand and the ones its scheduled sync imports from the news
+ * feed — pinned first, then newest. Unlike the other getters this throws on
+ * error, so getGlacierNews() can fall back to reading the feed directly.
+ */
+export async function getNewsLinks() {
+  const query = `
+    query GetNewsLinks {
+      newsLinks(first: 50, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          title
+          date
+          linkUrl
+          sourceName
+          summary
+          imageUrl
+          isPinned
+        }
+      }
+    }
+  `;
+
+  const data = await wpFetch(query, {}, { tags: ["news"], revalidate: 3600 });
+  const nodes = data?.newsLinks?.nodes || [];
+
+  return nodes
+    .filter((n) => n.linkUrl)
+    .map((n) => ({
+      title: decodeEntities(n.title),
+      description: n.summary || "",
+      url: n.linkUrl,
+      imageUrl: n.imageUrl || null,
+      source: n.sourceName || null,
+      isPinned: Boolean(n.isPinned),
+    }))
+    // Array.prototype.sort is stable, so date order is kept within each group.
+    .sort((a, b) => Number(b.isPinned) - Number(a.isPinned));
+}
+
+/**
  * Hero fields for a core WordPress Page, matched by slug (e.g. "media").
  * Returns null on any error or when the Page doesn't exist, so callers fall
  * back to their built-in hero.
