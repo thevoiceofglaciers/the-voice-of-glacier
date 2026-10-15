@@ -15,7 +15,10 @@ const SOCIAL_ICONS = {
 // `settings` comes from WordPress Site Settings (see getSiteSettings() in
 // src/lib/wp.js), already merged over the defaults in site-settings.json.
 export default function Footer({ settings }) {
-  const { footerTagline, footerLogo, socialLinks, founderName, contactEmail, copyright, creditText, creditUrl } = settings;
+  const {
+    footerTagline, footerLogo, socialLinks, founderName, contactEmail, copyright,
+    creditText, creditUrl, credit2Text, credit2Url, creditSuffix,
+  } = settings;
 
   return (
     <footer className="bg-glacier-dark text-glacier-light py-10 px-6 md:px-12">
@@ -25,7 +28,8 @@ export default function Footer({ settings }) {
           {footerTagline && <p className="text-glacier-soft max-w-md">{footerTagline}</p>}
           <div className="flex space-x-5 mt-4">
             {socialLinks
-              .filter((link) => link.url)
+              // "#" was the old placeholder for the unused Facebook link.
+              .filter((link) => link.url && link.url !== "#")
               .map((link, i) =>
                 link.platform === "substack" ? (
                   <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" aria-label="Substack">
@@ -78,20 +82,31 @@ export default function Footer({ settings }) {
           </p>
         )}
         <p>© {new Date().getFullYear()} {copyright}</p>
-        {creditText && (
+        {(creditText || credit2Text) && (
           <p>
-            <a
-              href={creditUrl || undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-glacier-primary transition-colors duration-300 underline"
-            >
-              {creditText}
-            </a>
+            <CreditLink text={creditText} url={creditUrl} />
+            {creditText && credit2Text && " and "}
+            <CreditLink text={credit2Text} url={credit2Url} />
+            {creditSuffix && ` ${creditSuffix}`}
           </p>
         )}
       </div>
     </footer>
+  );
+}
+
+function CreditLink({ text, url }) {
+  if (!text) return null;
+  if (!url) return text;
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-glacier-primary transition-colors duration-300 underline"
+    >
+      {text}
+    </a>
   );
 }
 

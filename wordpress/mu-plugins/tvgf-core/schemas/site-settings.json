@@ -25,7 +25,6 @@
           ],
           "default": [
             { "platform": "instagram", "url": "https://www.instagram.com/thevoiceofglaciers/" },
-            { "platform": "facebook", "url": "#" },
             { "platform": "linkedin", "url": "https://www.linkedin.com/company/the-voice-of-glaciers-foundation/" },
             { "platform": "substack", "url": "https://substack.com/@thevoiceofglaciers" }
           ]
@@ -33,8 +32,11 @@
         { "key": "founderName", "label": "Founder", "type": "text", "default": "Anurag Maloo" },
         { "key": "contactEmail", "label": "Contact email", "type": "text", "default": "thevoiceofglaciers@gmail.com" },
         { "key": "copyright", "label": "Copyright line", "type": "text", "help": "The current year is added in front automatically.", "default": "The Voice of Glaciers. All rights reserved." },
-        { "key": "creditText", "label": "Credit line", "type": "text", "default": "Created by Adarsh Tiwari with love for glaciers" },
-        { "key": "creditUrl", "label": "Credit link", "type": "url", "default": "https://www.linkedin.com/in/adarsh-tiwari-5084ab256/" }
+        { "key": "creditText", "label": "Credit — created by", "type": "text", "default": "Created by Adarsh Tiwari" },
+        { "key": "creditUrl", "label": "Credit — created by link", "type": "url", "default": "https://www.linkedin.com/in/adarsh-tiwari-5084ab256/" },
+        { "key": "credit2Text", "label": "Credit — nurtured by", "type": "text", "help": "Leave empty to show only the first credit.", "default": "Nurtured by Osheeva" },
+        { "key": "credit2Url", "label": "Credit — nurtured by link", "type": "url", "default": "https://www.osheeva.com/" },
+        { "key": "creditSuffix", "label": "Credit — ending", "type": "text", "help": "Shown after the credits.", "default": "with love for glaciers" }
       ]
     }
   ]
