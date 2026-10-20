@@ -25,6 +25,8 @@ define( 'TVGF_NEWS_SETTINGS_OPTION', 'tvgf_news_settings' );
 define( 'TVGF_NEWS_STATUS_OPTION', 'tvgf_news_last_sync' );
 define( 'TVGF_NEWS_DISMISSED_OPTION', 'tvgf_news_dismissed' );
 define( 'TVGF_NEWS_CRON_HOOK', 'tvgf_news_sync' );
+define( 'TVGF_NEWS_RETRY_HOOK', 'tvgf_news_sync_retry' );
+define( 'TVGF_NEWS_MAX_RETRIES', 3 );
 
 function tvgf_news_default_settings() {
 	return [
@@ -360,10 +362,34 @@ function tvgf_news_link_exists( $url ) {
 }
 
 /**
+ * The feed runs on Render's free tier, which sleeps when idle; waking it can
+ * take longer than the request timeout. The timed-out request still starts
+ * the wake-up, so a retry a few minutes later normally succeeds. Schedules
+ * that retry (up to TVGF_NEWS_MAX_RETRIES times, backing off) and returns
+ * the sentence to append to the status message.
+ */
+function tvgf_news_schedule_retry( $attempt ) {
+	if ( $attempt >= TVGF_NEWS_MAX_RETRIES ) {
+		return sprintf( ' Gave up after %d automatic retries — press "Sync now" to try again.', TVGF_NEWS_MAX_RETRIES );
+	}
+	wp_clear_scheduled_hook( TVGF_NEWS_RETRY_HOOK, [ $attempt + 1 ] );
+	$when = time() + 3 * MINUTE_IN_SECONDS * ( $attempt + 1 );
+	wp_schedule_single_event( $when, TVGF_NEWS_RETRY_HOOK, [ $attempt + 1 ] );
+	return sprintf(
+		' The feed server is probably waking up — retrying automatically around %s (retry %d of %d).',
+		wp_date( get_option( 'time_format' ), $when ),
+		$attempt + 1,
+		TVGF_NEWS_MAX_RETRIES
+	);
+}
+
+/**
  * Imports new articles from the feed and prunes old imported ones.
+ * $attempt is 0 for scheduled/manual runs and 1..N for automatic retries.
  * Returns [ 'ok' => bool, 'message' => string, 'added' => int, 'removed' => int ].
  */
-function tvgf_news_run_sync() {
+function tvgf_news_run_sync( $attempt = 0 ) {
+	$attempt  = (int) $attempt;
 	$settings = tvgf_news_settings();
 	$result   = [ 'ok' => false, 'message' => '', 'added' => 0, 'removed' => 0, 'time' => time() ];
 
@@ -373,10 +399,13 @@ function tvgf_news_run_sync() {
 		return $result;
 	}
 
-	// Render's free tier sleeps when idle — the first request can take ~30s.
+	// Leave PHP enough time for the slow first request to a sleeping server.
+	if ( function_exists( 'set_time_limit' ) ) {
+		@set_time_limit( 120 );
+	}
 	$response = wp_remote_get( $settings['feed_url'], [ 'timeout' => 60 ] );
 	if ( is_wp_error( $response ) ) {
-		$result['message'] = 'Could not reach the feed: ' . $response->get_error_message();
+		$result['message'] = 'Could not reach the feed: ' . $response->get_error_message() . '.' . tvgf_news_schedule_retry( $attempt );
 		update_option( TVGF_NEWS_STATUS_OPTION, $result, false );
 		return $result;
 	}
@@ -384,8 +413,17 @@ function tvgf_news_run_sync() {
 	$data = json_decode( wp_remote_retrieve_body( $response ), true );
 	if ( 200 !== $code || ! is_array( $data ) ) {
 		$result['message'] = "The feed returned an unexpected response (HTTP $code).";
+		// Render answers 502/503 while a sleeping service starts up.
+		if ( $code >= 500 ) {
+			$result['message'] .= tvgf_news_schedule_retry( $attempt );
+		}
 		update_option( TVGF_NEWS_STATUS_OPTION, $result, false );
 		return $result;
+	}
+
+	// Reached the feed — any queued retries are no longer needed.
+	for ( $i = 1; $i <= TVGF_NEWS_MAX_RETRIES; $i++ ) {
+		wp_clear_scheduled_hook( TVGF_NEWS_RETRY_HOOK, [ $i ] );
 	}
 
 	$articles  = isset( $data['articles'] ) && is_array( $data['articles'] ) ? $data['articles'] : ( isset( $data[0] ) ? $data : [] );
@@ -471,7 +509,9 @@ function tvgf_news_run_sync() {
 	return $result;
 }
 
+// The recurring event passes no arguments (attempt 0); retries pass their number.
 add_action( TVGF_NEWS_CRON_HOOK, 'tvgf_news_run_sync' );
+add_action( TVGF_NEWS_RETRY_HOOK, 'tvgf_news_run_sync' );
 
 // Keep the cron event in line with the settings (also covers first install).
 function tvgf_news_reschedule() {
@@ -504,6 +544,10 @@ function tvgf_render_news_sync_page() {
 	$settings = tvgf_news_settings();
 	$status   = get_option( TVGF_NEWS_STATUS_OPTION, [] );
 	$next     = wp_next_scheduled( TVGF_NEWS_CRON_HOOK );
+	$retry    = false;
+	for ( $i = 1; $i <= TVGF_NEWS_MAX_RETRIES && ! $retry; $i++ ) {
+		$retry = wp_next_scheduled( TVGF_NEWS_RETRY_HOOK, [ $i ] );
+	}
 	$fmt      = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
 	?>
 	<div class="wrap">
@@ -543,6 +587,12 @@ function tvgf_render_news_sync_page() {
 					<th>Next automatic sync</th>
 					<td><?php echo $next ? esc_html( wp_date( $fmt, $next ) ) : 'Off'; ?></td>
 				</tr>
+				<?php if ( $retry ) : ?>
+					<tr>
+						<th>Retry pending</th>
+						<td><?php echo esc_html( wp_date( $fmt, $retry ) ); ?> — after the last attempt couldn't reach the feed</td>
+					</tr>
+				<?php endif; ?>
 			</tbody>
 		</table>
 
