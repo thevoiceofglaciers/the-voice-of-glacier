@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   ResponsiveContainer,
@@ -10,33 +12,18 @@ import {
   Label,
 } from "recharts";
 
-const timelineData = [
-  { year: 1985, glaciers: 100 },
-  { year: 1992, glaciers: 98 },
-  { year: 1995, glaciers: 96 },
-  { year: 2000, glaciers: 93 },
-  { year: 2003, glaciers: 91 },
-  { year: 2005, glaciers: 89 },
-  { year: 2007, glaciers: 87 },
-  { year: 2010, glaciers: 84 },
-  { year: 2012, glaciers: 82 },
-  { year: 2014, glaciers: 80 },
-  { year: 2015, glaciers: 78 },
-  { year: 2017, glaciers: 75 },
-  { year: 2019, glaciers: 72 },
-  { year: 2020, glaciers: 69 },
-  { year: 2021, glaciers: 66 },
-  { year: 2022, glaciers: 62 },
-  { year: 2023, glaciers: 60 },
-  { year: 2024, glaciers: 58 },
-];
+// Data points, caption and references come from the WordPress
+// "glacier-matters" Page (schema: pages/glacier-matters.json).
+const CryosphereTimeline = ({ title, points = [], caption, references = [] }) => {
+  const timelineData = points
+    .filter((p) => p.year !== null && p.year !== "" && p.value !== null && p.value !== "")
+    .map((p) => ({ year: Number(p.year), glaciers: Number(p.value) }));
 
-const CryosphereTimeline = () => {
   return (
     <section className="w-full bg-glacier-dark py-20">
       <div className="w-[95%] max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-glacier-light mb-10">
-          Cryosphere Loss Timeline (1985-2024)
+          {title}
         </h2>
 
         <ResponsiveContainer width="100%" height={400}>
@@ -70,46 +57,32 @@ const CryosphereTimeline = () => {
           </LineChart>
         </ResponsiveContainer>
 
-        <p className="text-sm md:text-base text-glacier-light/80 mt-6 max-w-3xl mx-auto">
-          This timeline visualizes the gradual loss of global glacier mass over the past four decades, reflecting the accelerated impact of climate change on the cryosphere.
-        </p>
+        {caption && (
+          <p className="text-sm md:text-base text-glacier-light/80 mt-6 max-w-3xl mx-auto">
+            {caption}
+          </p>
+        )}
 
         {/* References Section */}
-        <div className="mt-8 text-left max-w-3xl mx-auto text-glacier-light/70 text-xs md:text-sm">
-          <p className="font-semibold mb-2">References:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>
-              <a
-                href="https://essd.copernicus.org/articles/17/1977/2025/essd-17-1977-2025.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-glacier-light underline"
-              >
-                Copernicus Earth Surface Dynamics - Global Glacier Mass Change (1976-2024)
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.reuters.com/business/environment/worlds-glaciers-are-losing-record-ice-global-temperatures-climb-un-says-2025-03-21/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-glacier-light underline"
-              >
-                UNESCO / WGMS Report (2025) - Global Glacier Loss since 1975
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://apnews.com/article/af8ff74dbbb9aabdc537adcbc9eb6010"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-glacier-light underline"
-              >
-                AP News Summary (2025) - Accelerating Glacier Melt Trends
-              </a>
-            </li>
-          </ul>
-        </div>
+        {references.length > 0 && (
+          <div className="mt-8 text-left max-w-3xl mx-auto text-glacier-light/70 text-xs md:text-sm">
+            <p className="font-semibold mb-2">References:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              {references.map((ref, i) => (
+                <li key={i}>
+                  <a
+                    href={ref.url || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-glacier-light underline"
+                  >
+                    {ref.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

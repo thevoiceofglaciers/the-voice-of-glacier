@@ -6,18 +6,10 @@ import { useRouter, usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [desktopDropdown, setDesktopDropdown] = useState(null);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const dropdownRef = useRef(null);
-
-  const structuredLinks = [
+// Used whenever WordPress's menu (Appearance > Menus, "primary" location)
+// can't be reached — see getMainMenu() in src/lib/wp.js — so the site still
+// has a working nav instead of an empty bar.
+const FALLBACK_LINKS = [
     {
       name: "Home",
       href: "/",
@@ -32,27 +24,27 @@ export default function Navbar() {
     },
     {
       name: "Why Glaciers Matter",
-      href: "/GlacierMatters",
+      href: "/why-glaciers-matter",
       sublinks: [
-        { label: "Cryosphere Crisis", href: "/GlacierMatters#cryosphere-crisis" },
-        { label: "The Hindu Kush Himalaya", href: "/GlacierMatters#Kush-Himalaya" },
-        { label: "What If Glaciers Disappear", href: "/GlacierMatters#Disappear" }
+        { label: "Cryosphere Crisis", href: "/why-glaciers-matter#cryosphere-crisis" },
+        { label: "The Hindu Kush Himalaya", href: "/why-glaciers-matter#Kush-Himalaya" },
+        { label: "What If Glaciers Disappear", href: "/why-glaciers-matter#Disappear" }
       ],
     },
     {
       name: "Our Strategy",
-      href: "/ourStrategy",
+      href: "/our-strategy",
       sublinks: [
-        { label: "Vision & Mission", href: "/ourStrategy#vision-mission" },
-        { label: "North Star", href: "/ourStrategy#north-star" },
-        { label: "Core Values", href: "/ourStrategy#core-values" },
-        { label: "Gaps We Bridge", href: "/ourStrategy#gaps" },
-        { label: "The Three-Engine Model", href: "/ourStrategy#The-Three-Engine-Model" },
-        { label: "Dual-Force Action", href: "/ourStrategy#Dual-Force-Action" },
+        { label: "Vision & Mission", href: "/our-strategy#vision-mission" },
+        { label: "North Star", href: "/our-strategy#north-star" },
+        { label: "Core Values", href: "/our-strategy#core-values" },
+        { label: "Gaps We Bridge", href: "/our-strategy#gaps" },
+        { label: "The Three-Engine Model", href: "/our-strategy#The-Three-Engine-Model" },
+        { label: "Dual-Force Action", href: "/our-strategy#Dual-Force-Action" },
         
-        { label: "Solution Pillars", href: "/ourStrategy#Solution-pillars" },
+        { label: "Solution Pillars", href: "/our-strategy#solution-pillars" },
         
-        { label: "Theory of Change", href: "/ourStrategy#Theory-of-Change" },
+        { label: "Theory of Change", href: "/our-strategy#theory-of-change" },
       ],
     },
     {
@@ -65,14 +57,14 @@ export default function Navbar() {
     },
     {
       name: "Learn",
-      href: "/Learn",
+      href: "/learn",
       sublinks: [
-        { label: "Introduction", href: "/Learn#introduction" },
-        { label: "Explore", href: "/Learn#explore" },
-        { label: "Glacier Data", href: "/Learn#glacier-data" },
-        { label: "Glossary", href: "/Learn#glossary" },
-        { label: "Partners", href: "/Learn#partners" },
-        { label: "Join Us", href: "/Learn#join" },
+        { label: "Introduction", href: "/learn#introduction" },
+        { label: "Explore", href: "/learn#explore" },
+        { label: "Glacier Data", href: "/learn#glacier-data" },
+        { label: "Glossary", href: "/learn#glossary" },
+        { label: "Partners", href: "/learn#partners" },
+        { label: "Join Us", href: "/learn#join" },
       ],
     },
     {
@@ -83,30 +75,20 @@ export default function Navbar() {
         { label: "Join Us", href: "/collaborate#join" },
       ],
     },
-    {
-      name: "Media",
-      href: "/media",
-      sublinks: [
-        { label: "Go to media", href: "/media" }
-      ],
-    },
-    
-    { name: "Glacier Dialogues", href: "/glacierDialgoues", sublinks: [{ label: "Go to Dialgoues", href: "/glacierDialgoues" }] }
-  ];
+    { name: "Media", href: "/media", sublinks: [] },
+    { name: "Glacier Dialogues", href: "/glacier-dialogues", sublinks: [] }
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+export default function Navbar({ links, showNavbar = true }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [desktopDropdown, setDesktopDropdown] = useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState(null);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const dropdownRef = useRef(null);
+
+  const structuredLinks = links?.length ? links : FALLBACK_LINKS;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -118,16 +100,45 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSmoothScroll = async (href) => {
+  // A first visit to a page fetches its WordPress content over the network
+  // before the target section exists in the DOM — a fixed delay guesses
+  // wrong half the time, so poll until the element shows up (or give up).
+  const waitForElement = (id, { timeout = 4000, interval = 100 } = {}) =>
+    new Promise((resolve) => {
+      const start = Date.now();
+      const check = () => {
+        const el = document.getElementById(id);
+        if (el || Date.now() - start >= timeout) {
+          resolve(el);
+        } else {
+          setTimeout(check, interval);
+        }
+      };
+      check();
+    });
+
+  const handleSmoothScroll = async (rawHref) => {
+    // WordPress menu items are hand-typed "Custom Links" — normalize away an
+    // accidentally-pasted full URL (e.g. "https://thevoiceofglaciers.org/x")
+    // to a relative path before splitting on "#", since router.push() needs
+    // an internal path, not an absolute URL with a host.
+    let href = rawHref;
+    if (typeof window !== "undefined") {
+      try {
+        const url = new URL(rawHref, window.location.origin);
+        href = url.pathname + url.search + url.hash;
+      } catch {
+        // Leave href as-is if it's not parseable as a URL at all.
+      }
+    }
+
     const [path, hash] = href.split("#");
 
     if (hash) {
       if (pathname !== path) {
         await router.push(path);
-        setTimeout(() => {
-          const el = document.getElementById(hash);
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 300);
+        const el = await waitForElement(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         const el = document.getElementById(hash);
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -160,28 +171,45 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div
-            className="hidden md:flex md:space-x-4 lg:space-x-6 items-center relative"
+            className="hidden xl:flex xl:space-x-6 items-center relative"
             ref={dropdownRef}
           >
-            {structuredLinks.map((link) => (
-              <div key={link.name} className="relative">
-                <button
-                  onClick={() =>
-                    setDesktopDropdown(
-                      desktopDropdown === link.name ? null : link.name
-                    )
-                  }
-                  className="flex items-center gap-1 
-                             text-white font-medium
-                             text-xs md:text-[11px] lg:text-sm
-                             hover:text-glacier-dark transition-colors"
-                >
-                  {link.name}
-                  {link.sublinks?.length > 0 && <ChevronDown size={14} />}
-                </button>
+            {structuredLinks.map((link) => {
+              const hasChildren = link.sublinks?.length > 0;
+              return (
+                <div key={link.name} className="relative flex items-center">
+                  {hasChildren ? (
+                    <button
+                      onClick={() =>
+                        setDesktopDropdown(
+                          desktopDropdown === link.name ? null : link.name
+                        )
+                      }
+                      className="flex items-center gap-1
+                                 text-white font-medium
+                                 text-xs md:text-[11px] lg:text-sm
+                                 hover:text-glacier-dark transition-colors"
+                    >
+                      {link.name}
+                      <ChevronDown size={14} />
+                    </button>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSmoothScroll(link.href);
+                      }}
+                      className="flex items-center gap-1
+                                 text-white font-medium
+                                 text-xs md:text-[11px] lg:text-sm
+                                 hover:text-glacier-dark transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  )}
 
-                {link.sublinks?.length > 0 &&
-                  desktopDropdown === link.name && (
+                  {hasChildren && desktopDropdown === link.name && (
                     <div className="absolute left-0 top-full mt-2 w-56 bg-white text-black rounded-md shadow-lg z-10">
                       {link.sublinks.map((sublink) => (
                         <a
@@ -199,12 +227,13 @@ export default function Navbar() {
                       ))}
                     </div>
                   )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <button
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -221,20 +250,37 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
-          {structuredLinks.map((link) => (
+        <div className="xl:hidden px-4 pt-3 pb-6 space-y-4 backdrop-blur-md shadow-md border-t border-white/20">
+          {structuredLinks.map((link) => {
+            const hasChildren = link.sublinks?.length > 0;
+            return (
             <div key={link.name}>
-              <button
-                onClick={() =>
-                  setMobileDropdown((prev) =>
-                    prev === link.name ? null : link.name
-                  )
-                }
-                className="w-full flex justify-between items-center text-left text-white font-medium text-base py-2"
-              >
-                {link.name}
-                {link.sublinks?.length > 0 && <ChevronDown size={16} />}
-              </button>
+              {hasChildren ? (
+                <button
+                  onClick={() =>
+                    setMobileDropdown((prev) =>
+                      prev === link.name ? null : link.name
+                    )
+                  }
+                  className="w-full flex justify-between items-center text-left text-white font-medium text-base py-2"
+                >
+                  {link.name}
+                  <ChevronDown size={16} />
+                </button>
+              ) : (
+                <a
+                  href={link.href}
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    setMobileDropdown(null);
+                    await handleSmoothScroll(link.href);
+                  }}
+                  className="block text-left text-white font-medium text-base py-2"
+                >
+                  {link.name}
+                </a>
+              )}
 
               {mobileDropdown === link.name && link.sublinks?.length > 0 && (
                 <div className="ml-4 mt-2 space-y-2">
@@ -256,7 +302,8 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </nav>

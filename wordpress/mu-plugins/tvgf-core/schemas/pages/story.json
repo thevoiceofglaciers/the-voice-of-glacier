@@ -1,0 +1,107 @@
+{
+  "slug": "story",
+  "path": "/story",
+  "title": "Story Page Content",
+  "pageTitle": "Anurag's Story",
+  "sections": [
+    {
+      "title": "Story slides",
+      "description": "Visitors click through the slides one at a time; the heading shows on the first slide.",
+      "fields": [
+        {
+          "key": "title",
+          "label": "Heading",
+          "type": "text",
+          "default": "Anurag Maloo: A Story of Survival"
+        },
+        {
+          "key": "backgroundVideo",
+          "label": "Background video (.mp4)",
+          "type": "video",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/AnuragMaloo.mp4"
+        },
+        {
+          "key": "slides",
+          "label": "Slides",
+          "type": "repeater",
+          "itemLabel": "Slide",
+          "titleField": "text",
+          "fields": [
+            {
+              "key": "text",
+              "label": "Text",
+              "type": "textarea",
+              "rows": 5
+            },
+            {
+              "key": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "key": "imageAlt",
+              "label": "Image description",
+              "type": "text"
+            }
+          ],
+          "default": [
+            {
+              "text": "For me, mountaineering has never just been about the thrill of summiting peaks. It's been a journey with a deeper mission - to spread awareness about the United Nations' Sustainable Development Goals (SDGs). That's what led me to launch the 'Climbing4SDGs' initiative, where I use mountaineering as a platform to engage with communities, encourage action, and advocate for global change.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/anuraag-maloo1.jpg",
+              "imageAlt": "Anurag Maloo"
+            },
+            {
+              "text": "Annapurna is infamous for its danger, with a high fatality rate of 33% due to avalanches and technical difficulty. Despite knowing the risks, I was determined to climb it to amplify my cause. On April 17, 2023, after 16-18 hours of climbing and reaching nearly 7,900 meters, I decided to turn back just 150 meters from the summit due to worsening weather and delayed time to reach the summit.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/anuraag-maloo2.jpg",
+              "imageAlt": "Anurag Maloo"
+            },
+            {
+              "text": "While descending the most dangerous avalanche prone section of Annapurna between Camp 3 to Camp 2, I accidentally clipped onto the broken wrong rope and fell on the icy surface and then entered into a deep crevasse nearly 25 floors under the Earth. I lay trapped in the ice for three days and nights, recording messages on my GoPro, hoping someone would find me. On the third night, an avalanche buried me deeper, and I lost consciousness completely.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/image.png",
+              "imageAlt": "Anurag Maloo"
+            },
+            {
+              "text": "Meanwhile, rescue efforts were underway. The first two attempts failed, but finally, a third team—including Polish climbers Adam Bielecki and Mariusz Hatala, Nepali Sherpas, and helicopter Sobit Gauchan—set out, expecting to retrieve a body. But on April 20th, they found me alive, buried in the fetal position nearly 70 meters deep at 6,000 meters altitude.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/anurag-snow.png",
+              "imageAlt": "Anurag Maloo"
+            },
+            {
+              "text": "Since then, I've spent over 7 months in hospitals in Nepal and India, relearned everything—walking, writing, eating, even moving my fingers. I feel like a 34-year-old with the motor skills of a baby. While my physical strength is still limited, I continue to undergo therapy and focus on healing.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/group.jpg",
+              "imageAlt": "Anurag Maloo"
+            },
+            {
+              "text": "This journey has been nothing short of a miracle, made possible by relentless efforts from my rescuers, doctors, therapists, family, and friends. Above all, I owe my life to the mountains and glaciers. Annapurna may have nearly taken my life, but it also gave it back. I'm alive to share this story, and I will always climb for a purpose.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/story/anurag-last.jpg",
+              "imageAlt": "Anurag Maloo"
+            }
+          ]
+        },
+        {
+          "key": "continuePrompt",
+          "label": "Click prompt",
+          "type": "text",
+          "help": "The slide counter, e.g. (2/6), is added automatically.",
+          "default": "Click anywhere to continue"
+        }
+      ]
+    },
+    {
+      "title": "Full story video",
+      "fields": [
+        {
+          "key": "videoTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Watch the Full Story"
+        },
+        {
+          "key": "video",
+          "label": "Video (.mp4)",
+          "type": "video",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main//story/amStory.mp4"
+        }
+      ]
+    }
+  ]
+}

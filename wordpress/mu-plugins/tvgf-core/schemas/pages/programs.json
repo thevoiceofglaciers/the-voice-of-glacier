@@ -1,0 +1,432 @@
+{
+  "slug": "programs",
+  "path": "/programs",
+  "title": "Programs Page Content",
+  "pageTitle": "Programs",
+  "sections": [
+    {
+      "title": "Hero",
+      "fields": [
+        {
+          "key": "heroTitle",
+          "label": "Headline",
+          "type": "text",
+          "default": "Flagship Programs And Efforts"
+        },
+        {
+          "key": "heroQuote",
+          "label": "Quote",
+          "type": "text",
+          "default": "\"Where glaciers speak, communities rise, and the world listens.\""
+        },
+        {
+          "key": "heroVideo",
+          "label": "Background video (.mp4)",
+          "type": "video",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/glacier-hero.mp4"
+        }
+      ]
+    },
+    {
+      "title": "International efforts (image tiles)",
+      "description": "Clicking a tile scrolls to the section with that <strong>Section ID</strong> (see the effort sections below; the SDG grid's ID is <code>sdg-section</code>).",
+      "fields": [
+        {
+          "key": "effortsTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "International efforts to advance cryospheric science."
+        },
+        {
+          "key": "effortTiles",
+          "label": "Tiles",
+          "type": "repeater",
+          "itemLabel": "Tile",
+          "titleField": "label",
+          "fields": [
+            {
+              "key": "label",
+              "label": "Label",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "key": "alt",
+              "label": "Image description (for screen readers)",
+              "type": "text"
+            },
+            {
+              "key": "target",
+              "label": "Section ID to scroll to",
+              "type": "text"
+            }
+          ],
+          "default": [
+            {
+              "label": "SDG decade of action. 2021-2030",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/susDevelopmentGoals.webp",
+              "alt": "SDG decade of action. 2021-2030",
+              "target": "sdg-section"
+            },
+            {
+              "label": "Decade of Ocean Science",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/unitedNationsDecade.webp",
+              "alt": "Decade of Ocean Science",
+              "target": "decade-of-ocean-science"
+            },
+            {
+              "label": "International Year of Glaciers Preservation",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/YearOfGlacier.webp",
+              "alt": "International Year of Glaciers' Preservation",
+              "target": "year-of-glacier"
+            },
+            {
+              "label": "Decade of Action for Cryospheric Sciences",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/UNdecade.webp",
+              "alt": "Decade of Action for Cryospheric Sciences",
+              "target": "decade-of-cryosphere"
+            },
+            {
+              "label": "International Polar Year",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/InternationalPolarYear.webp",
+              "alt": "International Polar Year",
+              "target": "international-polar-year"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Flagship programs overview",
+      "fields": [
+        {
+          "key": "programsTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "Our Flagship Programs Overview"
+        },
+        {
+          "key": "programsIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "A concise look at the key programs driving our mission forward:"
+        },
+        {
+          "key": "programsList",
+          "label": "Programs",
+          "type": "repeater",
+          "itemLabel": "Program",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "date",
+              "label": "Date / subtitle (optional)",
+              "type": "text"
+            }
+          ],
+          "default": [
+            {
+              "title": "GlacierX Gatherings",
+              "date": ""
+            },
+            {
+              "title": "GlacierX Residencies & Fellowships",
+              "date": ""
+            },
+            {
+              "title": "Education & Toolkits",
+              "date": ""
+            },
+            {
+              "title": "Cultural Campaigns & Public Rituals",
+              "date": ""
+            },
+            {
+              "title": "Glacier Guardians Network",
+              "date": ""
+            },
+            {
+              "title": "Policy Dialogues & Global Forums",
+              "date": ""
+            },
+            {
+              "title": "Digital Tools & Technology Platforms",
+              "date": ""
+            },
+            {
+              "title": "Storytelling & Digital Strategy",
+              "date": ""
+            }
+          ]
+        },
+        {
+          "key": "programsImage",
+          "label": "Image",
+          "type": "image",
+          "default": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/img1.webp"
+        }
+      ]
+    },
+    {
+      "title": "Sustainable Development Goals grid",
+      "description": "Each goal's number is its position in the list; hover colours follow the official SDG palette by position.",
+      "fields": [
+        {
+          "key": "sdgTitle",
+          "label": "Heading",
+          "type": "text",
+          "default": "17 Sustainable Development Goals"
+        },
+        {
+          "key": "sdgIntro",
+          "label": "Intro",
+          "type": "textarea",
+          "default": "Adopted by all United Nations Member States in 2015 as a universal call to action."
+        },
+        {
+          "key": "sdgGoals",
+          "label": "Goals",
+          "type": "repeater",
+          "itemLabel": "Goal",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "label": "Description",
+              "type": "textarea"
+            },
+            {
+              "key": "image",
+              "label": "Tile image",
+              "type": "image"
+            }
+          ],
+          "default": [
+            {
+              "title": "No Poverty",
+              "description": "End poverty in all its forms everywhere.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/1-bg.webp"
+            },
+            {
+              "title": "Zero Hunger",
+              "description": "End hunger, achieve food security and improved nutrition and promote sustainable agriculture.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/2-bg.webp"
+            },
+            {
+              "title": "Good Health and Well-Being",
+              "description": "Ensure healthy lives and promote well-being for all at all ages.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/3-bg.webp"
+            },
+            {
+              "title": "Quality Education",
+              "description": "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/4-bg.webp"
+            },
+            {
+              "title": "Gender Equality",
+              "description": "Achieve gender equality and empower all women and girls.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/5-bg.webp"
+            },
+            {
+              "title": "Clean Water and Sanitation",
+              "description": "Ensure availability and sustainable management of water and sanitation for all.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/6-bg.webp"
+            },
+            {
+              "title": "Affordable and Clean Energy",
+              "description": "Ensure access to affordable, reliable, sustainable and modern energy for all.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/7-bg.webp"
+            },
+            {
+              "title": "Decent Work and Economic Growth",
+              "description": "Promote sustained, inclusive and sustainable economic growth",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/8-bg.webp"
+            },
+            {
+              "title": "Industry, Innovation and Infrastructure",
+              "description": "Build resilient infrastructure, promote sustainable industrialization.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/9-bg.webp"
+            },
+            {
+              "title": "Reduced Inequalities",
+              "description": "Reduce inequality within and among countries.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/10-bg.webp"
+            },
+            {
+              "title": "Sustainable Cities and Communities",
+              "description": "Make cities and human settlements inclusive, safe, resilient and sustainable.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/11-bg.webp"
+            },
+            {
+              "title": "Responsible Consumption and Production",
+              "description": "Ensure sustainable consumption and production patterns.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/12-bg.webp"
+            },
+            {
+              "title": "Climate Action",
+              "description": "Take urgent action to combat climate change and its impacts.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/13-bg.webp"
+            },
+            {
+              "title": "Life Below Water",
+              "description": "Conserve and sustainably use the oceans, seas and marine resources for sustainable development.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/14-bg.webp"
+            },
+            {
+              "title": "Life on Land",
+              "description": "Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/15-bg.webp"
+            },
+            {
+              "title": "Peace, Justice and Strong Institutions",
+              "description": "Promote peaceful and inclusive societies for sustainable development.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/16-bg.webp"
+            },
+            {
+              "title": "Partnerships for the Goals",
+              "description": "Strengthen the means of implementation and revitalize the global partnership for sustainable development.",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/sdgs/17-bg.webp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Effort sections",
+      "description": "One full-width section per international effort, alternating background colours.",
+      "fields": [
+        {
+          "key": "efforts",
+          "label": "Sections",
+          "type": "repeater",
+          "itemLabel": "Section",
+          "titleField": "title",
+          "fields": [
+            {
+              "key": "title",
+              "label": "Heading",
+              "type": "text"
+            },
+            {
+              "key": "anchor",
+              "label": "Section ID",
+              "type": "text",
+              "help": "Lowercase-with-dashes, e.g. year-of-glacier. Used by the tiles above."
+            },
+            {
+              "key": "image",
+              "label": "Image",
+              "type": "image"
+            },
+            {
+              "key": "imageAlt",
+              "label": "Image description",
+              "type": "text"
+            },
+            {
+              "key": "imagePosition",
+              "label": "Image position (desktop)",
+              "type": "select",
+              "options": [
+                "left",
+                "right"
+              ]
+            },
+            {
+              "key": "body",
+              "label": "Text",
+              "type": "html",
+              "rows": 10,
+              "help": "One &lt;p&gt;…&lt;/p&gt; per paragraph."
+            }
+          ],
+          "default": [
+            {
+              "title": "United Nations Decade of Ocean Science for Sustainable Development (2021-2030)",
+              "anchor": "decade-of-ocean-science",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/unitedNationsDecade.webp",
+              "imageAlt": "UN Decade of Ocean Science",
+              "imagePosition": "left",
+              "body": "<p>The United Nations has proclaimed the years 2021 to 2030 as the Decade of Ocean Science for Sustainable Development, a groundbreaking global initiative aimed at transforming ocean science and policy to support a healthier, more resilient, and sustainable ocean. This initiative recognizes the urgent need to reverse the decline in ocean health and mobilize science and innovation in service of sustainable development.</p>\n<p>Under the slogan &quot;The Science We Need for the Ocean We Want&quot;, the Decade brings together governments, academia, industry, NGOs, Indigenous knowledge holders, and youth to co-design and co-deliver ocean science solutions. The Decade focuses on seven societal outcomes, including a clean ocean, a healthy and resilient ocean, a predicted ocean, a safe ocean, a sustainably harvested ocean, a transparent ocean, and an inspiring and engaging ocean.</p>\n<p>This initiative is critical to addressing challenges such as climate change, biodiversity loss, sea-level rise, marine pollution, and ocean acidification. By promoting partnerships and enhancing international cooperation, the Decade seeks to fill knowledge gaps and develop tools that empower communities and policymakers. It is a call to all stakeholders to unite in a common framework to deliver the science we need to safeguard the ocean for future generations.</p>"
+            },
+            {
+              "title": "2025: International Year of Glaciers' Preservation",
+              "anchor": "year-of-glacier",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/YearOfGlacier.webp",
+              "imageAlt": "International Year of Glaciers' Preservation",
+              "imagePosition": "left",
+              "body": "<p>In recognition of the urgent need to protect our planet&rsquo;s ice reserves, the United Nations has declared 2025 as the International Year of Glaciers&rsquo; Preservation. Glaciers are rapidly disappearing due to rising global temperatures, threatening freshwater sources, sea level stability, and entire ecosystems. This year-long global campaign seeks to raise awareness, mobilize action, and inspire scientific and community-led efforts toward glacier preservation.</p>\n<p>The initiative will feature educational programs, research collaborations, cultural events, and youth engagement around the world. It also aims to amplify the voices of indigenous and mountain communities who rely directly on glacier-fed rivers and are most affected by glacial retreat. Through international summits, public campaigns, and policy dialogues, the year will serve as a catalyst to accelerate glacier monitoring, early-warning systems, and sustainable adaptation measures.</p>\n<p>The International Year of Glaciers&rsquo; Preservation is not only a scientific milestone&mdash;it is a moral call to humanity to act before it&rsquo;s too late. It bridges science and storytelling, data and emotion, reminding us that protecting glaciers means safeguarding our shared future. Let 2025 be a year of unity, urgency, and unwavering commitment to our cryosphere.</p>"
+            },
+            {
+              "title": "UN Decade of Action for Cryospheric Sciences (2025-2034)",
+              "anchor": "decade-of-cryosphere",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/UNdecade.webp",
+              "imageAlt": "UN Decade of Action for Cryospheric Sciences",
+              "imagePosition": "right",
+              "body": "<p>The United Nations has designated 2025 to 2034 as the Decade of Action for Cryospheric Sciences&mdash;a pivotal global initiative to accelerate scientific understanding of Earth&rsquo;s frozen realms. This decade highlights the critical role glaciers, snow, permafrost, and polar ice play in regulating global climate, freshwater availability, sea-level rise, and biodiversity.</p>\n<p>Through the Decade, scientists, Indigenous communities, policy leaders, and youth will work collaboratively to expand cryospheric data collection, deploy cutting-edge technologies, and amplify public awareness of cryosphere-driven change. The initiative underscores the fact that the cryosphere is no longer a distant, icy domain&mdash;its melting is a visible and urgent global challenge that threatens ecosystems, economies, and human lives.</p>\n<p>The Decade of Action will support inclusive and interdisciplinary research, ensure open data access, and foster education and training across nations. It aims to turn knowledge into action, empowering communities in vulnerable glacier and permafrost regions to build resilience and inform global climate policy. As the cryosphere thaws, the time to act is now. This UN Decade stands as a beacon of hope, science, and solidarity for a rapidly changing planet.</p>"
+            },
+            {
+              "title": "The International Polar Year: A Global Cryosphere Initiative",
+              "anchor": "international-polar-year",
+              "image": "https://raw.githubusercontent.com/Adarsh108-tech/glacier-assets/main/efforts/InternationalPolarYear.webp",
+              "imageAlt": "International Polar Year",
+              "imagePosition": "right",
+              "body": "<p>The International Polar Year (IPY) represents a historic, collaborative scientific effort to study Earth&rsquo;s polar regions&mdash;the Arctic and Antarctic&mdash;and their vital role in the planet&rsquo;s climate system. Organized in multiple editions, the most recent IPY spanned from 2007 to 2009 and brought together over 60 nations, thousands of researchers, and indigenous communities to observe, document, and understand the profound transformations occurring at the poles.</p>\n<p>The IPY emphasized multidisciplinary research, combining atmospheric sciences, glaciology, oceanography, ecology, and social studies. It significantly enhanced the world&rsquo;s ability to monitor polar environments through satellite technologies, long-term observational networks, and data-sharing platforms. From shrinking sea ice to permafrost thaw and glacial retreat, the findings underscored the sensitivity of polar regions to climate change and their ripple effects across the globe.</p>\n<p>Beyond research, the IPY fostered public awareness, policy discourse, and educational outreach. It inspired a new generation of polar scientists and embedded the cryosphere into international climate agendas. Today, the legacy of the International Polar Year lives on, reminding us that understanding the poles is essential for preparing the planet for an uncertain future. The poles are not remote frontiers&mdash;they are the heartbeat of our climate.</p>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dushanbe conference",
+      "fields": [
+        {
+          "key": "dushanbeTitle",
+          "label": "Heading",
+          "type": "html",
+          "rows": 3,
+          "default": "The High-Level International Conference on Glaciers' Preservation concluded May 31<sup>st</sup> after a successful three days of international cooperation in Dushanbe, Republic of Tajikistan."
+        },
+        {
+          "key": "dushanbeBody",
+          "label": "Text",
+          "type": "html",
+          "rows": 10,
+          "default": "<p>The conference, held in support of the <strong>International Year of Glaciers' Preservation (IYGP) 2025</strong> and the <strong>Decade of Action for Cryosphere Sciences (2025-2034)</strong>, brought together over 2,500 participants from 80 countries and emphasized the crucial connection between glaciers and sustainable socio-economic development.</p>\n<p>The conference culminated in the adoption of the <strong>Dushanbe Declaration</strong>, a collective commitment to coordinated international action to safeguard glaciers. The document outlines urgent concerns and calls for immediate measures including reductions in greenhouse gas emissions, shifts to environmentally sustainable production, and the implementation of advanced monitoring systems.</p>\n<p>An international coalition was also announced, comprising states, scientific institutions, civil society organizations, and environmental movements. This coalition will oversee the declaration's implementation, facilitate knowledge exchange, attract investment, and foster climate technology innovation.</p>"
+        },
+        {
+          "key": "dushanbePdfTitle",
+          "label": "Document heading",
+          "type": "text",
+          "default": "Read the Dushanbe Declaration (PDF)"
+        },
+        {
+          "key": "dushanbePdf",
+          "label": "Document (PDF)",
+          "type": "file",
+          "help": "Upload the PDF to the Media Library and choose it here.",
+          "default": "/Dushanbe-Glaciers-Declaration-High-Level-International-Conference.pdf"
+        },
+        {
+          "key": "dushanbeButtonLabel",
+          "label": "Floating button label",
+          "type": "text",
+          "help": "The button in the bottom corner that scrolls to this section. Leave empty to hide it.",
+          "default": "Read the Dushanbe Declaration"
+        }
+      ]
+    }
+  ]
+}

@@ -9,8 +9,8 @@ module.exports = {
   theme: {
   	extend: {
 		fontFamily: {
-        	cabin: ['Cabin', 'sans-serif'],
-        	nohemi: ['NohemiBlack', 'sans-serif'],
+        	cabin: ['var(--font-cabin)', 'sans-serif'],
+        	nohemi: ['var(--font-cabin)', 'sans-serif'],
       	},
   		colors: {
   			glacier: {

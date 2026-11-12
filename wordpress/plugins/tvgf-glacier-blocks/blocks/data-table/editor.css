@@ -1,0 +1,60 @@
+.tvgf-data-table-edit {
+	border: 1px dashed #ccc;
+	padding: 16px;
+	border-radius: 6px;
+}
+.tvgf-block-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #8aacac;
+	margin: 16px 0 8px;
+}
+.tvgf-data-table-row-edit {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+	margin-bottom: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #eee;
+}
+.tvgf-data-table-row-edit > div {
+	flex: 1;
+}
+
+/* Live preview — mirrors src/styles/glacierDialogueBlocks.css */
+.tvgf-data-table {
+	background: #042a33;
+	border-radius: 12px;
+	overflow: hidden;
+	margin: 24px 0;
+}
+.tvgf-data-table-header {
+	background: #0b3540;
+	color: #a8dfe1;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	padding: 14px 20px;
+}
+.tvgf-data-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 12px 20px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.tvgf-data-label {
+	color: #fff;
+	font-size: 0.88rem;
+	opacity: 0.85;
+}
+.tvgf-data-value {
+	color: #a8dfe1;
+	font-size: 0.95rem;
+	font-weight: 700;
+	white-space: nowrap;
+}

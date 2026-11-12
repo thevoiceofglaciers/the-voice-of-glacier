@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import quizData from "@/data/quiz.json";
 
-export default function QuizSection() {
+// Questions come from the "Quiz Questions" collection in WordPress (built-in
+// defaults: wordpress/mu-plugins/tvgf-core/schemas/collections/quiz_question.json).
+export default function QuizSection({ title = "Do you know enough about glaciers?", questions = [] }) {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -14,9 +15,18 @@ export default function QuizSection() {
 
   // Shuffle questions once when quiz starts
   useEffect(() => {
-    const shuffled = [...quizData].sort(() => Math.random() - 0.5);
-    setShuffledQuestions(shuffled);
-  }, []);
+    // The answer must match one of the options — match loosely (case and
+    // surrounding spaces) since editors type it by hand, and skip questions
+    // where it still doesn't, rather than showing an unwinnable question.
+    const playable = questions
+      .map((q) => {
+        const options = q.options || [];
+        const answer = options.find((o) => o.trim().toLowerCase() === (q.answer || "").trim().toLowerCase());
+        return { question: q.title, options, answer };
+      })
+      .filter((q) => q.answer !== undefined);
+    setShuffledQuestions([...playable].sort(() => Math.random() - 0.5));
+  }, [questions]);
 
   const question = shuffledQuestions[current];
 
@@ -48,7 +58,7 @@ export default function QuizSection() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-nohemi text-glacier-dark mb-6 sm:mb-10 text-center"
       >
-        Do you know enough about glaciers?
+        {title}
       </motion.h1>
 
       <motion.div

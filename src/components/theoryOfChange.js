@@ -1,30 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiDatabase, FiZap, FiAward, FiGlobe } from 'react-icons/fi';
+import { Accent } from '@/lib/content';
+import { Icon } from '@/lib/icons';
 
-const TheoryOfChange = () => {
-  const theoryData = [
-    {
-      title: "Inputs",
-      content: ["Scientific Data", "Indigenous Wisdom", "Youth Advocacy"],
-      icon: <FiDatabase />
-    },
-    {
-      title: "Actions",
-      content: ["Policy Drafting", "Cultural Rituals", "Digital Portals"],
-      icon: <FiZap />
-    },
-    {
-      title: "Outcomes",
-      content: ["Legal Rights", "Increased Literacy", "Global Solidarity"],
-      icon: <FiAward />
-    },
-    {
-      title: "Impact",
-      content: ["Cryosphere Stability", "Reciprocal Living", "10+ Protected Zones"],
-      icon: <FiGlobe />
-    }
-  ];
+const TheoryOfChange = ({ eyebrow, title, stages = [], legendIncremental, legendSystemic, version }) => {
+  const theoryData = stages;
 
   return (
     <section 
@@ -47,12 +27,12 @@ const TheoryOfChange = () => {
           >
             <span className="w-8 md:w-12 h-[2px] bg-glacier-accent" />
             <span className="text-glacier-accent font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-[9px] md:text-[10px]">
-              The Logic of Action
+              {eyebrow}
             </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-7xl font-nohemi text-glacier-dark leading-tight md:leading-none">
-            Theory of <span className="text-glacier-primary italic">Change</span>
+            <Accent text={title} />
           </h2>
         </header>
 
@@ -94,10 +74,10 @@ const TheoryOfChange = () => {
                   
                   <div className="flex items-center justify-between mb-4 md:mb-6">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-lg md:text-xl text-glacier-primary group-hover:scale-110 transition-transform duration-500">
-                      {block.icon}
+                      <Icon name={block.icon} />
                     </div>
                     <span className="font-nohemi text-glacier-soft/20 text-2xl md:text-3xl italic">
-                      0{idx + 1}
+                      {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
@@ -106,7 +86,7 @@ const TheoryOfChange = () => {
                   </h3>
 
                   <ul className="space-y-2 md:space-y-3">
-                    {block.content.map((line, i) => (
+                    {(block.items || []).map((line, i) => (
                       <li 
                         key={i} 
                         className="flex items-start gap-2 text-sm lg:text-base text-glacier-dark/60 group-hover:text-glacier-dark/80 transition-colors"
@@ -130,14 +110,14 @@ const TheoryOfChange = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glacier-primary" />
-              <span>Incremental Progress</span>
+              <span>{legendIncremental}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-glacier-accent" />
-              <span>Systemic Transformation</span>
+              <span>{legendSystemic}</span>
             </div>
           </div>
-          <span className="hidden md:block">Glacier Framework v2.0</span>
+          <span className="hidden md:block">{version}</span>
         </footer>
       </div>
     </section>

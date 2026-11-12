@@ -1,0 +1,387 @@
+/* Shared styling for all Glacier Dialogue article content blocks.
+   Replaces the old per-article inline <style> blob in dialogues.js —
+   one stylesheet for every dialogue instead of bespoke CSS per entry. */
+
+/* Context Strip */
+.tvgf-context-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid #e0e8e8;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.tvgf-context-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 1 200px;
+}
+.tvgf-context-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e8f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+.tvgf-context-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8aacac;
+  margin-bottom: 2px;
+}
+.tvgf-context-value {
+  font-size: 0.88rem;
+  color: #042a33;
+  font-weight: 600;
+}
+
+/* Panel — the grid holding a group of consecutive Speaker Bio cards */
+.tvgf-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 32px 0 48px;
+}
+
+/* Speaker Bio — matches the original per-article .panelist-card design */
+.tvgf-speaker-bio {
+  background: #fff;
+  border: 1px solid #daeaea;
+  border-radius: 8px;
+  padding: 20px 16px 18px;
+  text-align: center;
+}
+.tvgf-speaker-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px;
+  display: block;
+  border: 3px solid #f0f8f8;
+  box-shadow: 0 2px 8px rgba(4, 42, 51, 0.08);
+}
+.tvgf-speaker-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #042a33;
+  margin-bottom: 6px;
+}
+.tvgf-speaker-role {
+  font-size: 0.78rem;
+  color: #5a8a8c;
+  line-height: 1.4;
+  min-height: 56px;
+}
+.tvgf-speaker-org {
+  font-size: 0.75rem;
+  color: #2a787c;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Stat Tiles */
+.tvgf-stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.tvgf-stat-tile {
+  background: #042a33;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.tvgf-stat-value {
+  font-family: "NohemiBlack", sans-serif;
+  font-size: 2rem;
+  color: #a8dfe1;
+}
+.tvgf-stat-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.tvgf-stat-trend {
+  font-size: 0.75rem;
+  color: #9cb8bf;
+  margin-top: 6px;
+}
+
+/* Callout */
+.tvgf-callout {
+  border-left: 4px solid #2a787c;
+  background: #eef6f6;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.tvgf-callout-warning {
+  border-left-color: #8b0333;
+  background: #fbeef1;
+}
+.tvgf-callout-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #042a33;
+}
+.tvgf-callout-body {
+  margin: 0;
+  color: #234;
+}
+
+/* Comparison */
+.tvgf-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.tvgf-comparison-col {
+  background: #fff;
+  border: 1px solid #e0e8e8;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.tvgf-comparison-heading {
+  font-weight: 700;
+  color: #2a787c;
+  margin-bottom: 6px;
+}
+.tvgf-comparison-body {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #234;
+}
+
+/* Takeaways — matches the original .takeaways-grid design */
+.tvgf-takeaways {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 28px 0 40px;
+}
+.tvgf-takeaway {
+  background: #fff;
+  border-top: 3px solid #2a787c;
+  border-radius: 0 0 8px 8px;
+  padding: 18px 18px 20px;
+  box-shadow: 0 2px 6px rgba(4, 42, 51, 0.06);
+}
+.tvgf-takeaway-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e0eeee;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.tvgf-takeaway p {
+  font-size: 0.88rem;
+  color: #1e3035;
+  margin: 0;
+}
+
+/* Section divider — a "kicker" paragraph (className tvgf-kicker) marking the
+   start of a new section, styled as a pill badge + rule line. */
+.tvgf-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 48px 0 8px !important;
+}
+.tvgf-kicker strong {
+  background: #042a33;
+  color: #a8dfe1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.tvgf-kicker::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #d4e0e0;
+}
+@media (max-width: 640px) {
+  .tvgf-kicker strong {
+    white-space: break-spaces;
+  }
+}
+
+/* Data Table — a labelled table of key figures (label/value rows) */
+.tvgf-data-table {
+  background: #042a33;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.tvgf-data-table-header {
+  background: #0b3540;
+  color: #a8dfe1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 20px;
+}
+.tvgf-data-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.tvgf-data-label {
+  color: #fff;
+  font-size: 0.88rem;
+  opacity: 0.85;
+}
+.tvgf-data-value {
+  color: #a8dfe1;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Two Phase — a side-by-side phase comparison with colored headers */
+.tvgf-two-phase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.tvgf-phase-header {
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+}
+.tvgf-phase-teal {
+  background: #2a787c;
+}
+.tvgf-phase-navy {
+  background: #042a33;
+}
+.tvgf-phase-body {
+  background: #f4f9f9;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #1e3035;
+}
+.tvgf-phase-body p {
+  margin: 0;
+}
+.tvgf-phase-left {
+  border-right: 1px solid #d4e0e0;
+}
+@media (max-width: 640px) {
+  .tvgf-two-phase {
+    grid-template-columns: 1fr;
+  }
+  .tvgf-phase-left {
+    border-right: none;
+  }
+}
+
+/* Fallback: WordPress core blocks (quote, gallery, list, paragraph, etc.) */
+.tvgf-wp-block {
+  margin: 20px 0;
+}
+.tvgf-wp-block h2.wp-block-heading {
+  font-family: "Nohemi", "Segoe UI", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #042a33;
+  margin: 48px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0ecec;
+}
+.tvgf-wp-block .wp-block-quote,
+.tvgf-wp-block .wp-block-pullquote {
+  border-left: 4px solid #2a787c;
+  padding: 8px 20px;
+  font-style: italic;
+  color: #042a33;
+}
+
+/* The first quote on the page reads as the article's opening statement —
+   styled larger and centered, matching the old per-article "opener quote". */
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote {
+  border-left: none;
+  border-top: 1px solid #e0ecec;
+  border-bottom: 1px solid #e0ecec;
+  padding: 32px 16px;
+  text-align: center;
+  font-style: normal;
+}
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote p {
+  font-family: "NohemiBlack", sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.tvgf-wp-block.tvgf-quote-opener .wp-block-quote cite {
+  font-size: 0.8rem;
+  color: #5a8a8c;
+  font-style: normal;
+  font-weight: 600;
+}
+.tvgf-wp-block .wp-block-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.tvgf-wp-block .wp-block-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.tvgf-wp-block .wp-block-gallery figcaption {
+  font-size: 0.75rem;
+  color: #8aacac;
+  margin-top: 4px;
+}
+
+/* Standalone captioned photo — matches the original .photo-block design */
+.tvgf-wp-block .wp-block-image {
+  margin: 40px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(4, 42, 51, 0.12);
+}
+.tvgf-wp-block .wp-block-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tvgf-wp-block .wp-block-image figcaption {
+  display: block;
+  background: #fff;
+  padding: 12px 20px;
+  border-top: 1px solid #e8f0f0;
+  font-size: 0.78rem !important;
+  color: #5a8a8c !important;
+  margin: 0 !important;
+  line-height: 1.5;
+}
+.tvgf-wp-block .wp-block-image figcaption em {
+  font-style: italic;
+  color: #5a8a8c;
+}

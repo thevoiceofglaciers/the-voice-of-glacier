@@ -1,0 +1,51 @@
+{
+  "slug": "dialogues",
+  "path": "/glacier-dialogues",
+  "title": "Glacier Dialogues Page Content",
+  "pageTitle": "Glacier Dialogues (listing page)",
+  "sections": [
+    {
+      "title": "Header",
+      "description": "The dialogues themselves are edited under <strong>Glacier Dialogues</strong> in the admin menu.",
+      "fields": [
+        {
+          "key": "title",
+          "label": "Heading",
+          "type": "text",
+          "default": "Glacier Dialogues"
+        },
+        {
+          "key": "tagline",
+          "label": "Tagline",
+          "type": "text",
+          "default": "When glaciers speak, the world must listen."
+        },
+        {
+          "key": "mission",
+          "label": "Mission statement",
+          "type": "textarea",
+          "rows": 5,
+          "default": "TVGF Glacier Dialogues is a monthly interdisciplinary conversation series convened by The Voice of Glaciers Foundation, bringing together glacier scientists, policymakers, practitioners, and mountain communities to examine how rapidly changing cryospheric systems are reshaping lives, landscapes, and glacial futures across the Hindu Kush Himalaya."
+        },
+        {
+          "key": "ctaLabel",
+          "label": "Button label",
+          "type": "text",
+          "default": "Register for Upcoming Dialogues"
+        },
+        {
+          "key": "ctaUrl",
+          "label": "Button link",
+          "type": "url",
+          "default": "https://forms.gle/2zSuf4cgMzZ2QawPA"
+        },
+        {
+          "key": "emptyText",
+          "label": "Text when no dialogues are published",
+          "type": "text",
+          "default": "New dialogues arriving soon..."
+        }
+      ]
+    }
+  ]
+}
