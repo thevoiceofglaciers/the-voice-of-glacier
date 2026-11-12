@@ -12,8 +12,9 @@ import {
   FaClock,
   FaPlayCircle,
 } from "react-icons/fa";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+
+// Navbar and Footer are rendered globally by the root layout; this page only
+// supplies its own content.
 
 // Google Form link is a placeholder until the real link is supplied.
 const CONTRIBUTE_FORM_PLACEHOLDER = "#";
@@ -306,8 +307,6 @@ export default function PindariGlacierPage() {
 
   return (
     <div className="bg-glacier-background text-glacier-foreground min-h-screen">
-      <Navbar />
-
       {/* Hero Banner */}
       <div className="relative w-full h-[640px] md:h-[520px] overflow-hidden">
         <img
@@ -683,8 +682,6 @@ export default function PindariGlacierPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
 
       {/* Lightbox */}
       <AnimatePresence>
