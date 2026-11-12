@@ -26,8 +26,9 @@ export default function StrategyPage({ content }) {
   }
 }, []);
 
-  const ParallaxBackground = ({ imageUrl, children }) => (
+  const ParallaxBackground = ({ id, imageUrl, children }) => (
     <div
+      id={id}
       className="relative bg-fixed bg-cover bg-center"
       style={{ backgroundImage: `url(${imageUrl})`, backgroundAttachment: 'fixed' }}
     >

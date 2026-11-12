@@ -6,7 +6,7 @@
   "graphqlPlural": "glossaryTerms",
   "menuIcon": "dashicons-book-alt",
   "titleLabel": "Term (e.g. Moraine)",
-  "path": "/Learn#glossary",
+  "path": "/learn#glossary",
   "orderBy": "TITLE",
   "description": "Terms are listed alphabetically under their first letter.",
   "fields": [

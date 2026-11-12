@@ -42,6 +42,9 @@ const PASSWORD = process.env.WORDPRESS_PREVIEW_APP_PASSWORD;
 const OVERWRITE = process.argv.includes("--overwrite");
 const SKIP_VIDEOS = process.argv.includes("--skip-videos");
 const SKIP_MEDIA = process.argv.includes("--skip-media");
+// Limit a re-run to one page slug or collection postType, e.g. --only our-strategy
+const onlyIndex = process.argv.indexOf("--only");
+const ONLY = onlyIndex !== -1 ? process.argv[onlyIndex + 1] : null;
 
 if (!SITE_URL || !USER || !PASSWORD) {
   console.error("Missing WORDPRESS_SITE_URL / WORDPRESS_PREVIEW_APP_USER / WORDPRESS_PREVIEW_APP_PASSWORD env vars.");
@@ -50,15 +53,40 @@ if (!SITE_URL || !USER || !PASSWORD) {
 
 const authHeader = "Basic " + Buffer.from(`${USER}:${PASSWORD}`).toString("base64");
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// The staging host occasionally drops the connection on slower requests
+// (large uploads, the 86-item Glossary insert) — fetch throws a bare
+// "fetch failed" with no status to act on. Retry those and 5xx/429s.
 async function wpRequest(route, options = {}) {
-  const res = await fetch(`${SITE_URL}/wp-json${route}`, {
-    ...options,
-    headers: { Authorization: authHeader, ...(options.headers || {}) },
-  });
-  if (!res.ok) {
-    throw new Error(`${options.method || "GET"} ${route} failed: ${res.status} ${await res.text()}`);
+  const MAX_ATTEMPTS = 4;
+  let lastErr;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(`${SITE_URL}/wp-json${route}`, {
+        ...options,
+        headers: { Authorization: authHeader, ...(options.headers || {}) },
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        if ((res.status >= 500 || res.status === 429) && attempt < MAX_ATTEMPTS) {
+          console.warn(`  (${res.status} on ${route}, retrying in ${attempt * 5}s...)`);
+          await sleep(attempt * 5000);
+          continue;
+        }
+        throw new Error(`${options.method || "GET"} ${route} failed: ${res.status} ${text}`);
+      }
+      return res.json();
+    } catch (err) {
+      lastErr = err;
+      if (attempt < MAX_ATTEMPTS) {
+        console.warn(`  (${err.message} on ${route}, retrying in ${attempt * 5}s...)`);
+        await sleep(attempt * 5000);
+        continue;
+      }
+    }
   }
-  return res.json();
+  throw lastErr;
 }
 
 const postJson = (route, body) =>
@@ -180,6 +208,7 @@ async function schemasIn(dir) {
 console.log(`Migrating site content into ${SITE_URL}${OVERWRITE ? " (overwriting existing content)" : ""}\n`);
 
 for (const schema of await schemasIn("pages")) {
+  if (ONLY && schema.slug !== ONLY) continue;
   console.log(`Page "${schema.slug}" (${schema.path})`);
   try {
     const content = await migrateMedia(schemaFields(schema), defaultsOf(schema));
@@ -195,6 +224,7 @@ for (const schema of await schemasIn("pages")) {
 }
 
 for (const schema of await schemasIn("collections")) {
+  if (ONLY && schema.postType !== ONLY) continue;
   console.log(`Collection "${schema.label}" (${schema.defaults.length} items)`);
   try {
     const items = [];
@@ -208,14 +238,16 @@ for (const schema of await schemasIn("collections")) {
   }
 }
 
-console.log("Site Settings");
-try {
-  const schema = await readJson(path.join(SCHEMA_DIR, "site-settings.json"));
-  const settings = await migrateMedia(schemaFields(schema), defaultsOf(schema));
-  const result = await postJson("/tvgf/v1/site-settings", { settings, overwrite: OVERWRITE });
-  console.log(result.skipped ? "  - Already saved — skipped." : "  Saved.");
-} catch (err) {
-  console.error(`  ! ${err.message}`);
+if (!ONLY || ONLY === "site-settings") {
+  console.log("Site Settings");
+  try {
+    const schema = await readJson(path.join(SCHEMA_DIR, "site-settings.json"));
+    const settings = await migrateMedia(schemaFields(schema), defaultsOf(schema));
+    const result = await postJson("/tvgf/v1/site-settings", { settings, overwrite: OVERWRITE });
+    console.log(result.skipped ? "  - Already saved — skipped." : "  Saved.");
+  } catch (err) {
+    console.error(`  ! ${err.message}`);
+  }
 }
 
 if (failures.length) {

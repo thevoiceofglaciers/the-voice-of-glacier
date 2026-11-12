@@ -52,6 +52,11 @@ const nextConfig = {
         destination: "/our-strategy",
         permanent: true,
       },
+      // "/Learn" -> "/learn" is NOT here: next.config.js redirect matching is
+      // case-insensitive by default, so a source/destination pair differing
+      // only by case would match "/learn" too and redirect it to itself in
+      // an infinite loop. Handled instead in middleware.js with an exact,
+      // case-sensitive string check.
     ];
   },
 };

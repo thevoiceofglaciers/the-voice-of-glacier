@@ -144,6 +144,7 @@ export default function CollaboratePage({ content }) {
 
         {/* Section: Collaboration Pathways */}
         <motion.section
+          id="partners"
           className="w-full bg-glacier-light py-16 md:py-20 px-6"
           variants={fadeInUp}
           initial="hidden"
@@ -188,7 +189,7 @@ export default function CollaboratePage({ content }) {
         </motion.section>
 
         {/* CTA */}
-        <section className="py-16 md:py-20 px-6">
+        <section id="join" className="py-16 md:py-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
               className="text-3xl md:text-4xl font-extrabold text-glacier-primary mb-6 text-balance"

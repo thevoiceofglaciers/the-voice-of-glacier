@@ -42,9 +42,9 @@ const FALLBACK_LINKS = [
         { label: "The Three-Engine Model", href: "/our-strategy#The-Three-Engine-Model" },
         { label: "Dual-Force Action", href: "/our-strategy#Dual-Force-Action" },
         
-        { label: "Solution Pillars", href: "/our-strategy#Solution-pillars" },
+        { label: "Solution Pillars", href: "/our-strategy#solution-pillars" },
         
-        { label: "Theory of Change", href: "/our-strategy#Theory-of-Change" },
+        { label: "Theory of Change", href: "/our-strategy#theory-of-change" },
       ],
     },
     {
@@ -57,14 +57,14 @@ const FALLBACK_LINKS = [
     },
     {
       name: "Learn",
-      href: "/Learn",
+      href: "/learn",
       sublinks: [
-        { label: "Introduction", href: "/Learn#introduction" },
-        { label: "Explore", href: "/Learn#explore" },
-        { label: "Glacier Data", href: "/Learn#glacier-data" },
-        { label: "Glossary", href: "/Learn#glossary" },
-        { label: "Partners", href: "/Learn#partners" },
-        { label: "Join Us", href: "/Learn#join" },
+        { label: "Introduction", href: "/learn#introduction" },
+        { label: "Explore", href: "/learn#explore" },
+        { label: "Glacier Data", href: "/learn#glacier-data" },
+        { label: "Glossary", href: "/learn#glossary" },
+        { label: "Partners", href: "/learn#partners" },
+        { label: "Join Us", href: "/learn#join" },
       ],
     },
     {
@@ -100,6 +100,23 @@ export default function Navbar({ links, showNavbar = true }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // A first visit to a page fetches its WordPress content over the network
+  // before the target section exists in the DOM — a fixed delay guesses
+  // wrong half the time, so poll until the element shows up (or give up).
+  const waitForElement = (id, { timeout = 4000, interval = 100 } = {}) =>
+    new Promise((resolve) => {
+      const start = Date.now();
+      const check = () => {
+        const el = document.getElementById(id);
+        if (el || Date.now() - start >= timeout) {
+          resolve(el);
+        } else {
+          setTimeout(check, interval);
+        }
+      };
+      check();
+    });
+
   const handleSmoothScroll = async (rawHref) => {
     // WordPress menu items are hand-typed "Custom Links" — normalize away an
     // accidentally-pasted full URL (e.g. "https://thevoiceofglaciers.org/x")
@@ -120,10 +137,8 @@ export default function Navbar({ links, showNavbar = true }) {
     if (hash) {
       if (pathname !== path) {
         await router.push(path);
-        setTimeout(() => {
-          const el = document.getElementById(hash);
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 300);
+        const el = await waitForElement(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         const el = document.getElementById(hash);
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });

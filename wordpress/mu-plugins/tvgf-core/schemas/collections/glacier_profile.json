@@ -6,7 +6,7 @@
   "graphqlPlural": "glacierProfiles",
   "menuIcon": "dashicons-image-flip-horizontal",
   "titleLabel": "Glacier name (e.g. Gangotri Glacier (Uttarakhand))",
-  "path": "/Learn#glacier-data",
+  "path": "/learn#glacier-data",
   "description": "Each profile is a card with a before/after image slider. Use the <strong>Order</strong> box (Page Attributes) to arrange the cards — lowest number first.",
   "fields": [
     {
